@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .about-us {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 90px 0;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .about {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    animation: glide-in 1s ease-out;
+  }
+
+  .pic {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+  }
+
+  .text {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .text h2 {
+    color: #333;
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .text h5 {
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .text span {
+    color: #07a73f;
+  }
+
+  .text p {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 1px;
+  }
+
+  .data {
+    margin-top: 30px;
+  }
+
+  .hire {
+    font-size: 1rem;
+    background: #07a73f;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    transition: 0.5s;
+  }
+
+  .hire:hover {
+    background: #0e9444;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .text h2 {
+      font-size: 3rem;
+    }
+
+    .text h5 {
+      font-size: 1.2rem;
+    }
+
+    .text p {
+      font-size: 0.9rem;
+    }
+
+    .about {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .pic {
+      margin-bottom: 20px;
+    }
+  }
+
+  /* Glide Animation */
+  @keyframes glide-in {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
