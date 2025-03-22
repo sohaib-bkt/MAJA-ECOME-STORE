@@ -1,16 +1,25 @@
-<div class="navigation bg-transparent md:hover:bg-white  md:translate-y-0 ease-in-out duration-300 " >
+<div class="navigation " >
     <div class="nav-center container d-flex ">
-    <a href="/" class="logo "><img src="{{ asset('images/logo1.png')}}" style="height: auto" alt="" class="w-[100px] md:w-[110px]" /></a>
+    <a href="/" class="logo "><img src="{{ asset('images/logo1.png')}}" style="height: auto" alt="" class="w-[100px] md:w-[120px]" /></a>
 
       <ul class="nav-list d-flex">
         <li class="nav-item">
           <a href="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('shop') }}" class="nav-link">Shop</a>
+          <a href="{{ route('shop') }}" class="nav-link">ABAYAS</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('about') }}" class="nav-link">About</a>
+          <a href="{{ route('shop') }}" class="nav-link">KIMONOS</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('shop') }}" class="nav-link">HIJAB</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('shop') }}" class="nav-link">ACCESSOIRES</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('about') }}" class="nav-link">NOTRE HISTOIRE</a>
         </li>
         <li class="nav-item">
           @php
@@ -18,7 +27,7 @@
           $encodedMessage = urlencode($message);
           @endphp
 
-          <a href="https://wa.me/+21239565569?text={{ $encodedMessage }}" class="nav-link">Contact</a>
+          <a href="https://wa.me/+21239565569?text={{ $encodedMessage }}" class="nav-link">CONTACT</a>
         </li>
         <li class="icons d-flex">
           @if (Auth::check())

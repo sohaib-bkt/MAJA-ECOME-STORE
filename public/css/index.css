@@ -1,11 +1,11 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 /* Color Variables */
 :root {
   --white: #fff;
   --black: #222;
-  --green: #6cbe02;
+  --green: #C9B194;
   --grey1: #f0f0f0;
   --grey2: #f1f1f1;
 }
@@ -45,7 +45,7 @@ li {
 .container {
   max-width: 114rem;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 0 1rem;
 }
 
 .d-flex {
@@ -95,6 +95,7 @@ Navigation
 
 .nav-center .nav-link:hover {
   color: var(--green);
+  
 }
 
 .nav-center .hamburger {
@@ -104,6 +105,23 @@ Navigation
   cursor: pointer;
 }
 
+
+.navigation:hover{
+  background-color: white;
+  transition: 0.3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  
+}
+
+.nav-list .nav-link {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1.6rem;
+  padding: 1.7rem; 
+}
 /* Icons */
 
 .icon {
@@ -130,8 +148,8 @@ Navigation
   width: 2rem;
   justify-content: center;
 }
-
-@media only screen and (max-width: 768px) {
+/*  */
+@media only screen and (max-width: 1068px) {
   .nav-list {
     position: fixed;
     top: 12%;
@@ -147,6 +165,12 @@ Navigation
     transition: all 300ms ease-in-out;
   }
 
+  .navigation:hover{
+    background-color: transparent;
+  }
+
+  
+
   .nav-list.open {
     left: 0;
     width: 100%;
@@ -158,8 +182,12 @@ Navigation
   }
 
   .nav-list .nav-link {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--black);
+    font-family: Inter;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.07em;
   }
 
   .nav-center .hamburger {
