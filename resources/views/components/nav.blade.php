@@ -1,6 +1,6 @@
-<div class="navigation">
-    <div class="nav-center container d-flex">
-    <a href="/" class="logo"><img src="{{ asset('images/logo3.png')}}" style="height: 60px" alt="" /></a>
+<div class="navigation bg-transparent md:hover:bg-white  md:translate-y-0 ease-in-out duration-300 " >
+    <div class="nav-center container d-flex ">
+    <a href="/" class="logo "><img src="{{ asset('images/logo1.png')}}" style="height: auto" alt="" class="w-[100px] md:w-[110px]" /></a>
 
       <ul class="nav-list d-flex">
         <li class="nav-item">
@@ -35,11 +35,11 @@
               </a>
           @endif
       
-        
+{{--         
         <a href="{{ route('wishlist') }}" class="icon">
           <i class="bx bx-heart"></i>
           <span class="d-flex">{{ $wishlistCount }}</span>
-        </a>
+        </a> --}}
 
       </li>
       </ul>
@@ -58,10 +58,10 @@
                 <i class="bx bx-user"></i>
             </a>
         @endif
-        <a href="{{ route('wishlist') }}" class="icon">
+        {{-- <a href="{{ route('wishlist') }}" class="icon">
           <i class="bx bx-heart"></i>
           <span class="d-flex" id="wishlist-count">{{ $wishlistCount }}</span>
-        </a>
+        </a> --}}
 
       </div>
 

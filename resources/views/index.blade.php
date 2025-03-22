@@ -10,55 +10,36 @@
           href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
           rel="stylesheet"
         />
-        <!-- Glide js -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.css">
+        <style>
+          @media screen and (min-width: 600px) {
+            #home-image {
+              background-position-y: 20%;
+              
+            }
+          }
 
+        </style>
         <title>Gift 4U</title>
         @vite('resources/css/app.css')
         <link rel="stylesheet" href="{{ asset('css/index.css') }}">
       </head>
       <body>
 
-        <!-- Header -->
-        <header class="header" id="header">
-          <x-nav></x-nav>
-    
-          <div class="hero">
-          <div class="glide" id="glide_1">
-            <div class="glide__track" data-glide-el="track">
-              <ul class="glide__slides">
-                <li class="glide__slide">
-                  <div class="center">
-                    <div class="left">
-                      <span class="">New Inspiration 2024</span>
-                      <h1 class="">Discover Our Collection!</h1>
-                      <p>Explore the hottest trends in gifts for both men and women.</p>
-                      <a href="{{ route('shop') }}" class="hero-btn">SHOP NOW</a>                      
-                    </div>
-                    <div class="right">
-                        <img class="img1" src="{{ asset('images/gift5.png')}}" alt="">
-                    </div>
-                  </div>
-                </li>
-                <li class="glide__slide">
-                  <div class="center">
-                    <div class="left">
-                      <span>New Inspiration 2024</span>
-                      <h1>Unveil the Latest Trends!</h1>
-                      <p> Find the perfect present to make any occasion special.</p>
-                      <a href="{{ route('shop')}}" class="hero-btn">SHOP NOW</a>
-                    </div>
-                    <div class="right">
-                      <img class="img2" src="{{ asset('images/gift6.png')}}" alt="">
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        </header>
+      <!-- Header -->
+      <header class="relative" id="header">  
+        <div id="home-image" class="bg-cover bg-center h-screen" style="background-image: url('/images/home1.jpeg'); ">  
+            <x-nav></x-nav>  
+        
+            {{-- <div class="flex flex-col max-w-full gap-y-0 px-8 py-6 mx-auto md:max-w-screen-md md:px-12 md:py-8">  
+                <h2 class="text-white text-4xl md:text-5xl font-bold text-center mb-4">Eid Collection</h2>  
+                <div class="flex items-center justify-center gap-4">  
+                    <a href="/collections/eid25" class=" text-white py-2 px-4 rounded  transition">Shop Now</a>  
+                    <a href="/pages/eid-25" class=" text-white py-2 px-4 rounded  transition">EXPLORE</a>  
+                </div>  
+            </div>   --}}
+        </div>  
+    </header>   
+
     
         <!-- Categories Section -->
         <section class="section category">
