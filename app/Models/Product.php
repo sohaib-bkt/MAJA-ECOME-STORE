@@ -16,6 +16,8 @@ class Product extends Model
         'images',
         'description',
         'price',
+        'slug',
+        'size',
     ];
 
     protected $casts = [

@@ -45,19 +45,19 @@
         <section class="section category">
           <div class="cat-center">
             <div class="cat">
-              <img src="{{ asset('images/logo.png')}}" alt="" />
+              <img src="{{ asset('images/logo1.png')}}" alt="" />
               <div>
                 <p>WOMEN'S WEAR</p>
               </div>
             </div>
             <div class="cat">
-              <img src="{{ asset('images/logo.png')}}" alt="" />
+              <img src="{{ asset('images/logo1.png')}}" alt="" />
               <div>
                 <p>ACCESSORIES</p>
               </div>
             </div>
             <div class="cat">
-              <img src="{{ asset('images/logo.png')}}" alt="" />
+              <img src="{{ asset('images/logo1.png')}}" alt="" />
               <div>
                 <p>MEN'S WEAR</p>
               </div>

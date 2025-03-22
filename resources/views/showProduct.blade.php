@@ -27,11 +27,13 @@
               <div class="relative h-full overflow-hidden rounded-lg">
                   <!-- Item 1 -->
                   <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                      <img src="{{ asset('storage/'.$product->image) }}" class="absolute inset-0 w-full h-full object-cover" alt="...">
+                      {{-- <img src="{{ asset('storage/'.$product->image) }}" class="absolute inset-0 w-full h-full object-cover" alt="..."> --}}
+                      <img src="{{ asset('images/'.$product->image) }}" class="absolute inset-0 w-full h-full object-cover" alt="...">
                   </div>
                   @foreach ($product->images as $productImage)
                   <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                      <img src="{{ asset('storage/'.$productImage) }}" class="absolute inset-0 w-full h-full object-cover" alt="...">
+                      {{-- <img src="{{ asset('storage/'.$productImage) }}" class="absolute inset-0 w-full h-full object-cover" alt="..."> --}}
+                      <img src="{{ asset('images/'.$productImage) }}" class="absolute inset-0 w-full h-full object-cover" alt="...">
                   </div>
                   @endforeach
               </div>
