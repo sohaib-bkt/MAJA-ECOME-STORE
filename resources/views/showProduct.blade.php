@@ -77,7 +77,7 @@
               $encodedMessage = urlencode($message);
           @endphp
 
-          <a href="https://wa.me/+21239565569?text={{ $encodedMessage }}" class="addCart">Call</a>
+          <a href="https://wa.me/+21239565569?text={{ $encodedMessage }}" class="addCart">Check Out</a>
 
         </div>
 

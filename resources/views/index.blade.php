@@ -56,12 +56,6 @@
                 <p>ACCESSORIES</p>
               </div>
             </div>
-            <div class="cat">
-              <img src="{{ asset('images/logo1.png')}}" alt="" />
-              <div>
-                <p>MEN'S WEAR</p>
-              </div>
-            </div>
           </div>
         </section>
     
@@ -77,7 +71,7 @@
             {{-- <div class="product-item">
               <div class="overlay">
                 <a href="" class="product-thumb">
-                  <img src="./images/product-3.jpg" alt="" />
+                  <img src="./images/pro1.jpeg" alt="" />
                 </a>
                 <span class="discount">50%</span>
               </div>
@@ -96,8 +90,7 @@
             @foreach ($products as $product)
                 <x-product :product="$product"></x-product>
             @endforeach
-        
-            
+  
             
           </div>
         </section>
@@ -105,18 +98,23 @@
     
         <!-- Promo -->
     
-        <section class="section banner">
-    <div class="left">
-      <span class="trend">Trend Design</span>
-      <h1>New Collection 2024</h1>
-      <p>New Arrival <span class="color">Sale 50% OFF</span> Limited Time Offer</p>
-      <a href="{{ route('shop')}}" class="btn btn-1">Discover Now</a>
-    </div>
-    <div class="right">
-      <img src="" alt="">
-    </div>
+        <section class="section banner flex flex-col md:flex-row items-center justify-between px-6 md:px-12 md:gap-11 py-2 bg-gray-50">
+          <div class="left ">
+            <span class="trend">Trend Design</span>
+            <h1>New Collection 2025</h1>
+            <p >
+              New Arrival <span class="color">Sale 50% OFF</span> Limited Time Offer
+            </p>
+            <a href="{{ route('shop') }}" 
+               class="btn btn-1 mt-6 inline-block bg-beige-500 text-white font-medium py-3 px-6 rounded-md hover:bg-beige-600 transition">
+              Discover Now
+            </a>
+          </div>
+          <div class="md:w-1/2 mt-6 md:mt-0 w-full">
+            <img src="{{ asset('images/img1.jpeg') }}" alt="New Collection" class="w-full h-auto object-cover rounded-lg">
+          </div>
         </section>
-    
+
         <!-- Contact -->
         <section class="section contact">
           <div class="row">

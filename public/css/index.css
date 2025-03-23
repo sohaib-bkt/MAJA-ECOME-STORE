@@ -629,14 +629,14 @@ Hero Media Query
 .banner {
   position: relative;
   background-color: var(--grey2);
-  padding: 14rem 20%;
+  padding: 5rem 20%;
 }
 
 .banner .right img {
   position: absolute;
   bottom: 0;
-  right: 10%;
-  width: 75rem;
+  right: 5%;
+  width: 65rem;
 }
 
 .banner .trend,
@@ -660,7 +660,7 @@ Hero Media Query
 
 @media only screen and (max-width: 1500px) {
   .banner {
-    padding: 14rem;
+    padding: 8rem 5rem;
   }
 
   .banner .right img {
@@ -707,15 +707,15 @@ Hero Media Query
 
   .banner .right img {
     right: 0;
-    width: 50rem;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 60%;
+    height: 50rem;
+    margin: 0 auto;
   }
 }
 
 @media only screen and (max-width: 567px) {
   .banner {
-    padding: 8rem 5rem;
+    padding: 8rem 4rem;
   }
 
   .banner .trend,
@@ -735,7 +735,9 @@ Hero Media Query
   }
 
   .banner .right img {
-    width: 45rem;
+    width: 40rem;
+    height: 40rem;
+    
   }
 }
 
