@@ -483,7 +483,7 @@ Hero Media Query
 
 .product-thumb img {
   width: 100%;
-  height: 31rem;
+  height: 425px;
   object-fit: cover;
   transition: all 500ms linear;
 }
@@ -611,7 +611,7 @@ Hero Media Query
   }
 
   .product-thumb img {
-    height: 20rem;
+    height: 400px;
   }
 
   .product-item {

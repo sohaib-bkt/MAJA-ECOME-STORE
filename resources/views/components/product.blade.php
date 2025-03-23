@@ -1,8 +1,8 @@
 <div class="product-item">
-<div class="overlay">
-    <a href="" class="product-thumb">
+<div class="overlay" >
+    <a href="" class="product-thumb " >
         {{-- <img src="{{ asset('storage/'.$product->image) }}" alt="" /> --}}
-        <img src="{{ asset('images/'.$product->image) }}" alt="" />
+        <img src="{{ asset('images/'.$product->image) }}"  alt="" />
     </a>
 </div>
 <div class="product-info">
