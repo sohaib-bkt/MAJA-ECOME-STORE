@@ -9,6 +9,7 @@
   @vite('resources/css/app.css')
   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css"  rel="stylesheet" />
   <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Product Details</title>
@@ -67,11 +68,7 @@
         <div class="price">${{ $product->price }}</div>
         <div class="form" style="z-index: 0;display:flex">
             <i class="bx bx-heart" onclick="addToWishlist({{ $product->id }})" style="margin: 12px 10px;font-size: 20px;cursor:pointer"></i>  
-          @php
-          $message = "Hello! Take a screenshot of the product and send it to me";
-          $encodedMessage = urlencode($message);
-          @endphp
-          <a href="https://wa.me/+21239565569?text={{ $encodedMessage }}" class="addCart">Check Out</a>
+            <a class="addCart" href="{{ route('checkout', $product->id) }}">Check Out</a>  
         </div>
         <h3 class="subtitle font-bold">Description</h3>
         <p class="text-gray-500">{{ $product->description }}</p>

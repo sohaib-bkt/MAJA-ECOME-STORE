@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::post('/wishlist/add', [HomeController::class, 'addWishlist'])->name('wish
 Route::delete('/wishlist/remove/{productId}', [HomeController::class, 'removeWishlist'])->name('wishlist.remove');
 Route::get('/shop/{id}', [HomeController::class, 'showProduct'])->name('product.show');
 
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');  
+Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');  
 
 Route::get('/dashboard' , [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/add' , [HomeController::class, 'add'])->name('add');

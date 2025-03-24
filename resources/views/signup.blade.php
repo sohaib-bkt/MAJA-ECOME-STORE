@@ -12,6 +12,7 @@
     
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
     <title>Sign Up</title>
   </head>
   <body>

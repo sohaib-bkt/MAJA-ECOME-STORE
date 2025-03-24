@@ -4,9 +4,6 @@
 
       <ul class="nav-list d-flex">
         <li class="nav-item">
-          <a href="/" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item">
           <a href="{{ route('shop') }}" class="nav-link">ABAYAS</a>
         </li>
         <li class="nav-item">
@@ -21,14 +18,7 @@
         <li class="nav-item">
           <a href="{{ route('about') }}" class="nav-link">NOTRE HISTOIRE</a>
         </li>
-        <li class="nav-item">
-          @php
-          $message = "Hello! Take a screen shot of the product and send it to me";
-          $encodedMessage = urlencode($message);
-          @endphp
-
-          <a href="https://wa.me/+21239565569?text={{ $encodedMessage }}" class="nav-link">CONTACT</a>
-        </li>
+        
         <li class="icons d-flex">
           @if (Auth::check())
           <form action="{{ route('logout') }}" method="POST" style="display:inline;">
@@ -53,7 +43,7 @@
       </li>
       </ul>
 
-      <div class="icons d-flex">
+      <div class="icons d-flex iconss">
         @if (Auth::check())
         <form action="{{ route('logout') }}" method="POST" style="display:inline;">
             @csrf
