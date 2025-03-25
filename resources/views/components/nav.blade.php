@@ -4,16 +4,16 @@
 
       <ul class="nav-list d-flex">
         <li class="nav-item">
-          <a href="{{ route('shop') }}" class="nav-link">ABAYAS</a>
+          <a href="{{ route('collections.abayas') }}" class="nav-link">ABAYAS</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('shop') }}" class="nav-link">KIMONOS</a>
+          <a href="{{ route('collections.kimonos') }}" class="nav-link">KIMONOS</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('shop') }}" class="nav-link">HIJAB</a>
+          <a href="{{ route('collections.hijabs') }}" class="nav-link">HIJAB</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('shop') }}" class="nav-link">ACCESSOIRES</a>
+          <a href="{{ route('collections.accessoires') }}" class="nav-link">ACCESSOIRES</a>
         </li>
         <li class="nav-item">
           <a href="{{ route('about') }}" class="nav-link">NOTRE HISTOIRE</a>

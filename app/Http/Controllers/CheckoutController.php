@@ -74,7 +74,7 @@ class CheckoutController extends Controller
 
     public function success(Request $request)
     {
-        dd($request);
+            
         try {
             $sessionId = $request->get('session_id');
             
@@ -94,14 +94,12 @@ class CheckoutController extends Controller
                 Mail::to($order->email)->send(new OrderConfirmation($order));
             }
 
-            return view('checkoutSuccess', [
-                'order' => $order,
-                'product' => $order->product
-            ]);
+            return redirect()->route('shop');
 
         } catch (\Exception $e) {
             return redirect()->route('checkout', ['id' => $order->product_id ?? 1])
-                             ->with('error', 'We encountered an issue confirming your payment: ' . $e->getMessage());
+                            ->with('error', 'We encountered an issue confirming your payment: ' . $e->getMessage());
         }
+
     }
 }

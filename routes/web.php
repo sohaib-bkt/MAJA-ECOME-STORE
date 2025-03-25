@@ -31,7 +31,11 @@ Route::get('/signup', [AuthController::class, 'showRegisterForm'])->name('signup
 Route::post('/signup', [AuthController::class, 'register'])->name('signupAction');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/shop' , [HomeController::class, 'shop'])->name('shop');
+Route::get('/collections/abayas' , [HomeController::class, 'abayas'])->name('collections.abayas');
+Route::get('/collections/hijabs' , [HomeController::class, 'hijabs'])->name('collections.hijabs');
+Route::get('/collections/accessoires' , [HomeController::class, 'accessoires'])->name('collections.accessoires');
+Route::get('/collections/kimonos' , [HomeController::class, 'kimonos'])->name('collections.kimonos');
+
 Route::get('/about' , [HomeController::class, 'about'])->name('about');
 Route::get('/shop/{id}' , [HomeController::class, 'showProduct'])->name('showProduct');
 Route::get('/wishlist' , [HomeController::class, 'wishlist'])->name('wishlist');
@@ -41,34 +45,7 @@ Route::get('/shop/{id}', [HomeController::class, 'showProduct'])->name('product.
 
 Route::get('/checkout/{id}', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
-Route::get('/success', function (Request $request)
-{
-    try {
-        $sessionId = $request->get('session_id');
-        
-        if (!$sessionId) {
-            throw new \Exception('Missing session ID');
-        }
-
-        // Verify Stripe payment
-        Stripe::setApiKey(config('services.stripe.secret'));
-        $session = Session::retrieve($sessionId);
-
-        // Get and update order
-        $order = Order::where('stripe_session_id', $sessionId)->firstOrFail();
-        
-        if (!$order->paid) {
-            $order->update(['paid' => true]);
-            Mail::to($order->email)->send(new OrderConfirmation($order));
-        }
-
-        return redirect()->route('shop');
-
-    } catch (\Exception $e) {
-        return redirect()->route('checkout', ['id' => $order->product_id ?? 1])
-                         ->with('error', 'We encountered an issue confirming your payment: ' . $e->getMessage());
-    }
-})->name('checkout.success');
+Route::get('/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 Route::get('/dashboard' , [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/add' , [HomeController::class, 'add'])->name('add');

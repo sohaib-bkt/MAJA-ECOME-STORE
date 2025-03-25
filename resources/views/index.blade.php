@@ -108,7 +108,7 @@
             <p >
               New Arrival <span class="color">Sale 50% OFF</span> Limited Time Offer
             </p>
-            <a href="{{ route('shop') }}" 
+            <a href="{{ route('collections.abayas') }}" 
                class="btn btn-1 mt-6 inline-block bg-beige-500 text-white font-medium py-3 px-6 rounded-md hover:bg-beige-600 transition">
               Discover Now
             </a>

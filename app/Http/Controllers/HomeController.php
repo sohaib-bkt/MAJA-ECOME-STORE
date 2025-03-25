@@ -48,39 +48,29 @@ class HomeController extends Controller
         return redirect()->route('add');
     }
     
-    public function shop(Request $request)
+    public function abayas(Request $request)
     {
-        $category = $request->get('category', 'all') ?? 'all';
-        $date = $request->get('date', 'all') ?? 'all';
-    
-        $query = Product::query();
-    
-        if ($category != 'all') {
-            $query->where('category', $category);
-        }
-    
-        if ($date == 'newest') {
-            $query->orderBy('created_at', 'desc');
-        } elseif ($date == 'oldest') {
-            $query->orderBy('created_at', 'asc');
-        }
-    
-        $products = $query->paginate(16)->appends([
-            'category' => $category,
-            'date' => $date,
-        ]);
-    
-        if ($request->ajax()) {
-            $productsView = view('partials.products', compact('products'))->render();
-            $paginationView = view('partials.pagination', compact('products'))->render();
-            
-            return response()->json([
-                'products' => $productsView,
-                'pagination' => $paginationView
-            ]);
-        }
-    
-        return view('shop', compact('products', 'category', 'date'));
+        
+        $products = Product::orderBy('created_at', 'desc')->where('category', 'ABAYA')->get();
+        return view('shop/abaya', compact('products'));
+    }
+    public function hijabs(Request $request)
+    {
+        
+        $products = Product::orderBy('created_at', 'desc')->where('category', 'HIJAB')->get();
+        return view('shop/abaya', compact('products'));
+    }
+    public function accessoires(Request $request)
+    {
+        
+        $products = Product::orderBy('created_at', 'desc')->where('category', 'ACCESSORY')->get();
+        return view('shop/abaya', compact('products'));
+    }
+    public function kimonos(Request $request)
+    {
+        
+        $products = Product::orderBy('created_at', 'desc')->where('category', 'KIMONO')->get();
+        return view('shop/abaya', compact('products'));
     }
     
 

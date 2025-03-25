@@ -12,10 +12,10 @@
       </div>
       <div class="col d-flex">
         <h4>USEFUL LINK</h4>
-        <a href="{{ route('shop')}}">Online Store</a>
+        <a href="{{ route('collections.abayas')}}">Online Store</a>
         <a href="">Customer Services</a>
-        <a href="{{ route('shop')}}">Promotion</a>
-        <a href="{{ route('shop')}}">Top Brands</a>
+        <a href="">Promotion</a>
+        <a href="">Top Brands</a>
       </div>
       <div class="col d-flex">
         <span><i class="bx bxl-facebook-square"></i></span>
