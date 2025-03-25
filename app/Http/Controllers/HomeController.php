@@ -49,29 +49,168 @@ class HomeController extends Controller
     }
     
     public function abayas(Request $request)
-    {
-        
-        $products = Product::orderBy('created_at', 'desc')->where('category', 'ABAYA')->get();
-        return view('shop/abaya', compact('products'));
+{
+    $query = Product::where('category', 'ABAYA');
+
+    // Apply filters
+    if ($request->has('size') && $request->size !== '') {
+        $query->where('size', $request->size);
     }
-    public function hijabs(Request $request)
-    {
-        
-        $products = Product::orderBy('created_at', 'desc')->where('category', 'HIJAB')->get();
-        return view('shop/abaya', compact('products'));
+
+    if ($request->has('color') && $request->color !== '') {
+        $query->where('color', $request->color);
     }
-    public function accessoires(Request $request)
-    {
-        
-        $products = Product::orderBy('created_at', 'desc')->where('category', 'ACCESSORY')->get();
-        return view('shop/abaya', compact('products'));
+
+    // Apply sorting
+    switch ($request->get('sort', 'newest')) {
+        case 'price_asc':
+            $query->orderBy('price', 'asc');
+            break;
+        case 'price_desc':
+            $query->orderBy('price', 'desc');
+            break;
+        case 'newest':
+        default:
+            $query->orderBy('created_at', 'desc');
+            break;
     }
-    public function kimonos(Request $request)
-    {
-        
-        $products = Product::orderBy('created_at', 'desc')->where('category', 'KIMONO')->get();
-        return view('shop/abaya', compact('products'));
+
+    $products = $query->paginate(4);
+
+    if ($request->ajax()) {
+        return response()->json([
+            'html' => view('partials.products', ['products' => $products])->render(),
+            'next_page_url' => $products->nextPageUrl(),
+            'current_page' => $products->currentPage(),
+            'last_page' => $products->lastPage()
+        ]);
     }
+
+    return view('shop/abaya', compact('products'));
+}
+
+public function hijabs(Request $request)
+{
+    $query = Product::where('category', 'HIJAB');
+
+    // Apply filters
+    if ($request->has('size') && $request->size !== '') {
+        $query->where('size', $request->size);
+    }
+
+    if ($request->has('color') && $request->color !== '') {
+        $query->where('color', $request->color);
+    }
+
+    // Apply sorting
+    switch ($request->get('sort', 'newest')) {
+        case 'price_asc':
+            $query->orderBy('price', 'asc');
+            break;
+        case 'price_desc':
+            $query->orderBy('price', 'desc');
+            break;
+        case 'newest':
+        default:
+            $query->orderBy('created_at', 'desc');
+            break;
+    }
+
+    $products = $query->paginate(4);
+
+    if ($request->ajax()) {
+        return response()->json([
+            'html' => view('partials.products', ['products' => $products])->render(),
+            'next_page_url' => $products->nextPageUrl(),
+            'current_page' => $products->currentPage(),
+            'last_page' => $products->lastPage()
+        ]);
+    }
+
+    return view('shop/abaya', compact('products'));
+}
+
+public function accessoires(Request $request)
+{
+    $query = Product::where('category', 'ACCESSORY');
+
+    // Apply filters
+    if ($request->has('size') && $request->size !== '') {
+        $query->where('size', $request->size);
+    }
+
+    if ($request->has('color') && $request->color !== '') {
+        $query->where('color', $request->color);
+    }
+
+    // Apply sorting
+    switch ($request->get('sort', 'newest')) {
+        case 'price_asc':
+            $query->orderBy('price', 'asc');
+            break;
+        case 'price_desc':
+            $query->orderBy('price', 'desc');
+            break;
+        case 'newest':
+        default:
+            $query->orderBy('created_at', 'desc');
+            break;
+    }
+
+    $products = $query->paginate(4);
+
+    if ($request->ajax()) {
+        return response()->json([
+            'html' => view('partials.products', ['products' => $products])->render(),
+            'next_page_url' => $products->nextPageUrl(),
+            'current_page' => $products->currentPage(),
+            'last_page' => $products->lastPage()
+        ]);
+    }
+
+    return view('shop/abaya', compact('products'));
+}
+
+public function kimonos(Request $request)
+{
+    $query = Product::where('category', 'KIMONO');
+
+    // Apply filters
+    if ($request->has('size') && $request->size !== '') {
+        $query->where('size', $request->size);
+    }
+
+    if ($request->has('color') && $request->color !== '') {
+        $query->where('color', $request->color);
+    }
+
+    // Apply sorting
+    switch ($request->get('sort', 'newest')) {
+        case 'price_asc':
+            $query->orderBy('price', 'asc');
+            break;
+        case 'price_desc':
+            $query->orderBy('price', 'desc');
+            break;
+        case 'newest':
+        default:
+            $query->orderBy('created_at', 'desc');
+            break;
+    }
+
+    $products = $query->paginate(4);
+
+    if ($request->ajax()) {
+        return response()->json([
+            'html' => view('partials.products', ['products' => $products])->render(),
+            'next_page_url' => $products->nextPageUrl(),
+            'current_page' => $products->currentPage(),
+            'last_page' => $products->lastPage()
+        ]);
+    }
+
+    return view('shop/abaya', compact('products'));
+}
     
 
     public function wishlist(){

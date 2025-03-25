@@ -57,10 +57,10 @@ class ProductSeeder extends Seeder
             'image' => 'pro1.jpeg',
             'images' => ['pro1.jpeg', 'pro2.jpeg'],
             'description' => "Découvrez notre abaya biege en nylon et jersey, une pièce qui marie élégance moderne et confort absolu. Confectionnée dans un tissu de qualité supérieure, elle offre légèreté et durabilité tout en assurant un confort optimal. Sa coupe minimaliste s'adapte avec raffinement aussi bien aux looks habillés qu'aux styles décontractés, pour une élégance discrète en toutes occasions. De plus, sa manche personnalisable brodée apporte une touche unique, vous permettant d’exprimer votre style avec originalité."  ,
-            'price' => 45,
+            'price' => 46,
             'slug' => 'abayaminimalbiege',
             'color' => 'Biege',
-            'size' => 'S/M',
+            'size' => 'M/L',
             
         ]);
         Product::create([
@@ -69,7 +69,7 @@ class ProductSeeder extends Seeder
             'image' => 'pro3.jpeg',
             'images' => ['pro2.jpeg', 'pro3.jpeg'],  
             'description' => "Découvrez notre abaya taupe en nylon et jersey, une pièce qui marie élégance moderne et confort absolu. Confectionnée dans un tissu de qualité supérieure, elle offre légèreté et durabilité tout en assurant un confort optimal. Sa coupe minimaliste s'adapte avec raffinement aussi bien aux looks habillés qu'aux styles décontractés, pour une élégance discrète en toutes occasions. De plus, sa manche personnalisable brodée apporte une touche unique, vous permettant d’exprimer votre style avec originalité."  ,
-            'price' => 45,
+            'price' => 47,
             'color' => 'Taupe',
             'slug' => 'abayaminimaltaupe',
             
@@ -81,7 +81,7 @@ class ProductSeeder extends Seeder
             'image' => 'pro2.jpeg',
             'images' => ['pro2.jpeg', 'pro3.jpeg'],  
             'description' => "Découvrez notre abaya marron en nylon et jersey, une pièce qui marie élégance moderne et confort absolu. Confectionnée dans un tissu de qualité supérieure, elle offre légèreté et durabilité tout en assurant un confort optimal. Sa coupe minimaliste s'adapte avec raffinement aussi bien aux looks habillés qu'aux styles décontractés, pour une élégance discrète en toutes occasions. De plus, sa manche personnalisable brodée apporte une touche unique, vous permettant d’exprimer votre style avec originalité."  ,
-            'price' => 45,
+            'price' => 42,
             'slug' => 'abayaminimalmarron',
             'color' => 'Marron',
             'size' => 'S/M',
@@ -130,7 +130,7 @@ class ProductSeeder extends Seeder
             'price' => 45,
             'slug' => 'abayaminimalbiege',
             'color' => 'Biege',
-            'size' => 'S/M',
+            'size' => 'M/L',
             
         ]);
         Product::create([
@@ -165,7 +165,7 @@ class ProductSeeder extends Seeder
             'price' => 45,
             'slug' => 'abayaminimalbiege',
             'color' => 'Biege',
-            'size' => 'S/M',
+            'size' => 'M/L',
             
         ]);
         Product::create([

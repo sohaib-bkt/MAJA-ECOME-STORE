@@ -80,7 +80,7 @@
   <section class="section featured">
     <div class="top container">
       <h1 class="text-3xl font-bold">Related Products</h1>
-      <a href="{{ route('shop') }}" class="view-more text-3xl hover:text-green-500 font-bold">View more</a>
+      <a href="{{ route('collections.abayas') }}" class="view-more text-3xl hover:text-[#ad8d55] font-bold">View more</a>
     </div>
     <div class="product-center container">
       @foreach ($products as $product)

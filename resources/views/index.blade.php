@@ -19,7 +19,7 @@
           }
 
         </style>
-        <title>Gift 4U</title>
+        <title>Maja</title>
         @vite('resources/css/app.css')
         
         <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
