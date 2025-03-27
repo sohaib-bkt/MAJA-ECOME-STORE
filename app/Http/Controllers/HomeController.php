@@ -80,7 +80,6 @@ class HomeController extends Controller
     if ($request->ajax()) {
         return response()->json([
             'html' => view('partials.products', ['products' => $products])->render(),
-            'next_page_url' => $products->nextPageUrl(),
             'current_page' => $products->currentPage(),
             'last_page' => $products->lastPage()
         ]);
@@ -162,7 +161,6 @@ public function accessoires(Request $request)
     if ($request->ajax()) {
         return response()->json([
             'html' => view('partials.products', ['products' => $products])->render(),
-            'next_page_url' => $products->nextPageUrl(),
             'current_page' => $products->currentPage(),
             'last_page' => $products->lastPage()
         ]);
@@ -203,7 +201,6 @@ public function kimonos(Request $request)
     if ($request->ajax()) {
         return response()->json([
             'html' => view('partials.products', ['products' => $products])->render(),
-            'next_page_url' => $products->nextPageUrl(),
             'current_page' => $products->currentPage(),
             'last_page' => $products->lastPage()
         ]);

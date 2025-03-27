@@ -75,8 +75,20 @@
             <div id="activeFilters" class="flex gap-2 items-center"></div>  
         </div>  
       </div>
-  
+      <div id="noProductsMessage" class="hidden container text-center py-12 bg-gray-50 rounded-lg">
+            <div class="max-w-md mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-[#ba9c76] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h.01M15 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">No Products Found</h2>
+                <p class="text-gray-600 mb-6">We couldn't find any products matching your current filters.</p>
+                <button onclick="clearAllFilters()" class="bg-[#ba9c76] text-white px-6 py-3 rounded-lg hover:bg-[#a78b6a] transition duration-300">
+                    Clear Filters
+                </button>
+            </div>
+        </div>
       <div class="product-center container" id="productContainer">
+        
         @include('partials.products', ['products' => $products])
       </div>
       
@@ -94,10 +106,14 @@
   <script src="{{ asset('js/index.js') }}"></script>
 
  <script>
+    
 document.addEventListener('DOMContentLoaded', function() {
+    
     let loading = false;
     const loadingDiv = document.getElementById('loading');
     const productContainer = document.getElementById('productContainer');
+    const noProductsMessage = document.getElementById('noProductsMessage');
+
     
     let currentFilters = {
         size: '',
@@ -153,6 +169,23 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchProducts(true);
     }
 
+    // Function to update no products message
+    function updateNoProductsMessage(hasProducts) {
+        console.log(noProductsMessage);
+        
+        if (!noProductsMessage) return;
+        
+        if (hasProducts) {
+            console.log('here');
+            noProductsMessage.classList.add('hidden');
+            productContainer.classList.remove('hidden');
+        } else {
+            console.log('here2');
+            noProductsMessage.classList.remove('hidden');
+            productContainer.classList.add('hidden');
+        }
+    }
+
     async function fetchProducts(resetPagination = true) {
         if (loading) return;
         loading = true;
@@ -186,12 +219,17 @@ document.addEventListener('DOMContentLoaded', function() {
             currentFilters.page = data.current_page;
             totalPages = data.last_page;
             
+            // Check if there are products (trim to handle potential whitespace)
+            updateNoProductsMessage(data.html.trim() != '');
+            
             // Update URL without reload
             history.replaceState(null, '', url);
             
             updateActiveFilters();
         } catch (error) {
             console.error('Error:', error);
+            // Ensure loading state is reset even if there's an error
+            updateNoProductsMessage(false);
         } finally {
             loading = false;
             loadingDiv.classList.add('hidden');
@@ -239,7 +277,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Add global function to clear all filters
+    window.clearAllFilters = function() {
+        // Reset filter dropdowns
+        document.getElementById('sizeFilter').value = '';
+        document.getElementById('colorFilter').value = '';
+        document.getElementById('sortBy').value = 'newest';
+
+        // Reset current filters
+        currentFilters = {
+            size: '',
+            color: '',
+            sort: 'newest',
+            page: 1
+        };
+
+        // Fetch products with reset filters
+        resetPagination();
+    };
+
     window.addEventListener('scroll', scrollHandler);
+
+    window.addEventListener('popstate', () => {  
+    const currentUrl = window.location.href;  
+    fetchProductsFromUrl(currentUrl);  
+    console.log('popstate event triggered');  
+});  
 });
     </script>
 </body>
