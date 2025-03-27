@@ -102,12 +102,29 @@
                                 <span class="text-xl">{{ $product->price }} €</span>
                             </div>
                             <p class="text-lg md:text-xl text-gray-500">{{ $product->category }} / {{ $product->size }}</p>
+                            <div class="flex items-center justify-between mt-4">
+                                <span class="text-xl font-medium text-gray-700">Quantity</span>
+                                <div class="flex items-center gap-1">
+                                    <button type="button" class="quantity-minus p-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 active:scale-95">
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                        </svg>
+                                    </button>
+                                    <input type="number" name="quantity" value="1" min="1" 
+                                           class="w-20 h-11 text-center border border-gray-300 rounded-lg mx-1 text-xl font-medium focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors duration-200 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                    <button type="button" class="quantity-plus p-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200 active:scale-95">
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="space-y-5">
                             <div class="flex justify-between font-medium text-2xl">
                                 <span>Total</span>
-                                <span>{{ $product->price }} €</span>
+                                <span id="total-price">{{ number_format($product->price, 2) }} €</span>
                             </div>
                         </div>
 
@@ -174,6 +191,11 @@
         const paymentMethods = document.querySelectorAll('.payment-method');
         const paymentMethodInput = document.getElementById('selected_payment_method');
         const form = document.getElementById('payment-form');
+        const quantityInput = document.querySelector('input[name="quantity"]');
+        const minusButton = document.querySelector('.quantity-minus');
+        const plusButton = document.querySelector('.quantity-plus');
+        const totalPriceElement = document.getElementById('total-price');
+        const productPrice = parseFloat({{ $product->price }});
 
         // Initialize first payment method as selected
         paymentMethods[0].classList.add('active');
@@ -198,6 +220,39 @@
                 alert('Please select a payment method');
             }
         });
+
+
+        function updateTotal() {
+            const quantity = parseInt(quantityInput.value, 10);
+            const total = productPrice * quantity;
+            totalPriceElement.textContent = total.toFixed(2) + ' €';
+        }
+
+        minusButton.addEventListener('click', function() {
+            let currentValue = parseInt(quantityInput.value, 10);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+                updateTotal();
+            }
+        });
+
+        plusButton.addEventListener('click', function() {
+            let currentValue = parseInt(quantityInput.value, 10);
+            quantityInput.value = currentValue + 1;
+            updateTotal();
+        });
+
+        quantityInput.addEventListener('input', function() {
+            let currentValue = parseInt(this.value, 10) || 1;
+            if (currentValue < 1) {
+                currentValue = 1;
+            }
+            this.value = currentValue;
+            updateTotal();
+        });
+
+        // Initialize total on load
+        updateTotal();
     });
     </script>
 </body>

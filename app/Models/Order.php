@@ -19,6 +19,8 @@ class Order extends Model
         'phone',
         'payment_method',
         'stripe_session_id',
+        'quantity',
+        'total_amount',
         'paid'
     ];
 

@@ -7,7 +7,7 @@
     <h1>Thank you for your order!</h1>
     <p>Order ID: {{ $order->id }}</p>
     <p>Product: {{ $order->product->name }}</p>
-    <p>Total: {{ $order->product->price }}€</p>
+    <p>Total: {{ $order->product->price * $order->quantity }}€</p>
     <p>Shipping Address:</p>
     <address>
         {{ $order->first_name }} {{ $order->last_name }}<br>

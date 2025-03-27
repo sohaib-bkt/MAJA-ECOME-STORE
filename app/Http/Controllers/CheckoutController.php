@@ -27,11 +27,13 @@ class CheckoutController extends Controller
             'city' => 'required',
             'phone' => 'required',
             'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
             'payment_method' => 'required|in:card,paypal,apple_pay'
         ]);
-
+        
         $product = Product::findOrFail($request->product_id);
-
+        $quantity = $request->quantity;
+        $totalAmount = $product->price * $quantity;
         // Create order record
         $order = Order::create([
             'product_id' => $product->id,
@@ -40,9 +42,11 @@ class CheckoutController extends Controller
             'last_name' => $request->last_name,
             'address' => $request->address,
             'city' => $request->city,
-            'phone' => $request->phone,
+            'phone' => '+33'.$request->phone,
             'payment_method' => $request->payment_method,
             'stripe_session_id' => '',
+            'quantity' => $quantity,
+            'total_amount' => $totalAmount,
             'paid' => false
         ]);
 
@@ -59,7 +63,7 @@ class CheckoutController extends Controller
                     ],
                     'unit_amount' => $product->price * 100,
                 ],
-                'quantity' => 1,
+                'quantity' => $quantity,
             ]],
             'mode' => 'payment',
             'success_url' => route('checkout.success').'?session_id={CHECKOUT_SESSION_ID}',
@@ -94,7 +98,7 @@ class CheckoutController extends Controller
                 Mail::to($order->email)->send(new OrderConfirmation($order));
             }
 
-            return redirect()->route('shop');
+            return redirect()->route('home')->with('success', 'Payment successful!');
 
         } catch (\Exception $e) {
             return redirect()->route('checkout', ['id' => $order->product_id ?? 1])

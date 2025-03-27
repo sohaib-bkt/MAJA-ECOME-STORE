@@ -13,6 +13,34 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Product Details</title>
+  <style>
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .animate-slide-in {
+      animation: slideIn 0.5s ease-out forwards;
+    }
+
+    .heartbeat {
+      animation: heartbeat 0.8s ease-in-out;
+    }
+  </style>
 </head>
 <body>
   <!-- Navigation -->
@@ -63,15 +91,61 @@
           </div>
           
       <div class="right pt-[375px] md:pt-[50px]">
-        <span>Shop/{{ $product->category }}</span>
-        <h1>{{ $product->name }}</h1>
-        <div class="price">${{ $product->price }}</div>
-        <div class="form" style="z-index: 0;display:flex">
-            <i class="bx bx-heart" onclick="addToWishlist({{ $product->id }})" style="margin: 12px 10px;font-size: 20px;cursor:pointer"></i>  
-            <a class="addCart" href="{{ route('checkout', $product->id) }}">Check Out</a>  
+        <span class="inline-block opacity-0 animate-slide-in [animation-delay:0.2s]">Shop/{{ $product->category }}</span>
+        <h1 class="opacity-0 animate-slide-in [animation-delay:0.3s]">{{ $product->name }}</h1>
+        <div>
+          
         </div>
-        <h3 class="subtitle font-bold">Description</h3>
-        <p class="text-gray-500">{{ $product->description }}</p>
+        <div class="price opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: inline-block;">  
+          ${{ $product->price }}  
+      </div>  
+      <div class="form space-x-4" style="z-index: 0; display: flex; align-items: center;">  
+          <i class="bx bx-heart transition-all duration-300 hover:text-red-500 hover:scale-110 transform cursor-pointer heartbeat"   
+             onclick="addToWishlist({{ $product->id }})"></i>    
+             <a class="addCart px-8 py-3 bg-[#ad8d55] text-white rounded-full transition-all duration-300 hover:bg-[#967c4a] hover:scale-105 transform shadow-md hover:shadow-lg" 
+             href="{{ route('checkout', $product->id) }}">Check Out</a>   
+      </div>  
+        <h3 class="subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">Description</h3>
+        <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">{{ $product->description }}</p>
+        <h3 class="subtitle font-bold mt-6">Composition</h3>
+        <div class="composition-grid grid grid-cols-1 gap-4 mt-4">
+          <!-- Item 1 -->
+          <div class="composition-item group hover:bg-gray-50 p-4 rounded-lg transition-all duration-300">
+            <div class="flex items-center gap-3 mb-2">
+              <i class='bx bx-basket text-2xl text-[#ad8d55]'></i>
+              <div>
+                <span class="font-medium text-gray-700">Nylon</span>
+                <span class="text-sm ml-2 text-gray-500">87%</span>
+              </div>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div class="bg-[#ad8d55] h-2.5 rounded-full transition-all duration-500" 
+                   style="width: 87%"></div>
+            </div>
+          </div>
+  
+          <!-- Item 2 -->
+          <div class="composition-item group hover:bg-gray-50 p-4 rounded-lg transition-all duration-300">
+            <div class="flex items-center gap-3 mb-2">
+              <i class='bx bx-basket text-2xl text-[#ad8d55]'></i>
+              <div>
+                <span class="font-medium text-gray-700">Élasthanne</span>
+                <span class="text-sm ml-2 text-gray-500">13%</span>
+              </div>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div class="bg-[#ad8d55] h-2.5 rounded-full transition-all duration-500" 
+                   style="width: 13%"></div>
+            </div>
+          </div>
+        </div>
+  
+        <h3 class="subtitle font-bold mt-8">Design</h3>
+        <div class="design-tags flex flex-wrap gap-2 mt-4">
+          <span class="px-3 py-1 bg-[#f5f5f5] rounded-full text-sm text-gray-700">Moderne</span>
+          <span class="px-3 py-1 bg-[#f5f5f5] rounded-full text-sm text-gray-700">Élégant</span>
+          <span class="px-3 py-1 bg-[#f5f5f5] rounded-full text-sm text-gray-700">Confortable</span>
+        </div>
       </div>
     </div>
   </section>
@@ -80,7 +154,10 @@
   <section class="section featured">
     <div class="top container">
       <h1 class="text-3xl font-bold">Related Products</h1>
-      <a href="{{ route('collections.abayas') }}" class="view-more text-3xl hover:text-[#ad8d55] font-bold">View more</a>
+      <a href="{{ route('collections.abayas') }}" 
+      class="view-more text-3xl font-bold transition-all duration-300 hover:text-[#ad8d55] hover:translate-x-2">
+     View more →
+   </a>
     </div>
     <div class="product-center container">
       @foreach ($products as $product)
