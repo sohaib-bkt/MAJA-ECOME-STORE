@@ -78,32 +78,39 @@ class CheckoutController extends Controller
 
     public function success(Request $request)
     {
-            
         try {
             $sessionId = $request->get('session_id');
             
             if (!$sessionId) {
                 throw new \Exception('Missing session ID');
             }
-
-            // Verify Stripe payment
+    
             Stripe::setApiKey(config('services.stripe.secret'));
             $session = Session::retrieve($sessionId);
-
-            // Get and update order
+    
             $order = Order::where('stripe_session_id', $sessionId)->firstOrFail();
             
             if (!$order->paid) {
                 $order->update(['paid' => true]);
                 Mail::to($order->email)->send(new OrderConfirmation($order));
             }
-
-            return redirect()->route('home')->with('success', 'Payment successful!');
-
+    
+            // Prepare flash card data
+            $flashData = [
+                'order_id' => $order->id,
+                'amount' => number_format($order->total_amount , 2), // Example for currency formatting
+                'product_name' => $order->product->name, // Ensure you have a product relationship
+                'customer_name' => $order->name,
+                'email' => $order->email
+            ];
+    
+            return redirect()->route('home')
+                ->with('success', 'Payment successful!')
+                ->with('flash_data', $flashData);
+    
         } catch (\Exception $e) {
             return redirect()->route('checkout', ['id' => $order->product_id ?? 1])
-                            ->with('error', 'We encountered an issue confirming your payment: ' . $e->getMessage());
+                ->with('error', 'We encountered an issue confirming your payment: ' . $e->getMessage());
         }
-
     }
 }

@@ -58,6 +58,14 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
   </head>
   <body class="scroll-smooth">
+    
+    <!-- Flash Message -->
+    @if(session('success') && session('flash_data'))
+      <div class="absolute top-28 left-1/2  md:left-[70%] transform -translate-x-1/2 z-50 animate-fade-in-up px-4 sm:w-auto sm:px-0">
+        <x-flash-card :flashData="session('flash_data')" />
+      </div>
+    @endif
+
     <!-- Header -->
     <header class="relative" id="header">
       <div
@@ -66,6 +74,11 @@
         style="background-image: url('/images/home1.jpeg')"
       >
         <x-nav></x-nav>
+
+       
+
+        
+        
         <!-- Centered Shop Button -->
         <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center">  
           <a  
