@@ -95,7 +95,7 @@ Navigation
     margin-right: 0.5rem;
   }
   
-  .icon span {
+  .icon span , .logout {
     position: absolute;
     top: 3px;
     right: -3px;
@@ -212,4 +212,11 @@ Navigation
 }
 
 
-  
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.animate-bounce {
+  animation: bounce 0.5s ease-in-out;
+}
