@@ -102,8 +102,10 @@
       <div class="form space-x-4" style="z-index: 0; display: flex; align-items: center;">  
           <i class="bx bx-heart transition-all duration-300 hover:text-red-500 hover:scale-110 transform cursor-pointer heartbeat"   
              onclick="addToWishlist({{ $product->id }})"></i>    
-             <a class="addCart px-8 py-3 bg-[#ad8d55] text-white rounded-full transition-all duration-300 hover:bg-[#967c4a] hover:scale-105 transform shadow-md hover:shadow-lg" 
-             href="{{ route('checkout', $product->id) }}">Check Out</a>   
+             <a href="{{ route('checkout', $product->id) }}" 
+              class="px-8 py-4 bg-[#C9B194] hover:bg-[#B89E80] text-white rounded-full font-medium transition-colors shadow-md hover:shadow-lg">
+             Commander
+           </a> 
       </div>  
         <h3 class="subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">Description</h3>
         <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">{{ $product->description }}</p>
@@ -140,12 +142,15 @@
           </div>
         </div>
   
-        <h3 class="subtitle font-bold mt-8">Design</h3>
-        <div class="design-tags flex flex-wrap gap-2 mt-4">
-          <span class="px-3 py-1 bg-[#f5f5f5] rounded-full text-sm text-gray-700">Moderne</span>
-          <span class="px-3 py-1 bg-[#f5f5f5] rounded-full text-sm text-gray-700">Élégant</span>
-          <span class="px-3 py-1 bg-[#f5f5f5] rounded-full text-sm text-gray-700">Confortable</span>
+        <!-- Caractéristiques -->
+      
+        <h3 class="text-2xl font-bold text-gray-900">Caractéristiques</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-4 py-2 bg-[#C9B194]/10 text-[#C9B194] rounded-full text-sm font-medium">Moderne</span>
+          <span class="px-4 py-2 bg-[#C9B194]/10 text-[#C9B194] rounded-full text-sm font-medium">Élégant</span>
+          <span class="px-4 py-2 bg-[#C9B194]/10 text-[#C9B194] rounded-full text-sm font-medium">Confortable</span>
         </div>
+      
       </div>
     </div>
   </section>

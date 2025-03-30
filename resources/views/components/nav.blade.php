@@ -43,11 +43,11 @@
               </a>
           @endif
       
-{{--         
+        
         <a href="{{ route('wishlist') }}" class="icon">
           <i class="bx bx-heart"></i>
           <span class="d-flex">{{ $wishlistCount }}</span>
-        </a> --}}
+        </a>
 
       </li>
       </ul>
@@ -66,10 +66,10 @@
                 <i class="bx bx-user"></i>
             </a>
         @endif
-        {{-- <a href="{{ route('wishlist') }}" class="icon">
+        <a href="{{ route('wishlist') }}" class="icon">
           <i class="bx bx-heart"></i>
           <span class="d-flex" id="wishlist-count">{{ $wishlistCount }}</span>
-        </a> --}}
+        </a>
 
       </div>
 
