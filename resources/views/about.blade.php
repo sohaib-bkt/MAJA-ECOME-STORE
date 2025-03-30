@@ -27,9 +27,9 @@
       }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
-    
+
     @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
   </head>
   
   <body class="font-inter bg-gray-50">
