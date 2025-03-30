@@ -57,8 +57,8 @@
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
   </head>
-  <body class="scroll-smooth">
-    
+  <body class="scroll-smooth selection:bg-[#e6cba9]" >
+
     <!-- Flash Message -->
     @if(session('success') && session('flash_data'))
       <div class="absolute top-28 left-1/2  md:left-[70%] transform -translate-x-1/2 z-50 animate-fade-in-up px-4 sm:w-auto sm:px-0">

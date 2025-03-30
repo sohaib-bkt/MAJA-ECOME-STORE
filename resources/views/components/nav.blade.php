@@ -16,6 +16,9 @@
           <a href="{{ route('collections.accessoires') }}" class="nav-link">ACCESSOIRES</a>
         </li>
         <li class="nav-item">
+          <a href="{{ route('backstage') }}" class="nav-link">BACKSTAGE</a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('about') }}" class="nav-link">NOTRE HISTOIRE</a>
         </li>
         

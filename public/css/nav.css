@@ -10,6 +10,24 @@
 Navigation
 =================
 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d1d1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
 
 .navigation {
     height: 10rem;
@@ -172,6 +190,7 @@ Navigation
 
   html{
     font-size: 62%;
+    scroll-behavior: smooth;
   }
 
 

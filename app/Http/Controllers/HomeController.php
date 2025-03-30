@@ -262,5 +262,9 @@ public function kimonos(Request $request)
         return view('checkoutSuccess');  
     }
     
+    public function backstage()
+    {
+        return view('backstage');
+    }
     
 }

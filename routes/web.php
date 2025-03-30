@@ -56,5 +56,5 @@ Route::get('/test-mail', function () {
     return new App\Mail\OrderConfirmation($order);
 });
 
-
+Route::get('/backstage',[HomeController::class, 'backstage'])->name('backstage');
 
