@@ -6,8 +6,10 @@
     <title>Modern Backstage Gallery</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
 
     <style>
         @keyframes fadeIn {
@@ -245,7 +247,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                 <div class="flex gap-6 px-4 md:px-8">
                     <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
                         <div class="relative aspect-video">
-                            <img src="/api/placeholder/400/225" alt="Concept sketching" class="w-full h-full object-cover">
+                            <img src="{{ asset("images/img1.jpeg")}}" alt="Concept sketching" class="w-full h-full object-cover">
                         </div>
                         <div class="p-4 bg-white">
                             <h3 class="font-medium text-lg mb-1">Concept initiale</h3>
@@ -254,7 +256,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                     </div>
                     <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
                         <div class="relative aspect-video">
-                            <img src="/api/placeholder/400/225" alt="Material research" class="w-full h-full object-cover">
+                            <img src="{{ asset("images/img1.jpeg")}}" alt="Material research" class="w-full h-full object-cover">
                         </div>
                         <div class="p-4 bg-white">
                             <h3 class="font-medium text-lg mb-1">Etude Matériel</h3>
@@ -263,7 +265,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                     </div>
                     <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
                         <div class="relative aspect-video">
-                            <img src="/api/placeholder/400/225" alt="Prototyping" class="w-full h-full object-cover">
+                            <img src="{{ asset("images/img1.jpeg")}}" alt="Prototyping" class="w-full h-full object-cover">
                         </div>
                         <div class="p-4 bg-white">
                             <h3 class="font-medium text-lg mb-1">Prototyping</h3>
@@ -272,7 +274,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                     </div>
                     <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
                         <div class="relative aspect-video">
-                            <img src="/api/placeholder/400/225" alt="Refinement" class="w-full h-full object-cover">
+                            <img src="{{ asset("images/img1.jpeg")}}" alt="Refinement" class="w-full h-full object-cover">
                         </div>
                         <div class="p-4 bg-white">
                             <h3 class="font-medium text-lg mb-1">Raffinement</h3>
@@ -281,7 +283,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                     </div>
                     <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
                         <div class="relative aspect-video">
-                            <img src="/api/placeholder/400/225" alt="Final product" class="w-full h-full object-cover">
+                            <img src="{{ asset("images/img1.jpeg")}}" alt="Final product" class="w-full h-full object-cover">
                         </div>
                         <div class="p-4 bg-white">
                             <h3 class="font-medium text-lg mb-1">Produit final</h3>
@@ -355,6 +357,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
 
         </div>
     </footer>
+    <x-footer></x-footer>
 
     <script>
         const scrollContainer = document.getElementById('scrollContainer');
@@ -384,5 +387,6 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
 
         updateButtonStates();
     </script>
+    <script src="{{ asset('js/index.js') }}"></script>
 </body>
 </html>
