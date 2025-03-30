@@ -4,22 +4,28 @@
 
       <ul class="nav-list d-flex">
         <li class="nav-item">
-          <a href="{{ route('collections.abayas') }}" class="nav-link">ABAYAS</a>
+          <a href="{{ route('collections.abayas') }}" class="nav-link relative  hover:text-[#C9B194] transition-colors font-med after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] 
+                          after:bg-[#C9B194] after:transition-all hover:after:w-full">ABAYAS</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('collections.kimonos') }}" class="nav-link">KIMONOS</a>
+          <a href="{{ route('collections.kimonos') }}" class="nav-link  relative  hover:text-[#C9B194] transition-colors font-med after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] 
+                          after:bg-[#C9B194] after:transition-all hover:after:w-full">KIMONOS</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('collections.hijabs') }}" class="nav-link">HIJAB</a>
+          <a href="{{ route('collections.hijabs') }}" class="nav-link  relative  hover:text-[#C9B194] transition-colors font-med after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] 
+                          after:bg-[#C9B194] after:transition-all hover:after:w-full">HIJAB</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('collections.accessoires') }}" class="nav-link">ACCESSOIRES</a>
+          <a href="{{ route('collections.accessoires') }}" class="nav-link  relative  hover:text-[#C9B194] transition-colors font-med after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] 
+                          after:bg-[#C9B194] after:transition-all hover:after:w-full">ACCESSOIRES</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('backstage') }}" class="nav-link">BACKSTAGE</a>
+          <a href="{{ route('backstage') }}" class="nav-link  relative  hover:text-[#C9B194] transition-colors font-med after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] 
+                          after:bg-[#C9B194] after:transition-all hover:after:w-full">BACKSTAGE</a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('about') }}" class="nav-link">NOTRE HISTOIRE</a>
+          <a href="{{ route('about') }}" class="nav-link  relative  hover:text-[#C9B194] transition-colors font-med after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] 
+                          after:bg-[#C9B194] after:transition-all hover:after:w-full">NOTRE HISTOIRE</a>
         </li>
         
         <li class="icons d-flex">
