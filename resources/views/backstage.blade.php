@@ -88,6 +88,38 @@
         html {
             scroll-behavior: smooth;
         }
+        /* Ajoutez ces styles */
+        .scroll-animate {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .grid-animate {
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .scroll-animate.animate-fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Animation pour les éléments de la grille */
+        .grid-animate.opacity-100 {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        /* Animation supplémentaire pour les cartes */
+        .card-animate {
+            transform: perspective(1000px) rotateX(-10deg) translateZ(0);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .card-animate.visible {
+            transform: perspective(1000px) rotateX(0) translateZ(0);
+            opacity: 1 !important;
+        }
+        
     </style>
 </head>
 
@@ -112,7 +144,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
     <main class="container mx-auto px-4 pb-16">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
 
-            <div class="md:col-span-3 group relative aspect-[2/1] overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="grid-animate md:col-span-3 group relative aspect-[2/1] overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 <img src="{{ asset('images/b1.jpg')}}" alt="Workshop" 
                      class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                      loading="lazy">
@@ -124,7 +156,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                 </div>
             </div>
             
-            <div class="grid grid-cols-2 gap-4 md:contents">
+            <div class="grid grid-cols-2 gap-4 md:contents grid-animate">
                 <div class="group relative aspect-[3/4] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 
                     <video autoplay muted loop playsinline 
@@ -139,7 +171,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                         </span>
                     </div>
                 </div>
-                <div class="group relative aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="grid-animate group relative aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
                     <img src="{{ asset('images/b1.jpg')}}" alt="Design" 
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -151,7 +183,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                 </div>
             </div>
     
-            <div class="md:col-span-3 group relative aspect-video overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="grid-animate md:col-span-3 group relative aspect-video overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 <img src="{{ asset('images/b4.jpeg')}}" alt="Team" 
                      class="w-full h-full object-cover transition-filter duration-500 group-hover:brightness-110"
                      style="object-position: 50% 32%;"
@@ -166,7 +198,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
             </div>
 
             <div class="grid grid-cols-2 gap-4 md:contents">
-                <div class="group relative aspect-[9/16] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="grid-animate group relative aspect-[9/16] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <img src="{{ asset('images/b3.jpg')}}" alt="Model" 
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                          loading="lazy">
@@ -177,7 +209,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                     </div>
                 </div>
                 
-                <div class="group relative aspect-[9/16] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="grid-animate group relative aspect-[9/16] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <video 
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         autoplay
@@ -198,7 +230,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                 </div>
             </div>
 
-            <div class="group relative aspect-square md:aspect-video overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="grid-animate group relative aspect-square md:aspect-video overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 <img src="{{ asset('images/b2.jpg')}}" alt="Details" 
                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                      loading="lazy">
@@ -209,8 +241,8 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                 </div>
             </div>
     
-            <div class="grid grid-cols-2 gap-4 md:contents">
-                <div class="group relative aspect-[9/14] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="grid-animate grid grid-cols-2 gap-4 md:contents">
+                <div class=" group relative aspect-[9/14] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <video 
                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         autoplay
@@ -318,7 +350,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
     
     
 
-    <footer class="container mx-auto px-4 py-16 md:py-24 text-center">
+    <footer class="container mx-auto px-4 py-16 md:py-24 text-center scroll-animate" >
         <div class="border-t border-gray-200 pt-16">
             <h2 class="text-2xl md:text-3xl font-light mb-6">Continuez le voyage</h2>
             
@@ -388,5 +420,49 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
         updateButtonStates();
     </script>
     <script src="{{ asset('js/index.js') }}"></script>
+    <script>
+        // Ajoutez ce script à la fin avant </body>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation au défilement
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px'
+            };
+        
+            const animateOnScroll = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+        
+            const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+        
+            // Éléments à animer
+            const scrollAnimations = document.querySelectorAll('.scroll-animate');
+            scrollAnimations.forEach(el => observer.observe(el));
+        
+            // Animation spécifique pour la grille
+            const gridItems = document.querySelectorAll('.grid-animate');
+            gridItems.forEach((el, index) => {
+                el.style.transitionDelay = `${index * 0.1}s`;
+                el.classList.add('opacity-0', 'translate-y-6');
+            });
+        
+            const gridObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                    }
+                });
+            }, { threshold: 0.1 });
+        
+            gridItems.forEach(el => gridObserver.observe(el));
+        });
+        </script>
+        
+        
 </body>
 </html>
