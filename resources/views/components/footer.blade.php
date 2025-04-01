@@ -1,3 +1,5 @@
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
 <footer class="bg-gray-50 border-t border-gray-100 mt-24 scroll-section">
   <div class="max-w-7xl mx-auto px-4 py-12 md:py-16">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
@@ -9,19 +11,17 @@
         </h4>
         <nav class="flex flex-col space-y-3">
           <a href="{{ route('about')}}" class="text-gray-600 hover:text-[#C9B194] transition-colors">
-            À propos de nous
+            Notre histoire
           </a>
           @php
-          $message = "Bonjour ! Veuillez envoyer une capture d'écran du produit";
+          $message = "Bonjour !";
           $encodedMessage = urlencode($message);
           @endphp
-          <a href="https://wa.me/+21239565569?text={{ $encodedMessage }}" 
+          <a href="https://wa.me/+33668493434?text={{ $encodedMessage }}" 
              class="text-gray-600 hover:text-[#C9B194] transition-colors">
             Nous contacter
           </a>
-          <a href="#" class="text-gray-600 hover:text-[#C9B194] transition-colors">
-            Conditions générales
-          </a>
+
         </nav>
       </div>
 
@@ -35,13 +35,10 @@
              class="text-gray-600 hover:text-[#C9B194] transition-colors">
             Boutique en ligne
           </a>
-          <a href="#" class="text-gray-600 hover:text-[#C9B194] transition-colors">
-            Service client
-          </a>
-          <a href="#" class="text-gray-600 hover:text-[#C9B194] transition-colors">
+          <a href="{{ route('collections.abayas')}}" class="text-gray-600 hover:text-[#C9B194] transition-colors">
             Promotions
           </a>
-          <a href="#" class="text-gray-600 hover:text-[#C9B194] transition-colors">
+          <a href="{{ route('collections.abayas')}}" class="text-gray-600 hover:text-[#C9B194] transition-colors">
             Marques phares
           </a>
         </nav>
@@ -53,11 +50,14 @@
           SUIVEZ-NOUS
         </h4>
         <div class="flex space-x-4">
-          <a href="#" class="text-gray-600 hover:text-[#C9B194] transition-colors">
-            <i class="bx bxl-facebook-square text-3xl"></i>
+          <a href="https://www.tiktok.com/@majaacouture?_t=ZN-8v7oiutFHaY&_r=1" target="_blank" class="text-gray-600 hover:text-[#C9B194] transition-colors">
+            <i class="bx bxl-tiktok text-3xl"></i>
           </a>
-          <a href="#" class="text-gray-600 hover:text-[#C9B194] transition-colors">
+          <a href="https://www.instagram.com/majaacouture?igsh=bm9lemlhYzRvZDZz" target="_blank" class="text-gray-600 hover:text-[#C9B194] transition-colors">
             <i class="bx bxl-instagram-alt text-3xl"></i>
+          </a>
+          <a href="https://snapchat.com/t/4Opv17y5" target="_blank" class="text-gray-600 hover:text-[#C9B194] transition-colors">
+            <i class="bx bxl-snapchat text-3xl"></i>
           </a>
         </div>
         

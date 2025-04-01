@@ -54,11 +54,11 @@
                 <!-- Carousel wrapper -->
                 <div class="relative flex-grow overflow-hidden rounded-lg h-[800px]">
                   <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="{{ asset('images/'.$product->image) }}" class="w-full h-full object-contain" alt="Product Image">
+                    <img src="{{ asset('storage/'.$product->image) }}" class="w-full h-full object-contain" alt="Product Image">
                   </div>
                   @foreach ($product->images as $productImage)
                   <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="{{ asset('images/'.$productImage) }}" class="w-full h-full object-contain" alt="Product Image">
+                    <img src="{{ asset('storage/'.$productImage) }}" class="w-full h-full object-contain" alt="Product Image">
                   </div>
                   @endforeach
                 </div>

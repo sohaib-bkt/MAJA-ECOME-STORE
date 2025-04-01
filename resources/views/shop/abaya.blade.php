@@ -41,9 +41,7 @@
                             <select id="sizeFilter" class="w-full border rounded p-2 text-[16px]">   
                                 <option value="">All Sizes</option>  
                                 <option>S/M</option>  
-                                <option>M/L</option>  
-                                <option>L</option>  
-                                <option>XL</option>  
+                                <option>M/L</option>     
                             </select>  
                         </div>  
                         
@@ -52,7 +50,7 @@
                             <label class="block text-[16px] font-medium text-gray-700 mb-2">Color</label> <!-- Increased font size -->  
                             <select id="colorFilter" class="w-full border rounded p-2 text-[16px]"> <!-- Increased font size -->  
                                 <option value="">All Colors</option>  
-                                <option>Black</option>  
+ 
                                 <option>Marron</option>  
                                 <option>Biege</option>  
                                 <option>Taupe</option>  

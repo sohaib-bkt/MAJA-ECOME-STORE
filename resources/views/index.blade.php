@@ -83,9 +83,9 @@
         <div class="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center">  
           <a  
             href="{{ route('collections.abayas') }}"  
-            class="bg-white text-gray-800 px-8 py-4 rounded-full font-medium text-[15px] inline-flex items-center shadow-lg transition-transform transition-opacity duration-300 hover:bg-gray-100 hover:scale-110 hover:opacity-80 loaded"  
+            class="bg-white text-gray-800 px-8 py-4 rounded-full font-medium text-[20px] inline-flex items-center shadow-lg transition-transform transition-opacity duration-300 hover:bg-gray-100 hover:scale-110 hover:opacity-80 loaded"  
           >  
-            <i class="bx bx-shopping-bag mr-2 text-xl"> Achetez maintenant</i>   
+            <i class="bx bx-shopping-bag mr-2 text-2xl"> Achetez maintenant</i>   
           </a>  
         </div>   
       </div>

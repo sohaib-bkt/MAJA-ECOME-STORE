@@ -146,7 +146,7 @@
               Redéfinir l'<span class="text-[#C9B194] animate__animated animate__fadeIn animate__slow">expérience</span> du luxe
             </h1>
           
-            <div class="text-lg md:text-2xl text-gray-600 leading-relaxed space-y-4 fade-in" style="transition-delay: 0.2s">
+            <div class="text-lg md:text-3xl text-gray-600 leading-relaxed space-y-4 fade-in" style="transition-delay: 0.2s">
               <p>
                 Majāa est née d’une passion pour la mode et du désir d’offrir des pièces élégantes, uniques et qualitatives. Chaque création est imaginée avec soin, confectionnée avec amour et pensée pour sublimer chaque femme à travers une esthétique alliant simplicité et raffinement.
               </p>
@@ -175,7 +175,7 @@
               </li>
             </ul>
           
-            <a href="/collections" class="inline-flex items-center gap-2 px-8 py-4 bg-[#C9B194] hover:bg-[#B89E80] text-white rounded-full transition-all duration-300 group text-lg pulse-btn fade-in" style="transition-delay: 0.5s">
+            <a href="{{ route('collections.abayas') }}" class="inline-flex items-center gap-2 px-8 py-4 bg-[#C9B194] hover:bg-[#B89E80] text-white rounded-full transition-all duration-300 group text-lg pulse-btn fade-in" style="transition-delay: 0.5s">
               <span>Découvrir la collection</span>
               <i class='bx bx-arrow-right text-2xl group-hover:translate-x-1 transition-transform'></i>
             </a>
