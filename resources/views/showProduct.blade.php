@@ -93,12 +93,14 @@
       <div class="right pt-[375px] md:pt-[50px]">
         <span class="inline-block opacity-0 animate-slide-in [animation-delay:0.2s]">Shop/{{ $product->category }}</span>
         <h1 class="opacity-0 animate-slide-in [animation-delay:0.3s]">{{ $product->name }}</h1>
-        <div>
-          
+
+        <div class="opacity-0 animate-slide-in [animation-delay:0.4s] pb-4" style="display: block;">
+          Taille : <span class="text-[#C9B194]">{{ $product->size }}</span>
         </div>
-        <div class="price opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: inline-block;">  
-          ${{ $product->price }}  
-      </div>  
+
+        <div class="price opacity-0 animate-slide-in [animation-delay:0.5s]" style="display: inline-block;">
+          €{{ $product->price }}
+        </div>
       <div class="form space-x-4" style="z-index: 0; display: flex; align-items: center;">  
           <i class="bx bx-heart transition-all duration-300 hover:text-red-500 hover:scale-110 transform cursor-pointer heartbeat"   
              onclick="addToWishlist({{ $product->id }})"></i>    

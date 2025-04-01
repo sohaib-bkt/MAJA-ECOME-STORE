@@ -17,6 +17,8 @@ class Order extends Model
         'address',
         'city',
         'phone',
+        'postal_code',
+        'text',
         'payment_method',
         'stripe_session_id',
         'quantity',

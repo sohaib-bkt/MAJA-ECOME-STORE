@@ -49,10 +49,15 @@
                                 <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
                             @enderror
                         </div>
-                        <label class="flex items-center space-x-3">
-                            <input type="checkbox" name="newsletter" class="rounded h-6 w-6">
-                            <span class="text-xl">Email me with news and offers</span>
-                        </label>
+                        <div class="mb-5">
+                            <label class="block text-xl font-medium text-gray-700 mb-3">Personnalisation</label>
+                            <input type="text" name="text" required maxlength="8" placeholder="Entrez votre texte ici (8 caractères maximum)"
+                                class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('text') border-red-500 @enderror">
+                            @error('text')
+                                <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                     </div>
 
                     <!-- Delivery Section -->
@@ -163,7 +168,7 @@
 
                                 <!-- Apple Pay -->
                                 <div class="payment-method rounded-lg p-4 cursor-pointer"
-                                    data-method="apple_pay">
+                                    data-method="card">
                                     <div class="flex items-center gap-4">
                                         <i class="bx bxl-apple text-3xl"></i>
                                         <div class="flex-1">

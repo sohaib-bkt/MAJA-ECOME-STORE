@@ -8,7 +8,7 @@
     <div class="product-info">
         <span>{{ $product->category }}</span>
         <a href="">{{ $product->name }}</a>
-        <h4>${{ $product->price }}</h4>
+        <h4>€{{ $product->price }}</h4>
     </div>
     <ul class="icons">
         <li>

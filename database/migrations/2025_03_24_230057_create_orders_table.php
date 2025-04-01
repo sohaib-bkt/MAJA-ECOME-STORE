@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('phone');
+            $table->string('text');
+            $table->string('postal_code');
             $table->string('payment_method');
             $table->string('stripe_session_id');
             $table->boolean('paid')->default(false);

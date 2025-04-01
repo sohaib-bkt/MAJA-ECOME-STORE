@@ -24,6 +24,8 @@ class CheckoutController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'address' => 'required',
+            'text' => 'required',
+            'postal_code' => 'required',
             'city' => 'required',
             'phone' => 'required',
             'product_id' => 'required|exists:products,id',
@@ -34,6 +36,7 @@ class CheckoutController extends Controller
         $product = Product::findOrFail($request->product_id);
         $quantity = $request->quantity;
         $totalAmount = $product->price * $quantity;
+
         // Create order record
         $order = Order::create([
             'product_id' => $product->id,
@@ -41,6 +44,8 @@ class CheckoutController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'address' => $request->address,
+            'text' => $request->text,
+            'postal_code' => $request->postal_code,
             'city' => $request->city,
             'phone' => '+33'.$request->phone,
             'payment_method' => $request->payment_method,
@@ -53,7 +58,7 @@ class CheckoutController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $session = Session::create([
-            'payment_method_types' => ['card'],
+            'payment_method_types' => [$request->payment_method], // Dynamically set payment method
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'eur',
@@ -75,7 +80,6 @@ class CheckoutController extends Controller
 
         return redirect()->away($session->url);
     }
-
     public function success(Request $request)
     {
         try {
@@ -98,19 +102,19 @@ class CheckoutController extends Controller
             // Prepare flash card data
             $flashData = [
                 'order_id' => $order->id,
-                'amount' => number_format($order->total_amount , 2), // Example for currency formatting
-                'product_name' => $order->product->name, // Ensure you have a product relationship
+                'amount' => number_format($order->total_amount , 2),
+                'product_name' => $order->product->name,
                 'customer_name' => $order->name,
                 'email' => $order->email
             ];
     
             return redirect()->route('home')
-                ->with('success', 'Payment successful!')
+                ->with('success', 'Paiement réussi!')
                 ->with('flash_data', $flashData);
     
         } catch (\Exception $e) {
             return redirect()->route('checkout', ['id' => $order->product_id ?? 1])
-                ->with('error', 'We encountered an issue confirming your payment: ' . $e->getMessage());
+                ->with('error', 'Nous avons rencontré un problème lors de la confirmation de votre paiement: ' . $e->getMessage());
         }
     }
 }
