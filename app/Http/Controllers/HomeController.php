@@ -13,40 +13,6 @@ class HomeController extends Controller
         $products = Product::orderBy('created_at', 'desc')->take(4)->get();
         return view('index' , compact('products'));
     }
-
-
-    public function add()
-    {
-        return view('add');
-    }
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'image' => 'required|image',
-            'images.*' => 'required|image',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-        ]);
-
-        $imagePath = $request->file('image')->store('products', 'public');
-        $images = [];
-        foreach ($request->file('images') as $image) {
-            $images[] = $image->store('products', 'public');
-        }
-
-        Product::create([
-            'name' => $request->name,
-            'category' => $request->category,
-            'image' => $imagePath,
-            'images' => $images,
-            'description' => $request->description,
-            'price' => $request->price,
-        ]);
-
-        return redirect()->route('add');
-    }
     
     public function abayas(Request $request)
 {
@@ -226,9 +192,9 @@ public function kimonos(Request $request)
         if (!in_array($productId, $wishlist)) {
             $wishlist[] = $productId;
             session()->put('wishlist', $wishlist);
-            $message = 'Product added to wishlist!';
+            $message = 'Produit ajouté à la liste de souhaits !';
         } else {
-            $message = 'Product is already in the wishlist!';
+            $message = 'Le produit est déjà dans la liste de souhaits !';
         }
 
         return response()->json([
@@ -244,7 +210,7 @@ public function kimonos(Request $request)
             session()->put('wishlist', $wishlist);
         }
 
-        return redirect()->route('wishlist')->with('success', 'Product removed from wishlist!');
+        return redirect()->route('wishlist')->with('success', 'Produit retiré de la liste de souhaits !');
     }
 
     public function showProduct($id)

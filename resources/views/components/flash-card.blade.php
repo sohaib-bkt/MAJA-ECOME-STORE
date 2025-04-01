@@ -12,13 +12,13 @@
                 ✓
             </div>
         </div>
-        <h3 class="font-bold text-xl md:text-2xl text-[#2a2a2a] leading-tight">Payment Successful!</h3>
+        <h3 class="font-bold text-xl md:text-2xl text-[#2a2a2a] leading-tight">Paiement réussi!</h3>
     </div>
 
     <!-- Email confirmation with icon -->
     <div class="flex items-center gap-2 p-2 md:p-3 bg-white/50 rounded-lg text-xs md:text-sm">
         <i class='bx bx-envelope text-[#9c6d2f] text-base md:text-lg'></i>
-        <p>Confirmation sent to <span class="font-semibold break-all">{{ $flashData['email'] ?? 'N/A' }}</span></p>
+        <p>Confirmation envoyée à <span class="font-semibold break-all">{{ $flashData['email'] ?? 'N/A' }}</span></p>
     </div>
 
     <!-- Modern close button with increased spacing -->

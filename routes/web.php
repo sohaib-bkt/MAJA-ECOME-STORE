@@ -35,7 +35,7 @@ Route::get('/collections/abayas' , [HomeController::class, 'abayas'])->name('col
 Route::get('/collections/hijabs' , [HomeController::class, 'hijabs'])->name('collections.hijabs');
 Route::get('/collections/accessoires' , [HomeController::class, 'accessoires'])->name('collections.accessoires');
 Route::get('/collections/kimonos' , [HomeController::class, 'kimonos'])->name('collections.kimonos');
-
+Route::get('/backstage',[HomeController::class, 'backstage'])->name('backstage');
 Route::get('/about' , [HomeController::class, 'about'])->name('about');
 Route::get('/shop/{id}' , [HomeController::class, 'showProduct'])->name('showProduct');
 Route::get('/wishlist' , [HomeController::class, 'wishlist'])->name('wishlist');
@@ -48,13 +48,11 @@ Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('
 Route::get('/success', [CheckoutController::class, 'success'])->name('checkout.success');
 
 Route::get('/dashboard' , [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/add' , [HomeController::class, 'add'])->name('add');
-Route::post('/add' , [HomeController::class, 'store'])->name('store');
+Route::post('/store' , [DashboardController::class, 'store'])->name('store');
 
 Route::get('/test-mail', function () {
     $order = App\Models\Order::first();
     return new App\Mail\OrderConfirmation($order);
 });
 
-Route::get('/backstage',[HomeController::class, 'backstage'])->name('backstage');
 

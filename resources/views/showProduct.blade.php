@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <title>Product Details</title>
+  <title>{{ $product->name }} | MAJA</title>
   <style>
     @keyframes slideIn {
       from {
@@ -160,10 +160,10 @@
   <!-- Related -->
   <section class="section featured">
     <div class="top container">
-      <h1 class="text-3xl font-bold">Related Products</h1>
+      <h1 class="text-3xl font-bold">Produits Similaires</h1>
       <a href="{{ route('collections.abayas') }}" 
       class="view-more text-3xl font-bold transition-all duration-300 hover:text-[#ad8d55] hover:translate-x-2">
-     View more →
+      Voir plus →
    </a>
     </div>
     <div class="product-center container">

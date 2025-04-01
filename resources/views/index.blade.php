@@ -52,7 +52,7 @@
         animation: fadeInUp 0.6s ease-out forwards;  
       }  
     </style>
-    <title>Maja</title>
+    <title>MAJA</title>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
@@ -85,7 +85,7 @@
             href="{{ route('collections.abayas') }}"  
             class="bg-white text-gray-800 px-8 py-4 rounded-full font-medium text-[15px] inline-flex items-center shadow-lg transition-transform transition-opacity duration-300 hover:bg-gray-100 hover:scale-110 hover:opacity-80 loaded"  
           >  
-            <i class="bx bx-shopping-bag mr-2 text-xl"></i> Shop Now  
+            <i class="bx bx-shopping-bag mr-2 text-xl"> Achetez maintenant</i>   
           </a>  
         </div>   
       </div>
@@ -97,13 +97,13 @@
         <div class="cat animate-scale-in">
           <img src="{{ asset('images/logo1.png') }}" alt="" class="transition-transform duration-500 hover:scale-105" />
           <div>
-            <p>WOMEN'S WEAR</p>
+            <p>VÊTEMENTS POUR FEMMES</p>
           </div>
         </div>
         <div class="cat animate-scale-in" data-delay="200">
           <img src="{{ asset('images/logo1.png') }}" alt="" class="transition-transform duration-500 hover:scale-105" />
           <div>
-            <p>ACCESSORIES</p>
+            <p>ACCESSOIRES</p>
           </div>
         </div>
       </div>
@@ -112,8 +112,8 @@
     <!-- New Arrivals -->
     <section class="section new-arrival scroll-section">
       <div class="title">
-        <h1 class="opacity-0">NEW ARRIVALS</h1>
-        <p class="opacity-0">All the latest picked from designer of our store</p>
+        <h1 class="opacity-0">NOUVEAUTÉS</h1>
+        <p class="opacity-0">Toutes les dernières nouveautés sélectionnées par les créateurs de notre boutique</p>
       </div>
       <div class="product-center">
         @foreach ($products as $product)
@@ -127,14 +127,14 @@
       class="section banner flex flex-col md:flex-row items-center justify-between px-6 md:px-12 md:gap-11 py-2 bg-gray-50 scroll-section"
     >
       <div class="left opacity-0">
-        <span class="trend">Trend Design</span>
-        <h1>New Collection 2025</h1>
-        <p>New Arrival <span class="color">Sale 50% OFF</span> Limited Time Offer</p>
+        <span class="trend">Tendance</span>
+        <h1>Nouvelle Collection 2025</h1>
+        <p>Nouvelle Arrivage , Offre Limitée</p>
         <a
           href="{{ route('collections.abayas') }}"
           class="btn btn-1 mt-6 inline-block bg-beige-500 text-white font-medium py-3 px-6 rounded-md hover:bg-beige-600 transition transform hover:scale-105"
         >
-          Discover Now
+        Découvrez maintenant
         </a>
       </div>
       <div class="md:w-1/2 mt-6 md:mt-0 w-full opacity-0">
@@ -151,14 +151,14 @@
       <div class="row">
         <div class="col opacity-0">
           <h2>EXCELLENT SUPPORT</h2>
-          <p>We love our customers and they can reach us any time of day we will be at your service 24/7</p>
+          <p>Nous aimons nos clients, et ils peuvent nous contacter à tout moment de la journée. Nous serons à votre service 24/7</p>
           <a href="" class="btn btn-1 transform hover:scale-105 transition">Contact</a>
         </div>
         <div class="col opacity-0">
           <form action="">
             <div>
               <input type="email" placeholder="Email Address" style="color: rgb(48, 48, 48)" />
-              <a href="" class="transform hover:scale-105 transition">Send</a>
+              <a href="" class="transform hover:scale-105 transition">Envoyer</a>
             </div>
           </form>
         </div>

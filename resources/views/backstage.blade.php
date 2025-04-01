@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Modern Backstage Gallery</title>
+    <title>Backstage - MAJA</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
@@ -183,20 +183,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
                 </div>
             </div>
     
-            <div class="grid-animate md:col-span-3 group relative aspect-video overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                <img src="{{ asset('images/b4.jpeg')}}" alt="Team" 
-                     class="w-full h-full object-cover transition-filter duration-500 group-hover:brightness-110"
-                     style="object-position: 50% 32%;"
-                     loading="lazy">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4 md:p-6">
-                        <div class="space-y-2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                            <span class="text-white text-lg font-medium">Studio Workshop</span>
-                            <span class="text-gray-300 text-sm block">Exploring material possibilities</span>
-                        </div>
-                    </div>
-                
-            </div>
-
+            
             <div class="grid grid-cols-2 gap-4 md:contents">
                 <div class="grid-animate group relative aspect-[9/16] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                     <img src="{{ asset('images/b3.jpg')}}" alt="Model" 
@@ -267,88 +254,6 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
         </div>
     </main>
 
-    <section class="container mx-auto px-4 py-12 md:py-16">
-        <div class="max-w-xl mx-auto text-center mb-12">
-            <h2 class="text-2xl md:text-3xl font-light mb-4">Explorez notre processus</h2>
-            <p class="text-gray-600">Faites glisser ou faites défiler le parcours créatif qui définit notre travail.</p>
-        </div>
-        
-        <div class="relative">
-            <!-- Scroll Container -->
-            <div id="scrollContainer" class="flex overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent snap-x snap-mandatory">
-                <div class="flex gap-6 px-4 md:px-8">
-                    <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
-                        <div class="relative aspect-video">
-                            <img src="{{ asset("images/img1.jpeg")}}" alt="Concept sketching" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-4 bg-white">
-                            <h3 class="font-medium text-lg mb-1">Concept initiale</h3>
-                            <p class="text-sm text-gray-600">Les premiers coups de pinceau de chaque nouvelle idée</p>
-                        </div>
-                    </div>
-                    <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
-                        <div class="relative aspect-video">
-                            <img src="{{ asset("images/img1.jpeg")}}" alt="Material research" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-4 bg-white">
-                            <h3 class="font-medium text-lg mb-1">Etude Matériel</h3>
-                            <p class="text-sm text-gray-600">Recherche sur les matériaux et leur utilisation</p>
-                        </div>
-                    </div>
-                    <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
-                        <div class="relative aspect-video">
-                            <img src="{{ asset("images/img1.jpeg")}}" alt="Prototyping" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-4 bg-white">
-                            <h3 class="font-medium text-lg mb-1">Prototyping</h3>
-                            <p class="text-sm text-gray-600">Du concept à la première forme physique</p>
-                        </div>
-                    </div>
-                    <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
-                        <div class="relative aspect-video">
-                            <img src="{{ asset("images/img1.jpeg")}}" alt="Refinement" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-4 bg-white">
-                            <h3 class="font-medium text-lg mb-1">Raffinement</h3>
-                            <p class="text-sm text-gray-600">Perfectionner chaque détail et élément</p>
-                        </div>
-                    </div>
-                    <div class="flex-none w-72 snap-center rounded-xl overflow-hidden shadow-sm">
-                        <div class="relative aspect-video">
-                            <img src="{{ asset("images/img1.jpeg")}}" alt="Final product" class="w-full h-full object-cover">
-                        </div>
-                        <div class="p-4 bg-white">
-                            <h3 class="font-medium text-lg mb-1">Produit final</h3>
-                            <p class="text-sm text-gray-600">L'aboutissement de notre processus créatif</p>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-    
-            <!-- Navigation Buttons -->
-            <div class="hidden md:flex justify-between absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none px-2">
-                <button 
-                    id="prevButton"
-                    class="h-12 w-12 rounded-full bg-white/70 backdrop-blur-sm shadow-lg flex items-center justify-center pointer-events-auto cursor-pointer hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    aria-label="Étape précédente">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                    </svg>
-                </button>
-                <button 
-                    id="nextButton"
-                    class="h-12 w-12 rounded-full bg-white/70 backdrop-blur-sm shadow-lg flex items-center justify-center pointer-events-auto cursor-pointer hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                    aria-label="Étape suivante">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </section>
-    
-    
 
     <footer class="container mx-auto px-4 py-16 md:py-24 text-center scroll-animate" >
         <div class="border-t border-gray-200 pt-16">

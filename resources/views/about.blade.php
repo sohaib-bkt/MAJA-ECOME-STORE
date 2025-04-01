@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>À Propos - Maja Store</title>
+    <title>Notre histoire - MAJA</title>
     
     <!-- Polices modernes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -126,7 +126,7 @@
           <div class="relative group h-[550px] md:h-[550px] rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500 image-container slide-in-left">
             <div class="absolute inset-0 bg-gradient-to-r from-[#C9B194]/20 to-transparent z-10"></div>
             <img 
-              src="{{ asset('images/img2.jpeg') }}" 
+              src="{{ asset('images/hist.jpg') }}" 
               alt="Boutique Maja Store"
               class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out parallax"
               loading="lazy"
@@ -141,31 +141,40 @@
               <div class="h-px w-8 bg-[#C9B194]"></div>
               <span class="text-base font-semibold tracking-wide text-[#C9B194] uppercase">Notre Histoire</span>
             </div>
-            
+          
             <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-snug fade-in" style="transition-delay: 0.1s">
               Redéfinir l'<span class="text-[#C9B194] animate__animated animate__fadeIn animate__slow">expérience</span> du luxe
             </h1>
-            
-            <p class="text-xl md:text-2xl text-gray-600 leading-relaxed fade-in" style="transition-delay: 0.2s">
-              Chez Maja Store, nous croyons que le vrai luxe réside dans les détails. 
-              Notre curation exclusive allie savoir-faire artisanal et design contemporain.
-            </p>
-            
+          
+            <div class="text-lg md:text-2xl text-gray-600 leading-relaxed space-y-4 fade-in" style="transition-delay: 0.2s">
+              <p>
+                Majāa est née d’une passion pour la mode et du désir d’offrir des pièces élégantes, uniques et qualitatives. Chaque création est imaginée avec soin, confectionnée avec amour et pensée pour sublimer chaque femme à travers une esthétique alliant simplicité et raffinement.
+              </p>
+          
+              <p>
+                Forte d'une formation dans l’univers de la mode et du luxe, notre fondatrice a conçu une marque incarnant sa vision : des collections raffinées où la qualité des tissus et la précision des broderies font toute la différence. Une approche minutieuse qui transforme chaque pièce en un accessoire d'exception, apportant une touche d’originalité à celles qui la portent.
+              </p>
+          
+              <p>
+                Chez Majāa, l'histoire se tisse dans chaque détail. Du savoir-faire artisanal à la passion pour l’élégance intemporelle, nous nous engageons à transcender les attentes. Nos créations ne sont pas simplement des vêtements, mais des narrations visuelles d’un héritage textile et d’une quête permanente d'excellence.
+              </p>
+            </div>
+          
             <ul class="grid grid-cols-2 gap-4">
               <li class="flex items-center gap-3 p-4 bg-white rounded-lg border border-gray-100 fade-in" style="transition-delay: 0.3s">
                 <div class="flex-shrink-0 w-8 h-8 bg-[#C9B194]/10 rounded-full flex items-center justify-center animate__animated animate__bounceIn">
                   <i class='bx bx-check text-[#C9B194] text-2xl'></i>
                 </div>
-                <span class="text-base font-medium text-gray-700">Collections exclusives</span>
+                <span class="text-lg font-medium text-gray-700">Collections exclusives</span>
               </li>
               <li class="flex items-center gap-3 p-4 bg-white rounded-lg border border-gray-100 fade-in" style="transition-delay: 0.4s">
                 <div class="flex-shrink-0 w-8 h-8 bg-[#C9B194]/10 rounded-full flex items-center justify-center animate__animated animate__bounceIn" style="animation-delay: 0.2s">
                   <i class='bx bx-check text-[#C9B194] text-2xl'></i>
                 </div>
-                <span class="text-base font-medium text-gray-700">Matériaux premium</span>
+                <span class="text-lg font-medium text-gray-700">Matériaux premium</span>
               </li>
             </ul>
-            
+          
             <a href="/collections" class="inline-flex items-center gap-2 px-8 py-4 bg-[#C9B194] hover:bg-[#B89E80] text-white rounded-full transition-all duration-300 group text-lg pulse-btn fade-in" style="transition-delay: 0.5s">
               <span>Découvrir la collection</span>
               <i class='bx bx-arrow-right text-2xl group-hover:translate-x-1 transition-transform'></i>
@@ -174,29 +183,6 @@
         </div>
       </section>
 
-      <!-- Section Chiffres clés avec animation de compteur -->
-      <section class="py-16 bg-[#C9B194]/10">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8">
-          <div class="text-center p-6 fade-in">
-            <div class="text-5xl md:text-6xl font-bold text-[#C9B194] mb-2">
-              <span class="counter-value" data-count="15" data-suffix="+">0</span>
-            </div>
-            <div class="text-gray-600 text-base">Années d'expertise</div>
-          </div>
-          <div class="text-center p-6 fade-in" style="transition-delay: 0.1s">
-            <div class="text-5xl md:text-6xl font-bold text-[#C9B194] mb-2">
-              <span class="counter-value" data-count="200" data-suffix="+">0</span>
-            </div>
-            <div class="text-gray-600 text-base">Créations uniques</div>
-          </div>
-          <div class="text-center p-6 fade-in" style="transition-delay: 0.2s">
-            <div class="text-5xl md:text-6xl font-bold text-[#C9B194] mb-2">
-              <span class="counter-value" data-count="98" data-suffix="%">0</span>
-            </div>
-            <div class="text-gray-600 text-base">Clients satisfaits</div>
-          </div>
-        </div>
-      </section>
     </main>
     <x-footer class="scroll-section"></x-footer>
     
@@ -220,34 +206,7 @@
           observer.observe(element);
         });
         
-        // Counter animation
-        const counters = document.querySelectorAll('.counter-value');
-        const counterObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const target = entry.target;
-              const count = parseInt(target.getAttribute('data-count'));
-              const suffix = target.getAttribute('data-suffix') || '';
-              
-              let current = 0;
-              const duration = 2000; // 2 seconds
-              const step = Math.ceil(count / (duration / 30)); // Update every 30ms
-              
-              const timer = setInterval(() => {
-                current += step;
-                if (current >= count) {
-                  current = count;
-                  clearInterval(timer);
-                }
-                target.textContent = current + suffix;
-              }, 30);
-            }
-          });
-        }, { threshold: 0.5, once: true });
         
-        counters.forEach(counter => {
-          counterObserver.observe(counter);
-        });
         
         // Parallax effect for image
         const parallaxElements = document.querySelectorAll('.parallax');

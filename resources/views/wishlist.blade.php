@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
-    <title>Liste de Souhaits - Maja Store</title>
+    <title>Liste de Souhaits - MAJA</title>
     <style>
       @keyframes border-grow {
         from { width: 0; }
@@ -78,7 +78,7 @@
                 <div class="space-y-1">
                   <h3 class="text-lg font-medium text-gray-900">{{ $product->name }}</h3>
                   <p class="text-[#C9B194] font-bold text-xl">
-                    {{ number_format($product->price, 2, ',', ' ') }} MAD
+                    €{{ number_format($product->price, 2, ',', ' ') }} 
                   </p>
                 </div>
               </div>
