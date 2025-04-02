@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   @vite('resources/css/app.css')
@@ -104,136 +107,224 @@
   <script src="{{ asset('js/index.js') }}"></script>
 
  <script>
-    
-document.addEventListener('DOMContentLoaded', function() {
-    
+ document.addEventListener('DOMContentLoaded', function() {
+    // Variables for controlling UI state
     let loading = false;
     const loadingDiv = document.getElementById('loading');
     const productContainer = document.getElementById('productContainer');
     const noProductsMessage = document.getElementById('noProductsMessage');
-
     
+    // Set a flag to prevent reload loops
+    let isInitialLoad = true;
+    
+    // Filter and pagination state
     let currentFilters = {
         size: '',
         color: '',
         sort: 'newest',
         page: 1
     };
-
+    
     let totalPages = 1;
-
-    // Get initial page from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    currentFilters.page = parseInt(urlParams.get('page')) || 1;
-
+    
+    // Initialize UI
     const filterButton = document.getElementById('filterButton');
     const filterDropdown = document.getElementById('filterDropdown');
     const filterContainer = document.getElementById('filterContainer');
-
-    // Initial load
+    
+    // Get initial parameters from URL
+    parseCurrentUrlParams();
+    
+    // Set up event listeners
+    setupEventListeners();
+    
+    // Initial load of products
     fetchProducts(true);
-
-    // Toggle dropdown on button click
-    filterButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        filterDropdown.classList.toggle('active');
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!filterContainer.contains(e.target)) {
-            filterDropdown.classList.remove('active');
+    
+    // After initial setup, mark initialization as complete
+    setTimeout(() => {
+        isInitialLoad = false;
+    }, 500);
+    
+    /**
+     * Parse URL parameters and update filter controls
+     */
+    function parseCurrentUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        currentFilters = {
+            size: urlParams.get('size') || '',
+            color: urlParams.get('color') || '',
+            sort: urlParams.get('sort') || 'newest',
+            page: parseInt(urlParams.get('page')) || 1
+        };
+        
+        // Update UI controls to match URL parameters
+        if (document.getElementById('colorFilter')) {
+            document.getElementById('colorFilter').value = currentFilters.color;
         }
-    });
-
-    // Event listeners for filters
-    document.getElementById('sizeFilter')?.addEventListener('change', (e) => {
-        currentFilters.size = e.target.value;
-        resetPagination();
-    });
-
-    document.getElementById('colorFilter')?.addEventListener('change', (e) => {
-        currentFilters.color = e.target.value;
-        resetPagination();
-    });
-
-    document.getElementById('sortBy')?.addEventListener('change', (e) => {
-        currentFilters.sort = e.target.value;
-        resetPagination();
-    });
-
+        
+        if (document.getElementById('sortBy')) {
+            document.getElementById('sortBy').value = currentFilters.sort;
+        }
+    }
+    
+    /**
+     * Set up all event listeners
+     */
+    function setupEventListeners() {
+        // Filter dropdown toggle
+        if (filterButton) {
+            filterButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                filterDropdown.classList.toggle('active');
+            });
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (filterContainer && !filterContainer.contains(e.target)) {
+                filterDropdown.classList.remove('active');
+            }
+        });
+        
+        // Filter change events
+        if (document.getElementById('colorFilter')) {
+            document.getElementById('colorFilter').addEventListener('change', (e) => {
+                currentFilters.color = e.target.value;
+                resetPagination();
+            });
+        }
+        
+        if (document.getElementById('sortBy')) {
+            document.getElementById('sortBy').addEventListener('change', (e) => {
+                currentFilters.sort = e.target.value;
+                resetPagination();
+            });
+        }
+        
+        // Handle infinite scroll
+        window.addEventListener('scroll', scrollHandler);
+        
+        // Handle browser navigation - only reload when it's a genuine back/forward navigation
+        window.addEventListener('popstate', function(event) {
+            // Only reload if this isn't during the initial page load
+            if (!isInitialLoad) {
+                // Prevent multiple reloads by using location.replace instead of reload
+                window.location.replace(window.location.href);
+            }
+        });
+    }
+    
+    /**
+     * Reset pagination and fetch products
+     */
     function resetPagination() {
         currentFilters.page = 1;
         fetchProducts(true);
     }
-
-    // Function to update no products message
-    function updateNoProductsMessage(hasProducts) {
-        console.log(noProductsMessage);
-        
-        if (!noProductsMessage) return;
-        
-        if (hasProducts) {
-            console.log('here');
-            noProductsMessage.classList.add('hidden');
-            productContainer.classList.remove('hidden');
-        } else {
-            console.log('here2');
-            noProductsMessage.classList.remove('hidden');
-            productContainer.classList.add('hidden');
-        }
-    }
-
+    
+    /**
+     * Fetch products with current filters
+     */
     async function fetchProducts(resetPagination = true) {
         if (loading) return;
         loading = true;
-        loadingDiv.classList.remove('hidden');
-
-        // Clean empty filters
+        
+        if (loadingDiv) {
+            loadingDiv.classList.remove('hidden');
+        }
+        
+        // Build clean URL parameters
         const cleanParams = new URLSearchParams();
         Object.entries(currentFilters).forEach(([key, value]) => {
             if (value && value !== '') {
                 cleanParams.append(key, value);
             }
         });
-
+        
         try {
-            const url = `{{ url()->current() }}?${cleanParams.toString()}`;
-            const response = await fetch(url, {
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            const baseUrl = window.location.pathname;
+            const url = `${baseUrl}?${cleanParams.toString()}`;
+            
+            // Add cache busting parameter to avoid cached responses
+            const cacheBuster = new Date().getTime();
+            const fetchUrl = `${url}&_=${cacheBuster}`;
+            
+            const response = await fetch(fetchUrl, {
+                headers: { 
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                },
+                cache: 'no-cache'
             });
             
-            if (!response.ok) throw new Error('Network error');
+            if (!response.ok) {
+                throw new Error('Network error');
+            }
             
             const data = await response.json();
             
-            if (resetPagination) {
-                productContainer.innerHTML = data.html;
+            // Handle the response data
+            if (data && typeof data === 'object') {
+                // Check if we got HTML content
+                if (data.html !== undefined) {
+                    if (resetPagination) {
+                        productContainer.innerHTML = data.html;
+                    } else {
+                        productContainer.insertAdjacentHTML('beforeend', data.html);
+                    }
+                    
+                    // Update pagination info
+                    if (data.current_page) currentFilters.page = data.current_page;
+                    if (data.last_page) totalPages = data.last_page;
+                    
+                    // Check if there are products
+                    updateNoProductsMessage(data.html.trim() !== '');
+                    
+                    // Update URL without reload - don't push state during popstate handling
+                    if (!isInitialLoad) {
+                        history.pushState({ filters: currentFilters }, '', url);
+                    }
+                    
+                    // Update filter badges
+                    updateActiveFilters();
+                } else {
+                    console.error('Response missing HTML content', data);
+                }
             } else {
-                productContainer.insertAdjacentHTML('beforeend', data.html);
+                console.error('Invalid response format', data);
             }
-            
-            // Update pagination info
-            currentFilters.page = data.current_page;
-            totalPages = data.last_page;
-            
-            // Check if there are products (trim to handle potential whitespace)
-            updateNoProductsMessage(data.html.trim() != '');
-            
-            // Update URL without reload
-            history.replaceState(null, '', url);
-            
-            updateActiveFilters();
         } catch (error) {
-            console.error('Error:', error);
-            // Ensure loading state is reset even if there's an error
+            console.error('Error fetching products:', error);
+            // On error, show no products message
             updateNoProductsMessage(false);
         } finally {
             loading = false;
-            loadingDiv.classList.add('hidden');
+            if (loadingDiv) {
+                loadingDiv.classList.add('hidden');
+            }
         }
     }
-
+    
+    /**
+     * Update the no products message visibility
+     */
+    function updateNoProductsMessage(hasProducts) {
+        if (!noProductsMessage || !productContainer) return;
+        
+        if (hasProducts) {
+            noProductsMessage.classList.add('hidden');
+            productContainer.classList.remove('hidden');
+        } else {
+            noProductsMessage.classList.remove('hidden');
+            productContainer.classList.add('hidden');
+        }
+    }
+    
+    /**
+     * Update the active filters display
+     */
     function updateActiveFilters() {
         const activeFilters = document.getElementById('activeFilters');
         if (!activeFilters) return;
@@ -246,42 +337,73 @@ document.addEventListener('DOMContentLoaded', function() {
                 badge.className = 'bg-gray-100 px-2 py-1 rounded text-sm flex items-center';
                 badge.innerHTML = `
                     ${value}
-                    <button onclick="removeFilter('${key}')" class="ml-1 text-gray-500 hover:text-gray-700">
+                    <button class="ml-1 text-gray-500 hover:text-gray-700" data-filter="${key}">
                         &times;
                     </button>
                 `;
+                
+                // Add event listener to remove button
+                const removeButton = badge.querySelector('button');
+                removeButton.addEventListener('click', function() {
+                    removeFilter(key);
+                });
+                
                 activeFilters.appendChild(badge);
             }
         });
     }
-
-    window.removeFilter = function(filterType) {
+    
+    /**
+     * Remove a filter and update products
+     */
+    function removeFilter(filterType) {
         currentFilters[filterType] = '';
         const filterElement = document.getElementById(`${filterType}Filter`);
         if (filterElement) filterElement.value = '';
         resetPagination();
-    };
-
+    }
+    
+    /**
+     * Global function to remove a filter
+     */
+    window.removeFilter = removeFilter;
+    
+    /**
+     * Load more products when scrolling
+     */
     async function loadMoreProducts() {
         if (currentFilters.page >= totalPages || loading) return;
         currentFilters.page++;
         await fetchProducts(false);
     }
     
+    /**
+     * Handle scroll events for infinite loading
+     */
     function scrollHandler() {
         const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
         if (scrollTop + clientHeight >= scrollHeight - 300 && !loading) {
             loadMoreProducts();
         }
     }
-
-    // Add global function to clear all filters
+    
+    /**
+     * Clear all filters and reset
+     */
     window.clearAllFilters = function() {
-        // Reset filter dropdowns
-        document.getElementById('sizeFilter').value = '';
-        document.getElementById('colorFilter').value = '';
-        document.getElementById('sortBy').value = 'newest';
-
+        // Reset all filter controls
+        if (document.getElementById('sizeFilter')) {
+            document.getElementById('sizeFilter').value = '';
+        }
+        
+        if (document.getElementById('colorFilter')) {
+            document.getElementById('colorFilter').value = '';
+        }
+        
+        if (document.getElementById('sortBy')) {
+            document.getElementById('sortBy').value = 'newest';
+        }
+        
         // Reset current filters
         currentFilters = {
             size: '',
@@ -289,19 +411,12 @@ document.addEventListener('DOMContentLoaded', function() {
             sort: 'newest',
             page: 1
         };
-
+        
         // Fetch products with reset filters
         resetPagination();
     };
-
-    window.addEventListener('scroll', scrollHandler);
-
-    window.addEventListener('popstate', () => {  
-    const currentUrl = window.location.href;  
-    fetchProductsFromUrl(currentUrl);  
-    console.log('popstate event triggered');  
-});  
 });
+
     </script>
 </body>
 </html>
