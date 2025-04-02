@@ -19,15 +19,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'sohaib@gmail.com',
             'age' => 20,
             'role' => 'admin',
-            'password' => bcrypt('1'),
+            'password' => bcrypt('@@Sohaibuzi99@@'),
         ]);
-        \App\Models\User::factory()->create([
-            'name' => 'yousef',
-            'email' => 'yousef@gmail.com',
-            'age' => 20,
-            'role' => 'client',
-            'password' => bcrypt('1'),
-        ]);
+
         // $this->call(ProductSeeder::class);
     }
 }

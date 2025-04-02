@@ -22,6 +22,7 @@ class Order extends Model
         'payment_method',
         'stripe_session_id',
         'quantity',
+        'size', 
         'total_amount',
         'paid'
     ];

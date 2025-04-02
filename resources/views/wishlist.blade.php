@@ -72,7 +72,7 @@
             <div class="flex items-center justify-between gap-6">
               <!-- Produit -->
               <div class="flex items-center gap-6 flex-1">
-                <img src="{{ asset('images/'.$product->image) }}" 
+                <img src="{{ asset('storage/'.$product->image) }}" 
                      alt="{{ $product->name }}"
                      class="w-40 h-64 md:w-56 md:h-96 object-cover rounded-lg transition-transform duration-500 hover:scale-105">
                 <div class="space-y-1">

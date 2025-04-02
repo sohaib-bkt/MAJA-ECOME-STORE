@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('stripe_session_id');
             $table->boolean('paid')->default(false);
             $table->unsignedInteger('quantity');  
+            $table->string('size'); 
             $table->decimal('total_amount', 10, 2);
             $table->timestamps();  
         });

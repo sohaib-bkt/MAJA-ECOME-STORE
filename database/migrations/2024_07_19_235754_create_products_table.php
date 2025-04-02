@@ -21,7 +21,6 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->decimal('price', 8, 2);
             $table->string('slug')->nullable();
-            $table->string("size")->nullable();
             $table->string("color")->nullable();
             $table->timestamps();
         });

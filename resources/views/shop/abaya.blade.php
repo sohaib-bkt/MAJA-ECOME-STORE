@@ -36,14 +36,14 @@
                 <div id="filterDropdown" class="filter-dropdown absolute bg-white shadow-lg rounded p-4 mt-2 min-w-[200px] z-10">  
                     <div class="space-y-4">  
                         <!-- Size Filter -->  
-                        <div>  
+                        {{-- <div>  
                             <label class="block text-[16px] font-medium text-gray-700 mb-2">Size</label> <!-- Increased font size -->  
                             <select id="sizeFilter" class="w-full border rounded p-2 text-[16px]">   
                                 <option value="">All Sizes</option>  
                                 <option>S/M</option>  
                                 <option>M/L</option>     
                             </select>  
-                        </div>  
+                        </div>   --}}
                         
                         <!-- Color Filter -->  
                         <div>  

@@ -11,12 +11,15 @@ use App\Mail\OrderConfirmation;
 
 class CheckoutController extends Controller
 {
-    public function index($id)
+    public function index($id, Request $request)
     {
         $product = Product::findOrFail($id);
-        return view('checkout', ['product' => $product]);
+        $selectedSize = $request->query('size', $product->size);   
+        return view('checkout', [
+            'product' => $product,
+            'selectedSize' => $selectedSize
+        ]);
     }
-
     public function process(Request $request)
     {
         $request->validate([
@@ -30,14 +33,16 @@ class CheckoutController extends Controller
             'phone' => 'required',
             'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1',
-            'payment_method' => 'required|in:card,paypal,apple_pay'
+            'payment_method' => 'required|in:card,paypal,apple_pay',
+            'selected_size' => 'required|string' // Add validation for selected size
         ]);
         
         $product = Product::findOrFail($request->product_id);
         $quantity = $request->quantity;
         $totalAmount = $product->price * $quantity;
+        $selectedSize = $request->selected_size;
 
-        // Create order record
+        // Create order record with the selected size
         $order = Order::create([
             'product_id' => $product->id,
             'email' => $request->email,
@@ -52,6 +57,7 @@ class CheckoutController extends Controller
             'stripe_session_id' => '',
             'quantity' => $quantity,
             'total_amount' => $totalAmount,
+            'size' => $selectedSize, // Store the selected size
             'paid' => false
         ]);
 
@@ -64,7 +70,7 @@ class CheckoutController extends Controller
                     'currency' => 'eur',
                     'product_data' => [
                         'name' => $product->name,
-                        'description' => $product->category.'/'.$product->size,
+                        'description' => $product->category.'/'.$selectedSize, // Use the selected size
                     ],
                     'unit_amount' => $product->price * 100,
                 ],

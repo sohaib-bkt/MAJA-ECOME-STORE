@@ -34,7 +34,7 @@
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="hidden" name="payment_method" id="selected_payment_method" required>
-
+            <input type="hidden" name="selected_size" value="{{ $selectedSize }}">
             <div class="max-w-7xl mx-auto lg:flex lg:gap-8">
                 <!-- Left Column -->
                 <div class="lg:w-2/3">
@@ -106,7 +106,7 @@
                                 <span class="text-xl">{{ $product->name }}</span>
                                 <span class="text-xl">{{ $product->price }} €</span>
                             </div>
-                            <p class="text-lg md:text-xl text-gray-500">{{ $product->category }} / {{ $product->size }}</p>
+                            <p class="text-lg md:text-xl text-gray-500">{{ $product->category }} / {{ $selectedSize }}</p>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-xl font-medium text-gray-700">Quantité</span>
                                 <div class="flex items-center gap-1">

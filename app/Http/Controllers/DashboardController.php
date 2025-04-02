@@ -20,7 +20,6 @@ class DashboardController extends Controller
             'images.*' => 'required|image',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'size' => 'required|string',
             'color' => 'required|string',
         ]);
 
@@ -36,7 +35,6 @@ class DashboardController extends Controller
             'image' => $imagePath,
             'images' => $images,
             'description' => $request->description,
-            'size' => $request->size,
             'color' => $request->color,
             'price' => $request->price,
         ]);

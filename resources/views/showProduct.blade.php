@@ -40,6 +40,12 @@
     .heartbeat {
       animation: heartbeat 0.8s ease-in-out;
     }
+    select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5em 1.5em;
+}
   </style>
 </head>
 <body>
@@ -93,10 +99,21 @@
       <div class="right pt-[375px] md:pt-[50px]">
         <span class="inline-block opacity-0 animate-slide-in [animation-delay:0.2s]">Shop/{{ $product->category }}</span>
         <h1 class="opacity-0 animate-slide-in [animation-delay:0.3s]">{{ $product->name }}</h1>
-
-        <div class="opacity-0 animate-slide-in [animation-delay:0.4s] pb-4" style="display: block;">
-          Taille : <span class="text-[#C9B194]">{{ $product->size }}</span>
-        </div>
+        <span class="block opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: block">
+          <label for="size-select" class="block mb-2   cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]" >
+            Choisir la taille :
+        </label>
+        <select 
+        style="font-size: 13px;"
+            id="size-select" 
+            name="size" 
+            class="w-full px-4 py-10 text-gray-700 bg-white border-2 border-gray-200 rounded-lg shadow-sm appearance-none cursor-pointer focus:outline-none focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194] focus:ring-opacity-50 transition-all duration-200 hover:border-gray-400 h-[42px]"
+        >
+            <option value="S/M" class="hover:bg-[#F5EEE6]">S/M</option>
+            <option value="M/L" class="hover:bg-[#F5EEE6]">M/L</option>
+        </select>
+        </span>
+      
 
         <div class="price opacity-0 animate-slide-in [animation-delay:0.5s]" style="display: inline-block;">
           €{{ $product->price }}
@@ -192,6 +209,31 @@
 
   <!-- Custom Script -->
   <script src="{{ asset('js/index.js') }}"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sizeSelect = document.getElementById('size-select');
+  const checkoutButton = document.querySelector('a[href="{{ route('checkout', $product->id) }}"]');
+  const baseUrl = "{{ route('checkout', '') }}";
+  const productId = {{ $product->id }};
+  
+  // Set initial selection if needed
+  const urlParams = new URLSearchParams(window.location.search);
+  const sizeParam = urlParams.get('size');
+  if (sizeParam) {
+    sizeSelect.value = sizeParam;
+  }
+  
+  sizeSelect.addEventListener('change', function() {
+    const selectedSize = this.value;
+    // Update the checkout URL with the selected size
+    // Note the fix in the URL construction - removed $ from $product->id
+    checkoutButton.href = `${baseUrl}/${productId}?size=${selectedSize}`;
+  });
+  
+  // Trigger the change event once to set the initial URL
+  sizeSelect.dispatchEvent(new Event('change'));
+});
+  </script>
 <script>
     function addToWishlist(productId) {
         fetch('{{ route('wishlist.add') }}', {
