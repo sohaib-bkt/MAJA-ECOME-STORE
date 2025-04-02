@@ -132,11 +132,10 @@
     <section class="container mx-auto px-4 py-12 md:py-20 lg:py-28 " style="margin-top: 22px">
         <div class="max-w-4xl mx-auto text-center space-y-6">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-thin mb-6 animate-fade-in">
-                Derrière le <span class="bg-gradient-to-r from-[#e6cba9] to-[#e0963b] bg-clip-text text-transparent">Vision</span>
+                DANS LES <span class="bg-gradient-to-r from-[#e6cba9] to-[#e0963b] bg-clip-text text-transparent">BACKSTAGES</span>
             </h1>
             <p class="text-gray-600 md:text-xl leading-relaxed max-w-3xl mx-auto">
-                
-Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité brute et du savoir-faire de précision qui caractérise nos collections.
+                Bienvenue dans les backstages de Majāa, là où chaque détail est façonné avec amour et passion. On vous emmène au cœur de notre univers, là où les idées prennent vie et où chaque instant raconte une histoire. Plongez avec nous dans cette aventure !
             </p>
         </div>
     </section>
@@ -145,7 +144,7 @@ Entrez dans notre sanctuaire créatif. Découvrez la fusion de la créativité b
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
 
             <div class="grid-animate md:col-span-3 group relative aspect-[2/1] overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                <img src="{{ asset('images/b1.jpg')}}" alt="Workshop" 
+                <img src="{{ asset('images/b5.jpg')}}" alt="Workshop" 
                      class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                      loading="lazy">
                 {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4 md:p-6">

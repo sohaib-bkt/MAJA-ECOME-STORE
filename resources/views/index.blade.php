@@ -151,7 +151,7 @@
       <div class="row">
         <div class="col opacity-0">
           <h2>EXCELLENT SUPPORT</h2>
-          <p>Nous aimons nos clients, et ils peuvent nous contacter à tout moment de la journée. Nous serons à votre service 24/7</p>
+          <p>Nous sommes à votre écoute 7j/7 pour tout renseignements</p>
           <a href="" class="btn btn-1 transform hover:scale-105 transition">Contact</a>
         </div>
         <div class="col opacity-0">

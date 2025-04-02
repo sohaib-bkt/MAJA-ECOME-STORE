@@ -156,7 +156,7 @@
               </p>
           
               <p>
-                Chez Majāa, l'histoire se tisse dans chaque détail. Du savoir-faire artisanal à la passion pour l’élégance intemporelle, nous nous engageons à transcender les attentes. Nos créations ne sont pas simplement des vêtements, mais des narrations visuelles d’un héritage textile et d’une quête permanente d'excellence.
+                Chez Majāa, l'histoire se tisse dans chaque détail. Du savoir-faire artisanal à la passion pour l’élégance intemporelle, nous nous engageons à répondre à vos attentes.
               </p>
             </div>
           
