@@ -161,10 +161,24 @@
   <section class="section featured">
     <div class="top container">
       <h1 class="text-3xl font-bold">Produits Similaires</h1>
-      <a href="{{ route('collections.abayas') }}" 
-      class="view-more text-3xl font-bold transition-all duration-300 hover:text-[#ad8d55] hover:translate-x-2">
-      Voir plus →
-   </a>
+      @php  
+          $category = '';  
+
+          if ($product->category == 'ABAYA') {  
+              $category = 'abayas';  
+          } elseif ($product->category == 'KIMONO') {  
+              $category = 'kimonos';  
+          } elseif ($product->category == 'HIJAB') {  
+              $category = 'hijabs';  
+          } elseif ($product->category == 'ACCESSORY') {  
+              $category = 'accessoires';  
+          }  
+      @endphp  
+
+      <a href="{{ route('collections.' . $category) }}"   
+        class="view-more text-3xl font-bold transition-all duration-300 hover:text-[#ad8d55] hover:translate-x-2">  
+        Voir plus →  
+      </a>  
     </div>
     <div class="product-center container">
       @foreach ($products as $product)

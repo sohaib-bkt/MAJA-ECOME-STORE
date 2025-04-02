@@ -97,7 +97,7 @@
         <div class="cat animate-scale-in">
           <img src="{{ asset('images/logo1.png') }}" alt="" class="transition-transform duration-500 hover:scale-105" />
           <div>
-            <p>VÊTEMENTS POUR FEMMES</p>
+            <p>VÊTEMENTS</p>
           </div>
         </div>
         <div class="cat animate-scale-in" data-delay="200">
