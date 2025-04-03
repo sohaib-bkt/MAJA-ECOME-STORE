@@ -27,75 +27,107 @@
 </head>
 
 <body class="bg-gray-100">
-    <x-nav></x-nav>
-
-    <div class="min-h-screen bg-gray-100 p-4 md:p-6 lg:p-8">
-        <form id="payment-form" action="{{ route('checkout.process') }}" method="POST">
-            @csrf
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
-            <input type="hidden" name="payment_method" id="selected_payment_method" required>
-            <input type="hidden" name="selected_size" value="{{ $selectedSize }}">
-            <div class="max-w-7xl mx-auto lg:flex lg:gap-8">
-                <!-- Left Column -->
-                <div class="lg:w-2/3">
-                    <!-- Contact Section -->
-                    <div class="bg-white rounded-lg shadow-sm p-4 md:p-6 mb-6">
-                        <h2 class="text-3xl font-semibold mb-4 md:mb-6">CONTACT</h2>
-                        <div class="mb-5">
-                            <label class="block text-xl font-medium text-gray-700 mb-3">Email</label>
-                            <input type="email" name="email" required
-                                class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('email') border-red-500 @enderror">
-                            @error('email')
-                                <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-5">
-                            <label class="block text-xl font-medium text-gray-700 mb-3">Personnalisation</label>
-                            <input type="text" name="text" required maxlength="8" placeholder="Entrez votre texte ici (8 caractères maximum)"
-                                class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('text') border-red-500 @enderror">
-                            @error('text')
-                                <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                    </div>
-
-                    <!-- Delivery Section -->
-                    <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
-                        <h2 class="text-3xl font-semibold mb-4 md:mb-6">LIVRAISON</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                            <div>
-                                <label class="block text-xl font-medium text-gray-700 mb-3">Prénom</label>
-                                <input type="text" name="first_name" required class="w-full px-5 py-4 border-2 rounded-lg text-xl">
+        <x-nav></x-nav>
+    
+        <div class="min-h-screen bg-gray-100 p-4 md:p-6 lg:p-8">
+            <form id="payment-form" action="{{ route('checkout.process') }}" method="POST">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <input type="hidden" name="payment_method" id="selected_payment_method" required>
+                <input type="hidden" name="selected_size" value="{{ old('selected_size', $selectedSize ?? 'S/M') }}">  
+                <div class="max-w-7xl mx-auto lg:flex lg:gap-8">
+                    <!-- Left Column -->
+                    <div class="lg:w-2/3">
+                        <!-- Contact Section -->
+                        <div class="bg-white rounded-lg shadow-sm p-4 md:p-6 mb-6">
+                            <h2 class="text-3xl font-semibold mb-4 md:mb-6">CONTACT</h2>
+                            <div class="mb-5">
+                                <label class="block text-xl font-medium text-gray-700 mb-3">Email</label>
+                                <input type="email" name="email" required
+                                    class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('email') border-red-500 @enderror"
+                                    value="{{ old('email') }}">
+                                @error('email')
+                                    <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <div>
-                                <label class="block text-xl font-medium text-gray-700 mb-3">Nom de famille</label>
-                                <input type="text" name="last_name" required class="w-full px-5 py-4 border-2 rounded-lg text-xl">
+                            <div class="mb-5">
+                                <label class="block text-xl font-medium text-gray-700 mb-3">Personnalisation</label>
+                                <input type="text" name="text" required maxlength="8" 
+                                       placeholder="Entrez votre texte ici (8 caractères maximum)"
+                                       class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('text') border-red-500 @enderror"
+                                       value="{{ old('text') }}">
+                                @error('text')
+                                    <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
+                        </div>
+    
+                        <!-- Delivery Section -->
+                        <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
+                            <h2 class="text-3xl font-semibold mb-4 md:mb-6">LIVRAISON</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                                <div>
+                                    <label class="block text-xl font-medium text-gray-700 mb-3">Prénom</label>
+                                    <input type="text" name="first_name" required 
+                                           class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('first_name') border-red-500 @enderror"
+                                           value="{{ old('first_name') }}">
+                                    @error('first_name')
+                                        <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div>
+                                    <label class="block text-xl font-medium text-gray-700 mb-3">Nom de famille</label>
+                                    <input type="text" name="last_name" required 
+                                           class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('last_name') border-red-500 @enderror"
+                                           value="{{ old('last_name') }}">
+                                    @error('last_name')
+                                        <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="mb-5">
                                 <label class="block text-xl font-medium text-gray-700 mb-3">Adresse</label>
-                                <input type="text" name="address" required class="w-full px-5 py-4 border-2 rounded-lg text-xl">
+                                <input type="text" name="address" required 
+                                       class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('address') border-red-500 @enderror"
+                                       value="{{ old('address') }}">
+                                @error('address')
+                                    <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                                 <div>
                                     <label class="block text-xl font-medium text-gray-700 mb-3">Ville</label>
-                                    <input type="text" name="city" required class="w-full px-5 py-4 border-2 rounded-lg text-xl">
+                                    <input type="text" name="city" required 
+                                           class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('city') border-red-500 @enderror"
+                                           value="{{ old('city') }}">
+                                    @error('city')
+                                        <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div>
                                     <label class="block text-xl font-medium text-gray-700 mb-3">Code postal</label>
-                                    <input type="text" name="postal_code" class="w-full px-5 py-4 border-2 rounded-lg text-xl">
+                                    <input type="text" name="postal_code" required 
+                                           class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('postal_code') border-red-500 @enderror"
+                                           value="{{ old('postal_code') }}">
+                                    @error('postal_code')
+                                        <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="mb-5">
                                 <label class="block text-xl font-medium text-gray-700 mb-3">Téléphone</label>
                                 <div class="flex">
                                     <span class="inline-flex items-center px-5 border-2 border-r-0 rounded-l-lg bg-gray-50 text-xl">+33</span>
-                                    <input type="tel" name="phone" required class="w-full px-5 py-4 border-2 rounded-r-lg text-xl">
+                                    <input type="tel" name="phone" required 
+                                           class="w-full px-5 py-4 border-2 rounded-r-lg text-xl @error('phone') border-red-500 @enderror"
+                                           value="{{ old('phone') }}">
                                 </div>
+                                @error('phone')
+                                    <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
+                        </div>
                     </div>
-                </div>
 
                 <!-- Right Column -->
                 <div class="lg:w-1/3 mt-6 lg:mt-0">
@@ -106,7 +138,7 @@
                                 <span class="text-xl">{{ $product->name }}</span>
                                 <span class="text-xl">{{ $product->price }} €</span>
                             </div>
-                            <p class="text-lg md:text-xl text-gray-500">{{ $product->category }} / {{ $selectedSize }}</p>
+                            <p class="text-lg md:text-xl text-gray-500">{{ $product->category }} / {{ $selectedSize ?? 'S/M' }}</p>
                             <div class="flex items-center justify-between mt-4">
                                 <span class="text-xl font-medium text-gray-700">Quantité</span>
                                 <div class="flex items-center gap-1">

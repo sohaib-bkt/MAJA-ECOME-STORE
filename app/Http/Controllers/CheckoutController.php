@@ -22,6 +22,7 @@ class CheckoutController extends Controller
     }
     public function process(Request $request)
     {
+              
         $request->validate([
             'email' => 'required|email',
             'first_name' => 'required',
@@ -31,16 +32,17 @@ class CheckoutController extends Controller
             'postal_code' => 'required',
             'city' => 'required',
             'phone' => 'required',
-            'product_id' => 'required|exists:products,id',
+            'product_id' => 'required',
             'quantity' => 'required|integer|min:1',
             'payment_method' => 'required|in:card,paypal,apple_pay',
-            'selected_size' => 'required|string' // Add validation for selected size
+            'selected_size' => 'string'
         ]);
+
         
         $product = Product::findOrFail($request->product_id);
         $quantity = $request->quantity;
         $totalAmount = $product->price * $quantity;
-        $selectedSize = $request->selected_size;
+        $selectedSize = $request->selected_size ? $request->selected_size : 'S/M'; 
 
         // Create order record with the selected size
         $order = Order::create([
