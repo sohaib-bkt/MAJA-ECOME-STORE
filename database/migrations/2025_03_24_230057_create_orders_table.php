@@ -27,6 +27,8 @@ return new class extends Migration
             $table->boolean('paid')->default(false);
             $table->unsignedInteger('quantity');  
             $table->string('size'); 
+            $table->string('shipping_method');
+            $table->string('status')->default('pending');
             $table->decimal('total_amount', 10, 2);
             $table->timestamps();  
         });

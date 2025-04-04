@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->json('images');
             $table->text('description');
             $table->decimal('price', 8, 2);
+            $table->decimal('price_before_discount', 8, 2)->nullable();
             $table->string('slug')->nullable();
             $table->string("color")->nullable();
             $table->timestamps();

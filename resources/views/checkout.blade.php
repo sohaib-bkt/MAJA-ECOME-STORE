@@ -22,6 +22,41 @@
         .payment-method.active .check-icon {
             display: block;
         }
+    
+        .shipping-method {
+            border-color: #e5e7eb;
+        }
+        
+        .shipping-method:hover {
+            border-color: #C9B194;
+            background-color: #fafafa;
+        }
+        
+        .radio-indicator {
+            transition: all 0.2s ease;
+        }
+        
+        .shipping-method.active .inner-circle {
+            transform: scale(1);
+        }
+        
+        .shipping-method {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shipping-method::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        
     </style>
     <title>Checkout - MAJA</title>
 </head>
@@ -32,6 +67,8 @@
         <div class="min-h-screen bg-gray-100 p-4 md:p-6 lg:p-8">
             <form id="payment-form" action="{{ route('checkout.process') }}" method="POST">
                 @csrf
+                <input type="hidden" name="shipping_method" id="selected_shipping_method">
+                <input type="hidden" name="total_price" id="total_price_value">
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <input type="hidden" name="payment_method" id="selected_payment_method" required>
                 <input type="hidden" name="selected_size" value="{{ old('selected_size', $selectedSize ?? 'S/M') }}">  
@@ -52,10 +89,10 @@
                             </div>
                             <div class="mb-5">
                                 <label class="block text-xl font-medium text-gray-700 mb-3">Personnalisation</label>
-                                <input type="text" name="text" required maxlength="8" 
-                                       placeholder="Entrez votre texte ici (8 caractères maximum)"
+                                <input type="text" name="text" required maxlength="5" 
+                                       placeholder="Entrez votre texte ici (5 caractères maximum)"
                                        class="w-full px-5 py-4 border-2 rounded-lg text-xl @error('text') border-red-500 @enderror"
-                                       value="{{ old('text') }}">
+                                       value="{{ $selectedText  }}">
                                 @error('text')
                                     <p class="text-red-500 text-xl mt-2">{{ $message }}</p>
                                 @enderror
@@ -158,10 +195,73 @@
                             </div>
                         </div>
 
+                        <!-- Shipping Methods -->
+                        <div class="mb-6 mt-8">
+                            <h3 class="text-xl font-semibold mb-4">Mode d'expédition</h3>
+                            <div class="space-y-3 shipping-methods">
+                                <!-- Mondial Relay -->
+                                <div class="shipping-method rounded-lg p-4 cursor-pointer border-2 transition-colors"
+                                    data-price="5.50"  data-carrier="Mondial Relay">
+                                    <div class="flex items-center gap-4">
+                                        <div class="shipping-radio flex items-center">
+                                            <div class="radio-indicator w-5 h-5 rounded-full border-2 border-gray-300 
+                                                    flex items-center justify-center mr-3">
+                                                <div class="inner-circle w-3 h-3 rounded-full bg-[#C9B194] 
+                                                        scale-0 transition-transform"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <div>
+                                                    <span class="text-xl font-medium">Mondial Relay</span>
+                                                    <p class="text-gray-500 text-lg">Point Relais</p>
+                                                </div>
+                                                <span class="text-xl font-semibold text-[#C9B194]">5,50 €</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Colissimo -->
+                                <div class="shipping-method rounded-lg p-4 cursor-pointer border-2 transition-colors"
+                                    data-price="8.50" data-carrier="Colissimo">
+                                    <div class="flex items-center gap-4">
+                                        <div class="shipping-radio flex items-center">
+                                            <div class="radio-indicator w-5 h-5 rounded-full border-2 border-gray-300 
+                                                    flex items-center justify-center mr-3">
+                                                <div class="inner-circle w-3 h-3 rounded-full bg-[#C9B194] 
+                                                        scale-0 transition-transform"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <div>
+                                                    <span class="text-xl font-medium">Colissimo</span>
+                                                    <p class="text-gray-500 text-lg">À domicile</p>
+                                                </div>
+                                                <span class="text-xl font-semibold text-[#C9B194]">8,50 €</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Section -->
                         <div class="space-y-5">
                             <div class="flex justify-between font-medium text-2xl">
-                                <span>Total</span>
-                                <span id="total-price">{{ number_format($product->price, 2) }} €</span>
+                                <span>Sous-total</span>
+                                <span id="subtotal-price">{{ number_format($product->price, 2) }} €</span>
+                            </div>
+                            <div class="flex justify-between font-medium text-2xl">
+                                <span>Expédition</span>
+                                <span id="shipping-price">0,00 €</span>
+                            </div>
+                            <div class="border-t pt-4">
+                                <div class="flex justify-between font-bold text-2xl">
+                                    <span>Total</span>
+                                    <span id="total-price">{{ number_format($product->price, 2) }} €</span>
+                                </div>
                             </div>
                         </div>
 
@@ -224,73 +324,110 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const paymentMethods = document.querySelectorAll('.payment-method');
-        const paymentMethodInput = document.getElementById('selected_payment_method');
-        const form = document.getElementById('payment-form');
-        const quantityInput = document.querySelector('input[name="quantity"]');
-        const minusButton = document.querySelector('.quantity-minus');
-        const plusButton = document.querySelector('.quantity-plus');
-        const totalPriceElement = document.getElementById('total-price');
-        const productPrice = parseFloat({{ $product->price }});
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements communs
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const paymentMethodInput = document.getElementById('selected_payment_method');
+            const form = document.getElementById('payment-form');
+            const quantityInput = document.querySelector('input[name="quantity"]');
+            const minusButton = document.querySelector('.quantity-minus');
+            const plusButton = document.querySelector('.quantity-plus');
+            const totalPriceElement = document.getElementById('total-price');
+            const productPrice = parseFloat({{ $product->price }});
+            
+            // Elements d'expédition
+            const shippingMethods = document.querySelectorAll('.shipping-method');
+            let selectedShippingPrice = 0;
+        
+            // Initialisation des méthodes de paiement
+            function initPaymentMethods() {
+                paymentMethods[0].classList.add('active');
+                paymentMethodInput.value = paymentMethods[0].dataset.method;
+        
+                paymentMethods.forEach(method => {
+                    method.addEventListener('click', function() {
+                        paymentMethods.forEach(m => m.classList.remove('active'));
+                        this.classList.add('active');
+                        paymentMethodInput.value = this.dataset.method;
+                    });
+                });
+            }
+        
+            // Initialisation des méthodes d'expédition
+            function initShippingMethods() {
+                shippingMethods.forEach(method => {
+                    method.addEventListener('click', function() {
+                        shippingMethods.forEach(m => {
+                            m.classList.remove('border-[#C9B194]', 'bg-[#F7F1E9]');
+                            m.querySelector('.inner-circle').classList.add('scale-0');
+                        });
 
-        // Initialize first payment method as selected
-        paymentMethods[0].classList.add('active');
-        paymentMethodInput.value = paymentMethods[0].dataset.method;
+                        this.classList.add('border-[#C9B194]', 'bg-[#F7F1E9]');
+                        this.querySelector('.inner-circle').classList.remove('scale-0');
+                        
+                        // Mise à jour des valeurs
+                        selectedShippingPrice = parseFloat(this.dataset.price);
+                        document.getElementById('selected_shipping_method').value = this.dataset.carrier;
+                        updateTotal();
+                    });
+                });
 
-        paymentMethods.forEach(method => {
-            method.addEventListener('click', function() {
-                // Remove active class from all methods
-                paymentMethods.forEach(m => m.classList.remove('active'));
-                
-                // Add active class to selected method
-                this.classList.add('active');
-                
-                // Set the selected payment method value
-                paymentMethodInput.value = this.dataset.method;
+                // Sélection initiale
+                shippingMethods[0].click();
+            }
+
+            // Calcul du total
+            function updateTotal() {
+                const quantity = parseInt(quantityInput.value, 10) || 1;
+                const subtotal = productPrice * quantity;
+                const total = subtotal + selectedShippingPrice;
+
+                // Mise à jour des affichages
+                document.getElementById('subtotal-price').textContent = subtotal.toFixed(2) + ' €';
+                document.getElementById('shipping-price').textContent = selectedShippingPrice.toFixed(2) + ' €';
+                totalPriceElement.textContent = total.toFixed(2) + ' €';
+
+                // Mise à jour du champ caché
+                document.getElementById('total_price_value').value = total.toFixed(2);
+            }
+        
+            // Gestion de la quantité
+            function setupQuantityControls() {
+                minusButton.addEventListener('click', () => {
+                    let currentValue = parseInt(quantityInput.value, 10);
+                    if (currentValue > 1) {
+                        quantityInput.value = currentValue - 1;
+                        updateTotal();
+                    }
+                });
+        
+                plusButton.addEventListener('click', () => {
+                    quantityInput.value = parseInt(quantityInput.value, 10) + 1;
+                    updateTotal();
+                });
+        
+                quantityInput.addEventListener('input', () => {
+                    let currentValue = parseInt(quantityInput.value, 10) || 1;
+                    quantityInput.value = Math.max(1, currentValue);
+                    updateTotal();
+                });
+            }
+        
+            // Validation du formulaire
+            form.addEventListener('submit', function(e) {
+                if (!paymentMethodInput.value) {
+                    e.preventDefault();
+                    alert('Veuillez sélectionner un mode de paiement');
+                }
             });
+        
+            // Initialisation
+            initPaymentMethods();
+            initShippingMethods();
+            setupQuantityControls();
+            updateTotal(); // Calcul initial
         });
-
-        form.addEventListener('submit', function(e) {
-            if (!paymentMethodInput.value) {
-                e.preventDefault();
-                alert('Please select a payment method');
-            }
-        });
-
-
-        function updateTotal() {
-            const quantity = parseInt(quantityInput.value, 10);
-            const total = productPrice * quantity;
-            totalPriceElement.textContent = total.toFixed(2) + ' €';
-        }
-
-        minusButton.addEventListener('click', function() {
-            let currentValue = parseInt(quantityInput.value, 10);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-                updateTotal();
-            }
-        });
-
-        plusButton.addEventListener('click', function() {
-            let currentValue = parseInt(quantityInput.value, 10);
-            quantityInput.value = currentValue + 1;
-            updateTotal();
-        });
-
-        quantityInput.addEventListener('input', function() {
-            let currentValue = parseInt(this.value, 10) || 1;
-            if (currentValue < 1) {
-                currentValue = 1;
-            }
-            this.value = currentValue;
-            updateTotal();
-        });
-
-        // Initialize total on load
-        updateTotal();
-    });
-    </script>
+        </script>
+    
 </body>
 </html>

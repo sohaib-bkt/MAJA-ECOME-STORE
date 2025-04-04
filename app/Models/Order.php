@@ -23,6 +23,8 @@ class Order extends Model
         'stripe_session_id',
         'quantity',
         'size', 
+        'shipping_method',
+        'status',
         'total_amount',
         'paid'
     ];

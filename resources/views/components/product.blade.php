@@ -1,3 +1,50 @@
+<style>
+  .product-item {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.discount-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ff4444, #ff6b6b);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.price-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.original-price {
+    color: #a0aec0;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+}
+
+.discounted-price {
+    color: #e53e3e;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+</style>
 <div class="product-item">
     <div class="overlay" >
         <a class="product-thumb " >
@@ -7,7 +54,14 @@
     <div class="product-info">
         <span>{{ $product->category }}</span>
         <a href="">{{ $product->name }}</a>
-        <h4>€{{ $product->price }}</h4>
+        <div class="">
+            @if($product->price_before_discount)
+                <span class="text-xl font-bold text-red-500" style="">{{ $product->price }}€</span>
+                <span class="text-gray-400 line-through text-sm">€{{ $product->price_before_discount }}</span>
+            @else
+                <span class="text-xl font-bold text-gray-900">€{{ $product->price_before_discount }}</span>
+            @endif
+        </div>
     </div>
     <ul class="icons">
         <li>

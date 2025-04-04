@@ -20,6 +20,7 @@ class DashboardController extends Controller
             'images.*' => 'required|image',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'price_before_discount' => 'nullable|numeric',
             'color' => 'required|string',
         ]);
 
@@ -37,6 +38,7 @@ class DashboardController extends Controller
             'description' => $request->description,
             'color' => $request->color,
             'price' => $request->price,
+            'price_before_discount' => $request->price_before_discount,
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Produit ajouté avec succès.');

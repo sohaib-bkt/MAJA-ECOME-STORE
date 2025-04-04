@@ -14,15 +14,16 @@ class ProductSeeder extends Seeder
     public function run()
     {
         Product::create([
-            'name' => 'ABAYA MINIMAL BIEGE',
+            'name' => 'ABAYA MINIMAL BEIGE',
             'category' => 'ABAYA',
             'image' => 'biege1.jpg',
             'images' => ['biege2.jpg', 'biege3.jpg'],
-            'description' => "Découvrez notre abaya biege en nylon et jersey, une pièce qui marie élégance moderne et confort absolu. Confectionnée dans un tissu de qualité supérieure, elle offre légèreté et durabilité tout en assurant un confort optimal. Sa coupe minimaliste s'adapte avec raffinement aussi bien aux looks habillés qu'aux styles décontractés, pour une élégance discrète en toutes occasions. De plus, sa manche personnalisable brodée apporte une touche unique, vous permettant d’exprimer votre style avec originalité."  ,
-            'price' => 45,
+            'description' => "Découvrez notre abaya beige en nylon et jersey, une pièce qui marie élégance moderne et confort absolu. Confectionnée dans un tissu de qualité supérieure, elle offre légèreté et durabilité tout en assurant un confort optimal. Sa coupe minimaliste s'adapte avec raffinement aussi bien aux looks habillés qu'aux styles décontractés, pour une élégance discrète en toutes occasions. De plus, sa manche personnalisable brodée apporte une touche unique, vous permettant d’exprimer votre style avec originalité."  ,
+            'price' => 44.99,
+            'price_before_discount' => 45,
             'slug' => 'abaya-minimal-biege',
-            'color' => 'Biege',
-            'size' => 'S/M',
+            'color' => 'Beige',
+            
             
         ]);
         Product::create([
@@ -31,11 +32,12 @@ class ProductSeeder extends Seeder
             'image' => 'taupe1.jpg',
             'images' => ['taupe2.jpg', 'taupe3.jpg'],  
             'description' => "Découvrez notre abaya taupe en nylon et jersey, une pièce qui marie élégance moderne et confort absolu. Confectionnée dans un tissu de qualité supérieure, elle offre légèreté et durabilité tout en assurant un confort optimal. Sa coupe minimaliste s'adapte avec raffinement aussi bien aux looks habillés qu'aux styles décontractés, pour une élégance discrète en toutes occasions. De plus, sa manche personnalisable brodée apporte une touche unique, vous permettant d’exprimer votre style avec originalité."  ,
-            'price' => 45,
+            'price' => 44.99,
+            'price_before_discount' => 45,
             'color' => 'Taupe',
             'slug' => 'abaya-minimal-taupe',
             
-            'size' => 'M/L',
+            
         ]);
         Product::create([
             'name' => 'ABAYA MINIMAL MARRON',
@@ -43,10 +45,11 @@ class ProductSeeder extends Seeder
             'image' => 'marron1.jpg',
             'images' => ['marron2.jpg', 'marron3.jpg'],  
             'description' => "Découvrez notre abaya marron en nylon et jersey, une pièce qui marie élégance moderne et confort absolu. Confectionnée dans un tissu de qualité supérieure, elle offre légèreté et durabilité tout en assurant un confort optimal. Sa coupe minimaliste s'adapte avec raffinement aussi bien aux looks habillés qu'aux styles décontractés, pour une élégance discrète en toutes occasions. De plus, sa manche personnalisable brodée apporte une touche unique, vous permettant d’exprimer votre style avec originalité."  ,
-            'price' => 45,
+            'price' => 44.99,
+            'price_before_discount' => 45,
             'slug' => 'abaya-minimal-marron',
             'color' => 'Marron',
-            'size' => 'S/M',
+            
         ]);
 
 

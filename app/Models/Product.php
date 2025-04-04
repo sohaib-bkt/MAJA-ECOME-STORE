@@ -17,6 +17,7 @@ class Product extends Model
         'images',
         'description',
         'price',
+        'price_before_discount',
         'slug',
         'color',
     ];

@@ -14,14 +14,17 @@ class CheckoutController extends Controller
     public function index($id, Request $request)
     {
         $product = Product::findOrFail($id);
-        $selectedSize = $request->query('size', $product->size);   
+        $selectedSize = $request->query('size'); 
+        $selectedText = $request->query('custom_text');
         return view('checkout', [
             'product' => $product,
-            'selectedSize' => $selectedSize
+            'selectedSize' => $selectedSize,
+            'selectedText' => $selectedText
         ]);
     }
     public function process(Request $request)
     {
+        
               
         $request->validate([
             'email' => 'required|email',
@@ -35,13 +38,15 @@ class CheckoutController extends Controller
             'product_id' => 'required',
             'quantity' => 'required|integer|min:1',
             'payment_method' => 'required|in:card,paypal,apple_pay',
-            'selected_size' => 'string'
+            'selected_size' => 'string',
+            'shipping_method' => 'required|string',
+            'total_price' => 'required|numeric'
         ]);
 
         
         $product = Product::findOrFail($request->product_id);
         $quantity = $request->quantity;
-        $totalAmount = $product->price * $quantity;
+        $totalAmount = $request->total_price;
         $selectedSize = $request->selected_size ? $request->selected_size : 'S/M'; 
 
         // Create order record with the selected size
@@ -60,7 +65,8 @@ class CheckoutController extends Controller
             'quantity' => $quantity,
             'total_amount' => $totalAmount,
             'size' => $selectedSize, // Store the selected size
-            'paid' => false
+            'paid' => false,
+            'shipping_method' => $request->shipping_method,
         ]);
 
         Stripe::setApiKey(config('services.stripe.secret'));

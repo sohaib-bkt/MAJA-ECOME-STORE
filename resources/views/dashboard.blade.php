@@ -93,7 +93,17 @@
         
                 <!-- Prix -->
                 <div>
-                    <label class="block text-gray-700 mb-2 font-medium">Prix (€)</label>
+                    <label class="block text-gray-700 mb-2 font-medium">Prix avant remise (€)</label>
+                    <input type="number" step="0.01" name="price_before_discount" value="{{ old('price_before_discount') }}" required 
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#C9B194]">
+                    @error('price_before_discount')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Prix -->
+                <div>
+                    <label class="block text-gray-700 mb-2 font-medium">Prix apres remise (€)</label>
                     <input type="number" step="0.01" name="price" value="{{ old('price') }}" required 
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-[#C9B194]">
                     @error('price')

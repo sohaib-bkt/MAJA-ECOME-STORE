@@ -46,6 +46,41 @@
     background-position: right 0.75rem center;
     background-size: 1.5em 1.5em;
 }
+/* Add these after your existing animations */
+@keyframes pop-in {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.price-discounted {
+    position: relative;
+    display: inline-block;
+    padding: 0 4px;
+}
+
+.price-discounted::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 65%;
+    background: linear-gradient(120deg, rgba(201,177,148,0.15) 0%, rgba(201,177,148,0.05) 100%);
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+    z-index: -1;
+}
+
+.price-discounted:hover::after {
+    transform: translateY(-50%) scaleX(1);
+    transform-origin: left;
+}
+
+.animate-pop-in {
+    animation: pop-in 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+      
   </style>
 </head>
 <body>
@@ -115,17 +150,65 @@
         </span>
       
 
-        <div class="price opacity-0 animate-slide-in [animation-delay:0.5s]" style="display: inline-block;">
-          €{{ $product->price }}
-        </div>
+        <div class="price-container opacity-0 animate-slide-in [animation-delay:0.5s]">
+          @if($product->price_before_discount)
+              <div class="flex flex-col md:flex-row md:items-center gap-3 group relative">
+                  <!-- Original Price -->
+                  <div class="flex items-center gap-2">
+                    <span class="text-4xl font-bold text-[#C9B194] relative inline-block transform transition-all duration-300 hover:scale-105">
+                      <span class="price-discounted animate-pop-in">€{{ $product->price }}</span>
+                      <span class="absolute bottom-0 left-0 w-full h-0.5 bg-[#C9B194]/30 origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                  </span>
+                      <span class="text-lg text-gray-500 relative">
+                          <span class="line-through opacity-90 group-hover:opacity-60 transition-opacity duration-300">€{{ $product->price_before_discount }}</span>
+                          <span class="absolute top-1/2 left-0 w-full h-px bg-[#C9B194]/40 transform -translate-y-1/2"></span>
+                      </span>
+
+                  </div>
+              </div>
+          @else
+              <div class="text-4xl font-bold text-gray-900 relative group">
+                  <span class="relative z-10">€{{ $product->price_before_discount }}</span>
+                  <span class="absolute bottom-0 left-0 h-1.5 bg-[#C9B194]/20 w-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+              </div>
+          @endif
+      </div>
+      
+     
+      
+     
       <div class="form space-x-4" style="z-index: 0; display: flex; align-items: center;">  
           <i class="bx bx-heart transition-all duration-300 hover:text-red-500 hover:scale-110 transform cursor-pointer heartbeat"   
              onclick="addToWishlist({{ $product->id }})"></i>    
              <a href="{{ route('checkout', $product->id) }}" 
-              class="px-8 py-4 bg-[#C9B194] hover:bg-[#B89E80] text-white rounded-full font-medium transition-colors shadow-md hover:shadow-lg">
-             Commander
-           </a> 
+              class="px-8 py-4 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-full font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+               Commander →
+           </a>
       </div>  
+      <!-- Champ de personnalisation -->
+      <span class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s]" style="display: inline;">
+        <div class="relative group">
+            <input 
+                type="text" 
+                name="custom_text" 
+                id="custom-text" 
+                maxlength="5"
+                placeholder=" "
+                class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl peer focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194]/30 transition-all duration-300 placeholder-transparent"
+                oninput="updateCharCounter(this)">
+            
+            <label 
+                for="custom-text" 
+                class="absolute left-4 -top-2.5 bg-white px-2 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-[#C9B194]">
+                Texte personnalisé (5 caractères max)
+            </label>
+            
+            <div class="flex justify-between items-center mt-2">
+                <div id="char-counter" class="text-sm text-gray-400 ml-2">0/5</div>
+                <div id="custom-text-error" class="text-red-400 text-sm hidden">Maximum 5 caractères</div>
+            </div>
+        </div>
+      </span>
         <h3 class="subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">Description</h3>
         <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">{{ $product->description }}</p>
         <h3 class="subtitle font-bold mt-6">Composition</h3>
@@ -210,30 +293,54 @@
   <!-- Custom Script -->
   <script src="{{ asset('js/index.js') }}"></script>
   <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const sizeSelect = document.getElementById('size-select');
-  const checkoutButton = document.querySelector('a[href="{{ route('checkout', $product->id) }}"]');
-  const baseUrl = "{{ route('checkout', '') }}";
-  const productId = {{ $product->id }};
-  
-  // Set initial selection if needed
-  const urlParams = new URLSearchParams(window.location.search);
-  const sizeParam = urlParams.get('size');
-  if (sizeParam) {
-    sizeSelect.value = sizeParam;
-  }
-  
-  sizeSelect.addEventListener('change', function() {
-    const selectedSize = this.value;
-    // Update the checkout URL with the selected size
-    // Note the fix in the URL construction - removed $ from $product->id
-    checkoutButton.href = `${baseUrl}/${productId}?size=${selectedSize}`;
-  });
-  
-  // Trigger the change event once to set the initial URL
-  sizeSelect.dispatchEvent(new Event('change'));
-});
+     function updateCharCounter(input) {
+    const counter = document.getElementById('char-counter');
+    const error = document.getElementById('custom-text-error');
+    const length = input.value.length;
+    
+    counter.textContent = `${length}/5`;
+    
+    if(length > 5) {
+        error.classList.remove('hidden');
+        input.classList.add('border-red-500', 'focus:border-red-500');
+    } else {
+        error.classList.add('hidden');
+        input.classList.remove('border-red-500', 'focus:border-red-500');
+    }
+}
   </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const sizeSelect = document.getElementById('size-select');
+  const customTextInput = document.getElementById('custom-text');
+  const checkoutButton = document.querySelector('a[href*="checkout"]');
+  
+  // Get the original base URL
+  const baseUrl = checkoutButton.getAttribute('href');
+
+  function updateCheckoutUrl() {
+    // Create URL object to properly handle parameters
+    const url = new URL(baseUrl, window.location.origin);
+    
+    // Set query parameters
+    url.searchParams.set('size', sizeSelect.value);
+    url.searchParams.set('custom_text', customTextInput.value);
+    
+    // Update the href attribute
+    checkoutButton.href = url.toString();
+    
+    // For debugging - check the console
+    console.log("Updated URL:", url.toString());
+  }
+
+  // Update on ANY input change
+  sizeSelect.addEventListener('change', updateCheckoutUrl);
+  customTextInput.addEventListener('input', updateCheckoutUrl);
+  
+  // Initial update
+  updateCheckoutUrl();
+});
+    </script>
 <script>
     function addToWishlist(productId) {
         fetch('{{ route('wishlist.add') }}', {
@@ -275,6 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+   
 </script>
 
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
