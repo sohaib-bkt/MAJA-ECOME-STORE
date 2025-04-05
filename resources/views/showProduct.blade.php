@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <title>{{ $product->name }} | MAJA</title>
+  <title>{{ $product->name }} | MAJĀA</title>
   <style>
     @keyframes slideIn {
       from {

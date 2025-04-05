@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Confirmation de commande - MAJAA</title>
+    <title>Confirmation de commande - MAJĀA</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
     </style>

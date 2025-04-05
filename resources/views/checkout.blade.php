@@ -58,7 +58,7 @@
         }
         
     </style>
-    <title>Checkout - MAJA</title>
+    <title>Checkout - MAJĀA</title>
 </head>
 
 <body class="bg-gray-100">

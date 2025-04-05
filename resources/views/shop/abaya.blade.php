@@ -21,7 +21,7 @@
     
 
   </style>
-  <title>Maja Store</title>
+  <title>MAJĀA Store</title>
 </head>
 <body>
     <x-nav></x-nav>

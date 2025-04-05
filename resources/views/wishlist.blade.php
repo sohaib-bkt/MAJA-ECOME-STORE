@@ -7,7 +7,7 @@
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
-    <title>Liste de Souhaits - MAJA</title>
+    <title>Liste de Souhaits - MAJĀA</title>
     <style>
       @keyframes border-grow {
         from { width: 0; }

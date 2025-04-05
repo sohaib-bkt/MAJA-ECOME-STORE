@@ -52,7 +52,7 @@
         animation: fadeInUp 0.6s ease-out forwards;  
       }  
     </style>
-    <title>MAJA</title>
+    <title>MAJĀA</title>
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
