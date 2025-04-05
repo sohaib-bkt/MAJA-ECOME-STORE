@@ -458,7 +458,7 @@ Hero Media Query
   }
 
   .product-item {
-    width: 42%;
+    width: 47%;
     margin-bottom: 3rem;
   }
 
@@ -466,9 +466,7 @@ Hero Media Query
     height: 300px;
   }
 
-  .product-item {
-    margin-right: 2rem;
-  }
+  
 
   .product-item .icons li {
     padding: 0.5rem 1rem;

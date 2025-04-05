@@ -428,6 +428,6 @@
             updateTotal(); // Calcul initial
         });
         </script>
-    
+        <script src="{{ asset('js/index.js') }}"></script>
 </body>
 </html>

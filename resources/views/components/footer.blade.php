@@ -1,6 +1,6 @@
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-<footer class="bg-gray-50 border-t border-gray-100 mt-24 scroll-section">
+<footer class="bg-gray-50 border-t border-gray-100 scroll-section">
   <div class="max-w-7xl mx-auto px-4 py-12 md:py-16">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
       
