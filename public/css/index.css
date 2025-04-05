@@ -458,12 +458,12 @@ Hero Media Query
   }
 
   .product-item {
-    width: 40%;
+    width: 42%;
     margin-bottom: 3rem;
   }
 
   .product-thumb img {
-    height: 400px;
+    height: 355px;
   }
 
   .product-item {

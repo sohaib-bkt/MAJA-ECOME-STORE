@@ -88,7 +88,7 @@
                 </button>
             </div>
         </div>
-      <div class="product-center container" id="productContainer">
+      <div class="product-center container" id="productContainer" style="padding: 0 !important;">
         
         @include('partials.products', ['products' => $products])
       </div>
