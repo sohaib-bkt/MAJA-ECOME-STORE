@@ -1,13 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Stripe\Stripe;
-use Stripe\Checkout\Session;
-use App\Models\Product;
 use App\Models\Order;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
 use App\Mail\OrderConfirmation;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderBusinessNotification;
 
 class CheckoutController extends Controller
 {
@@ -72,13 +73,13 @@ class CheckoutController extends Controller
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $session = Session::create([
-            'payment_method_types' => [$request->payment_method], // Dynamically set payment method
+            'payment_method_types' => [$request->payment_method], 
             'line_items' => [[
                 'price_data' => [
                     'currency' => 'eur',
                     'product_data' => [
                         'name' => $product->name,
-                        'description' => $product->category.'/'.$selectedSize, // Use the selected size
+                        'description' => $product->category.'/'.$selectedSize, 
                     ],
                     'unit_amount' => $product->price * 100,
                 ],
@@ -111,6 +112,7 @@ class CheckoutController extends Controller
             if (!$order->paid) {
                 $order->update(['paid' => true]);
                 Mail::to($order->email)->send(new OrderConfirmation($order));
+                Mail::to('majaacouture7@gmail.com')->send(new OrderBusinessNotification($order));
             }
     
             // Prepare flash card data

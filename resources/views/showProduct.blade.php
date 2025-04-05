@@ -92,7 +92,7 @@
         <div class="left image-container h-[800px]">
             <div class="main">
               <div id="default-carousel" class="relative w-full h-[800px]  flex flex-col " data-carousel="slide">
-                <!-- Carousel wrapper -->
+                <!-- Carousel wrapper -->              
                 <div class="relative flex-grow overflow-hidden rounded-lg h-[800px]">
                   <div class="hidden duration-700 ease-in-out" data-carousel-item>
                     <img src="{{ asset('storage/'.$product->image) }}" class="w-full h-full object-contain" alt="Product Image">
@@ -187,7 +187,7 @@
       </div>  
       <!-- Champ de personnalisation -->
       <span class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s]" style="display: inline;">
-        <div class="relative group">
+        <span class="relative group">
             <input 
                 type="text" 
                 name="custom_text" 
@@ -207,7 +207,7 @@
                 <div id="char-counter" class="text-sm text-gray-400 ml-2">0/5</div>
                 <div id="custom-text-error" class="text-red-400 text-sm hidden">Maximum 5 caractères</div>
             </div>
-        </div>
+          </span>
       </span>
         <h3 class="subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">Description</h3>
         <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">{{ $product->description }}</p>

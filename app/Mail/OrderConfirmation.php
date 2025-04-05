@@ -33,10 +33,11 @@ class OrderConfirmation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Confirmation',
+            subject: 'Nouvelle commande' ,
+            from: 'majaacouture7@gmail.com',
+            replyTo: ['majaacouture7@gmail.com'],
         );
     }
-
 
 
 }

@@ -112,7 +112,7 @@
 
         <!-- Footer -->
         <footer style="border-top: 2px solid rgba(201,177,148,0.1); padding-top: 32px; text-align: center;">
-            <a href="https://majaacouture.com" style="display: inline-block; 
+            {{-- <a href="https://majaacouture.com" style="display: inline-block; 
                     background: linear-gradient(45deg, #C9B194 0%, #B89E7D 100%);
                     color: white!important;
                     padding: 16px 40px;
@@ -123,7 +123,7 @@
                     transition: transform 0.2s;
                     box-shadow: 0 6px 24px rgba(201,177,148,0.25);">
                 Visiter notre boutique
-            </a>
+            </a> --}}
             <p style="color: #999; font-size: 0.85em; margin: 16px 0 0 0; line-height: 1.6;">
                 © 2025 MAJAA Couture • Tous droits réservés<br>
                 <span style="color: #C9B194; font-weight: 500;">Création sur-mesure </span>
