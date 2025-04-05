@@ -82,7 +82,7 @@
                 </div>
                 <div>
                     <span style="display: inline-block; width: 80px; color: #C9B194;margin-bottom: 12px;">Méthode de livraison :</span>
-                    {{ $order->shiping_method }}
+                    {{ $order->shipping_method }}
                 </div>
                 <div>
                     <span style="display: inline-block; width: 80px; color: #C9B194;">Total :</span>

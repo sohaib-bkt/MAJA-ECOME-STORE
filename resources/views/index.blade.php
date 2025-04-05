@@ -91,23 +91,6 @@
       </div>
     </header>
 
-    <!-- Categories Section -->
-    <section class="section category scroll-section">
-      <div class="cat-center">
-        <div class="cat animate-scale-in">
-          <img src="{{ asset('images/logo1.png') }}" alt="" class="transition-transform duration-500 hover:scale-105" />
-          <div>
-            <p>VÊTEMENTS</p>
-          </div>
-        </div>
-        <div class="cat animate-scale-in" data-delay="200">
-          <img src="{{ asset('images/logo1.png') }}" alt="" class="transition-transform duration-500 hover:scale-105" />
-          <div>
-            <p>ACCESSOIRES</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- New Arrivals -->
     <section class="section new-arrival scroll-section">
