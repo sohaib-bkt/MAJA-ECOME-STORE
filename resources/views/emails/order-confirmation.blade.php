@@ -27,7 +27,7 @@
                      box-shadow: 0 6px 20px rgba(201,177,148,0.2);
                      position: relative;
                      z-index: 1;">
-                Commande #{{ $order->id }}
+                Commande #{{ $orders->first()->id }}
                 <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); 
                          width: 60%; height: 4px; background: rgba(201,177,148,0.3); border-radius: 2px;">
                 </div>
@@ -52,33 +52,48 @@
                     border: 2px solid rgba(201,177,148,0.15);
                     position: relative;
                     margin-bottom: 20px;">
-            <h3 style="color: #2A2A2A; font-weight: 700; margin: 0 0 20px 0; 
-                    display: flex; align-items: center; gap: 12px; font-size: 1.1em;">
-                <svg style="width: 24px; height: 24px; fill: #C9B194;" viewBox="0 0 24 24">
-                    <path d="M12 11.5A2.5 2.5 0 1 0 12 6.5 2.5 2.5 0 0 0 12 11.5zM12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/>
-                </svg>
-                Détails de la commande
-            </h3>
-            <address style="color: #666; font-style: normal; line-height: 1.6; margin: 0; padding-left: 36px;">
-                <div style="margin-bottom: 12px;">
-                    <span style="display: inline-block; width: 80px; color: #C9B194;">Produit :</span>
-                    {{ $order->product->name }}
-                </div>
-                <div style="margin-bottom: 12px;">
-                    <span style="display: inline-block; width: 80px; color: #C9B194;">Taille :</span>
-                    {{ $order->size }}
-                </div>
-                <div>
-                    <span style="display: inline-block; width: 80px; color: #C9B194;margin-bottom: 12px;">Quantité :</span>
-                    {{ $order->quantity }}
-                </div>
-                <div>
-                    <span style="display: inline-block; width: 80px; color: #C9B194;">Total :</span>
-                    {{ $order->total_amount }}€
-                </div>
+                <h3 style="color: #2A2A2A; font-weight: 700; margin: 0 0 20px 0; 
+                        display: flex; align-items: center; gap: 12px; font-size: 1.1em;">
+                    <svg style="width: 24px; height: 24px; fill: #C9B194;" viewBox="0 0 24 24">
+                        <path d="M12 11.5A2.5 2.5 0 1 0 12 6.5 2.5 2.5 0 0 0 12 11.5zM12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"/>
+                    </svg>
+                    Détails de la commande
+                </h3>
                 
-            </address>
-        </div>
+                <div style="color: #666; line-height: 1.6; margin: 0; padding-left: 36px;">
+                    @foreach($orders as $order)
+                    <div style="background: #F8F5F0; padding: 20px; border-radius: 12px; margin-bottom: 16px;">
+                        <div style="display: flex; align-items: center;">
+                            <div style="flex-grow: 1;">
+                                <div style="font-weight: 600; color: #2A2A2A; margin-bottom: 8px;">
+                                    {{ $order->product->name }}
+                                </div>
+                                <div style="color: #666; font-size: 0.9em; margin-bottom: 8px;">
+                                    <span style="color: #C9B194;">Taille:</span> {{ $order->size }} •
+                                    <span style="color: #C9B194;">Quantité:</span> {{ $order->quantity }}
+                                </div>
+                                @if($order->text)
+                                <div style="color: #666; font-size: 0.9em;">
+                                    <span style="color: #C9B194;">Personnalisation:</span> {{ $order->text }}
+                                </div>
+                                @endif
+                            </div>
+                            <div style="font-weight: 700; color: #2A2A2A;">
+                                {{ number_format($order->total_amount, 2) }}€
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
+                    <!-- Total -->
+                    <div style="text-align: right; padding-top: 20px; border-top: 2px solid rgba(201,177,148,0.1);">
+                        <span style="color: #C9B194; font-weight: 600; margin-right: 16px;">Total Général:</span>
+                        <span style="font-size: 1.4em; font-weight: 700; color: #2A2A2A;">
+                            {{ number_format($totalAmount, 2) }}€
+                        </span>
+                    </div>
+                </div>
+            </div>
 
             <!-- Section adresse -->
             <div style="background: #FBF9F7;
@@ -93,18 +108,22 @@
                     </svg>
                     Adresse de livraison
                 </h3>
-                <address style="color: #666; font-style: normal; line-height: 1.6; margin: 0; padding-left: 36px;">
+                <address style="color: #666; font-style: normal; line-height: 1.6; padding-left: 36px;">
                     <div style="margin-bottom: 12px;">
-                        <span style="display: inline-block; width: 80px; color: #C9B194;">Nom :</span>
-                        {{ $order->first_name }} {{ $order->last_name }}
+                        <span style="display: inline-block; width: 100px; color: #C9B194;">Nom :</span>
+                        {{ $orders->first()->first_name }} {{ $orders->first()->last_name }}
                     </div>
                     <div style="margin-bottom: 12px;">
-                        <span style="display: inline-block; width: 80px; color: #C9B194;">Adresse :</span>
-                        {{ $order->address }}, {{ $order->city }}
+                        <span style="display: inline-block; width: 100px; color: #C9B194;">Adresse :</span>
+                        {{ $orders->first()->address }}, {{ $orders->first()->city }}
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <span style="display: inline-block; width: 100px; color: #C9B194;">Code postal :</span>
+                        {{ $orders->first()->postal_code }}
                     </div>
                     <div>
-                        <span style="display: inline-block; width: 80px; color: #C9B194;">Téléphone :</span>
-                        {{ $order->phone }}
+                        <span style="display: inline-block; width: 100px; color: #C9B194;">Téléphone :</span>
+                        {{ $orders->first()->phone }}
                     </div>
                 </address>
             </div>
@@ -112,18 +131,6 @@
 
         <!-- Footer -->
         <footer style="border-top: 2px solid rgba(201,177,148,0.1); padding-top: 32px; text-align: center;">
-            {{-- <a href="https://majaacouture.com" style="display: inline-block; 
-                    background: linear-gradient(45deg, #C9B194 0%, #B89E7D 100%);
-                    color: white!important;
-                    padding: 16px 40px;
-                    border-radius: 50px;
-                    text-decoration: none;
-                    font-weight: 700;
-                    margin-bottom: 24px;
-                    transition: transform 0.2s;
-                    box-shadow: 0 6px 24px rgba(201,177,148,0.25);">
-                Visiter notre boutique
-            </a> --}}
             <p style="color: #999; font-size: 0.85em; margin: 16px 0 0 0; line-height: 1.6;">
                 © 2025 MAJAA Couture • Tous droits réservés<br>
                 <span style="color: #C9B194; font-weight: 500;">Création sur-mesure </span>

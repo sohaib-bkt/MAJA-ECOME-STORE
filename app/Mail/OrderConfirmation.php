@@ -14,17 +14,19 @@ class OrderConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
+    public $orders;
+    public $totalAmount;
 
-    public function __construct(Order $order)
+    public function __construct($orders)
     {
-        $this->order = $order;
+        $this->orders = $orders;
+        $this->totalAmount = $orders->sum('total_amount');
     }
 
     public function build()
     {
-        return $this->subject('Order Confirmation - #' . $this->order->id)
-                    ->view('emails.order-confirmation');
+        return $this->subject('Confirmation de commande - MAJĀA')
+            ->view('emails.order-confirmation');
     }
 
     /**

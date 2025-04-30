@@ -5,25 +5,33 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Order;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Support\Collection;
 
 class OrderBusinessNotification extends Mailable
 {
+
     use Queueable, SerializesModels;
 
-    public $order;
+    public $orders;
+    public $totalAmount;
 
-    public function __construct(Order $order)
+    public function __construct(Collection $orders)
     {
-        $this->order = $order;
+        $this->orders = $orders->loadMissing('product');
+        $this->totalAmount = $orders->sum('total_amount');
     }
 
     public function build()
     {
-        return $this->subject('Nouvelle commande reçue - #' . $this->order->id)
-                    ->view('emails.order-maja');
+        return $this->subject('Nouvelle commande reçue - #' . $this->orders->first()->id)
+                    ->view('emails.order-maja')
+                    ->with([
+                        'orders' => $this->orders,
+                        'totalAmount' => $this->totalAmount
+                    ]);
     }
+
     public function envelope(): Envelope
     {
         return new Envelope(

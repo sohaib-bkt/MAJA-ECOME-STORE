@@ -1,17 +1,11 @@
 <?php
 
-use Stripe\Stripe;
-use App\Mail\OrderConfirmation;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
-
-use Illuminate\Http\Request;
-use Stripe\Checkout\Session;
-use App\Models\Order;
-use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +37,14 @@ Route::post('/wishlist/add', [HomeController::class, 'addWishlist'])->name('wish
 Route::delete('/wishlist/remove/{productId}', [HomeController::class, 'removeWishlist'])->name('wishlist.remove');
 Route::get('/shop/{id}', [HomeController::class, 'showProduct'])->name('product.show');
 
-Route::get('/checkout/{id}', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/success', [CheckoutController::class, 'success'])->name('checkout.success');
+
+Route::get('/panier' , [CartController::class, 'panier'])->name('panier');
+Route::post('/panier/ajouter', [CartController::class, 'add'])->name('cart.add');
+Route::put('/panier/update/{index}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/panier/remove/{index}', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::get('/dashboard' , [DashboardController::class, 'index'])->name('dashboard');
 Route::post('/store' , [DashboardController::class, 'store'])->name('store');

@@ -88,7 +88,7 @@
         html {
             scroll-behavior: smooth;
         }
-        /* Ajoutez ces styles */
+        /* Animation styles */
         .scroll-animate {
             opacity: 0;
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -103,13 +103,11 @@
             transform: translateY(0);
         }
         
-        /* Animation pour les éléments de la grille */
         .grid-animate.opacity-100 {
             opacity: 1 !important;
             transform: translateY(0) !important;
         }
         
-        /* Animation supplémentaire pour les cartes */
         .card-animate {
             transform: perspective(1000px) rotateX(-10deg) translateZ(0);
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -120,6 +118,277 @@
             opacity: 1 !important;
         }
         
+        /* Masonry-inspired grid adjustment */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(100px, auto);
+            grid-gap: 16px;
+        }
+        
+        /* Hover effects */
+        .media-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+        
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+        
+        .media-item img, 
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .media-item:hover img,
+        .media-item:hover video {
+            transform: scale(1.05);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            
+            /* Adjust height for mobile screens */
+            .mobile-height-sm {
+                height: 260px !important;
+            }
+            
+            .mobile-height-md {
+                height: 320px !important;
+            }
+            
+            .mobile-height-lg {
+                height: 380px !important;
+            }
+            
+            /* Text scaling for mobile */
+            h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            /* Improved spacing for mobile */
+            .mobile-my-4 {
+                margin-top: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            /* Improved readability on mobile */
+            .mobile-text-sm {
+                font-size: 0.875rem !important;
+            }
+        }
+    
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in { 
+            animation: fadeIn 0.6s ease-out; 
+        }
+        
+        .aspect-portrait { 
+            aspect-ratio: 3/4; 
+        }
+        
+        .aspect-landscape { 
+            aspect-ratio: 16/9; 
+        }
+        
+        .aspect-square { 
+            aspect-ratio: 1/1; 
+        }
+        
+        .aspect-panorama { 
+            aspect-ratio: 2/1; 
+        }
+        
+        .aspect-vertical { 
+            aspect-ratio: 9/16; 
+        }
+        
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 1.5s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* Custom scrollbar for modern feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #d1d1d1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1a1;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Animation styles */
+        .scroll-animate {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .grid-animate {
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .scroll-animate.animate-fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .grid-animate.opacity-100 {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        .card-animate {
+            transform: perspective(1000px) rotateX(-10deg) translateZ(0);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .card-animate.visible {
+            transform: perspective(1000px) rotateX(0) translateZ(0);
+            opacity: 1 !important;
+        }
+        
+        /* Masonry-inspired grid adjustment */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(100px, auto);
+            grid-gap: 16px;
+        }
+        
+        /* Hover effects */
+        .media-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+        
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+        }
+        
+        .media-item img, 
+        .media-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .media-item:hover img,
+        .media-item:hover video {
+            transform: scale(1.05);
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            
+            .mobile-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 10px;
+            }
+            
+            .mobile-col-2 {
+                grid-column: span 2;
+            }
+            
+            .mobile-col-1 {
+                grid-column: span 1;
+            }
+            
+            /* Adjust height for mobile screens */
+            .mobile-height-sm {
+                height: 260px !important;
+            }
+            
+            .mobile-height-md {
+                height: 320px !important;
+            }
+            
+            .mobile-height-lg {
+                height: 380px !important;
+            }
+            
+            .mobile-height-xs {
+                height: 200px !important;
+            }
+            
+            /* Text scaling for mobile */
+            h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            /* Improved spacing for mobile */
+            .mobile-my-4 {
+                margin-top: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            /* Improved readability on mobile */
+            .mobile-text-sm {
+                font-size: 0.875rem !important;
+            }
+            
+            .mobile-full-width {
+                width: 100% !important;
+            }
+        }
     </style>
 </head>
 
@@ -129,126 +398,277 @@
     <x-nav></x-nav>
 
     <!-- Hero Section -->
-    <section class="container mx-auto px-4 py-12 md:py-20 lg:py-28 " style="margin-top: 22px">
-        <div class="max-w-4xl mx-auto text-center space-y-6">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-thin mb-6 animate-fade-in">
+    <section class="container mx-auto px-4 py-8 md:py-16 lg:py-28" style="margin-top: 22px">
+        <div class="max-w-4xl mx-auto text-center space-y-4 md:space-y-6">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-thin mb-4 md:mb-6 animate-fade-in">
                 DANS LES <span class="bg-gradient-to-r from-[#e6cba9] to-[#e0963b] bg-clip-text text-transparent">BACKSTAGES</span>
             </h1>
-            <p class="text-gray-600 md:text-xl leading-relaxed max-w-3xl mx-auto">
-                Bienvenue dans les backstages de Majāa, là où chaque détail est façonné avec amour et passion. On vous emmène au cœur de notre univers, là où les idées prennent vie et où chaque instant raconte une histoire. Plongez avec nous dans cette aventure !
+            <p class="text-gray-600 md:text-xl leading-relaxed max-w-3xl mx-auto text-sm md:text-base">
+                Bienvenue dans les backstages de Majāa, là où chaque détail est façonné avec amour et passion. On vous emmène au cœur de notre univers, là où les idées prennent vie et où chaque instant raconte une histoire. Plongez avec nous dans cette aventure !
             </p>
         </div>
     </section>
 
-    <main class="container mx-auto px-4 pb-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-
-            <div class="grid-animate md:col-span-3 group relative aspect-[2/1] overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+    <main class="container mx-auto px-4 pb-12 md:pb-16">
+        <!-- Desktop Grid -->
+        <div class="hidden md:grid grid-cols-12 gap-6">
+            <!-- Featured Item - Full Width Hero Image -->
+            <div class="grid-animate col-span-12 group relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 480px;">
                 <img src="{{ asset('images/b5.jpg')}}" alt="Workshop" 
                      class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                      loading="lazy">
-                {{-- <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4 md:p-6">
-                    <div class="space-y-2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                        <span class="text-white text-lg font-medium">Studio Workshop</span>
-                        <span class="text-gray-300 text-sm block">Exploring material possibilities</span>
-                    </div>
-                </div> --}}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div class="text-white text-xl font-light">L'atelier</div>
+                </div>
             </div>
             
-            <div class="grid grid-cols-2 gap-4 md:contents grid-animate">
-                <div class="group relative aspect-[3/4] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                
-                    <video autoplay muted loop playsinline 
-                           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <source src="{{ asset('videos/bv.mp4') }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                
-                    {{-- <div class="absolute inset-0 flex items-end p-4 md:p-6 bg-gradient-to-t from-black/50 to-transparent">
-                        <span class="text-white text-sm md:text-lg opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                            Final Fitting
-                        </span>
-                    </div> --}}
-                </div>
-                <div class="grid-animate group relative aspect-[9/16 md:aspect-[9/9] overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-                    <img src="{{ asset('images/b1.jpg')}}" alt="Design" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                         loading="lazy">
-                         {{-- <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-3 md:p-6 space-y-2 md:space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                            <span class="text-white text-base md:text-xl font-light">Material Selection</span>
-                            <p class="text-gray-300 text-xs md:text-sm">Curating sustainable materials</p>
-                        </div> --}}
-                </div>
-            </div>
-    
-            
-            <div class="grid grid-cols-2 gap-4 md:contents">
-                <div class="grid-animate group relative aspect-[9/16] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <img src="{{ asset('images/b3.jpg')}}" alt="Model" 
-                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                         loading="lazy">
-                    {{-- <div class="absolute inset-0 flex items-end p-4 md:p-6 bg-gradient-to-t from-black/50 to-transparent">
-                        <span class="text-white text-sm md:text-lg opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                            Final Fitting2
-                        </span>
-                    </div> --}}
-                </div>
-                
-                <div class="grid-animate group relative aspect-[9/16] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <video 
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        autoplay
-                        muted
-                        loop
-                        playsinline
-                        poster="{{ asset('images/b3.jpg') }}" 
-                    >
-                        <source src="{{ asset('videos/bv2.mp4') }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    
-                    {{-- <div class="absolute inset-0 flex items-end p-4 md:p-6 bg-gradient-to-t from-black/50 to-transparent">
-                        <span class="text-white text-sm md:text-lg opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                            Final Fitting22
-                        </span>
-                    </div> --}}
-                </div>
-            </div>
+            <!-- First Row - Mixed Media -->
+            <div class="grid-animate col-span-5 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 380px;">
+                <video autoplay muted loop playsinline 
+                       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <source src="{{ asset('videos/bv.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
 
-            <div class="grid-animate group relative aspect-square md:aspect-video overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+            </div>
+            
+            <div class="grid-animate col-span-7 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 380px;">
+                <img src="{{ asset('images/b1.jpg')}}" alt="Design" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                     loading="lazy">
+
+            </div>
+            
+            <!-- Second Row - Three Column Layout -->
+            <div class="grid-animate col-span-4 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 320px;">
+                <img src="{{ asset('images/b3.jpg')}}" alt="Model" 
+                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                     loading="lazy">
+
+            </div>
+            
+            <div class="grid-animate col-span-4 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 320px;">
+                <video 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                >
+                    <source src="{{ asset('videos/bv2.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <div class="grid-animate col-span-4 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 320px;">
                 <img src="{{ asset('images/b2.jpg')}}" alt="Details" 
                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                      loading="lazy">
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-12 h-12 md:w-16 md:h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 shadow-lg">
-                        <span class="text-black text-xs md:text-sm font-medium">View</span>
-                    </div>
-                </div>
+
             </div>
-    
-            <div class="grid-animate grid grid-cols-2 gap-4 md:contents">
-                <div class=" group relative aspect-[9/14] md:aspect-square overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <video 
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        autoplay
-                        muted
-                        loop
-                        playsinline
-                        poster="{{ asset('images/b1.jpg') }}" 
-                    >
-                        <source src="{{ asset('videos/bv3.mp4') }}" type="video/mp4">
+            
+            <!-- Third Row - Asymmetric Layout -->
+            <div class="grid-animate col-span-8 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 400px;">
+                <video 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                >
+                    <source src="{{ asset('videos/bv3.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </div>
+            
+            <div class="grid-animate col-span-4 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 400px;">
+                <video autoplay muted loop playsinline 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <source src="{{ asset('videos/bv5.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </div>
+            
+            <!-- Fourth Row - Mixed Sizes -->
+            <div class="grid-animate col-span-6 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 360px;">
+                <img src="{{ asset('images/b6.jpg')}}" alt="New Image 1" 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy">
+
+            </div>
+            
+            <div class="grid-animate col-span-6 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 360px;">
+                <img src="{{ asset('images/b7.jpg')}}" alt="New Image 2" 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy">
+
+            </div>
+            
+            <!-- Fifth Row - Contrasting Portrait/Landscape -->
+            <div class="grid-animate col-span-8 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 450px;">
+                <video autoplay muted loop playsinline 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <source src="{{ asset('videos/bv6.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </div>
+            
+            <div class="grid-animate col-span-4 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 450px;">
+                <img src="{{ asset('images/b8.jpg')}}" alt="New Image 3" 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy">
+
+            </div>
+            
+            <!-- Final Row - Balance of Square and Portrait -->
+            <div class="grid-animate col-span-7 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 380px;">
+                <img src="{{ asset('images/b9.jpg')}}" alt="New Image 4" 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy">
+
+            </div>
+            
+            <div class="grid-animate col-span-5 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300" style="height: 380px;">
+                <img src="{{ asset('images/b10.jpg')}}" alt="New Image 5" 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy">
+
+            </div>
+        </div>
+        
+        <!-- Mobile Grid with 2-column layout -->
+        <div class="md:hidden flex flex-col gap-3">
+            <!-- Featured Item - Full Width Hero Image -->
+            <div class="grid-animate group relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-lg">
+                <img src="{{ asset('images/b5.jpg')}}" alt="Workshop" 
+                     class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                     loading="lazy">
+
+            </div>
+            
+            <!-- First 2-column row -->
+            <div class="mobile-grid">
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <video autoplay muted loop playsinline 
+                           class="w-full h-full object-cover">
+                        <source src="{{ asset('videos/bv.mp4') }}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    
-                    {{-- <div class="absolute inset-0 flex items-end p-4 md:p-6 bg-gradient-to-t from-black/50 to-transparent">
-                        <span class="text-white text-sm md:text-lg opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                            Final Fitting
-                        </span>
-                    </div> --}}
+
                 </div>
                 
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <img src="{{ asset('images/b1.jpg')}}" alt="Design" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+
+                </div>
             </div>
+            
+            <!-- Full width item -->
+            <div class="grid-animate relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-md">
+                <img src="{{ asset('images/b3.jpg')}}" alt="Model" 
+                     class="w-full h-full object-cover"
+                     loading="lazy">
+
+            </div>
+            
+            <!-- Second 2-column row -->
+            <div class="mobile-grid">
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <video autoplay muted loop playsinline 
+                        class="w-full h-full object-cover">
+                        <source src="{{ asset('videos/bv2.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                </div>
+                
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <img src="{{ asset('images/b2.jpg')}}" alt="Details" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+
+                </div>
+            </div>
+            
+            <!-- Another full width item -->
+            <div class="grid-animate relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-md">
+                <video autoplay muted loop playsinline 
+                    class="w-full h-full object-cover">
+                    <source src="{{ asset('videos/bv3.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </div>
+            
+            <!-- Third 2-column row -->
+            <div class="mobile-grid">
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <video autoplay muted loop playsinline 
+                        class="w-full h-full object-cover">
+                        <source src="{{ asset('videos/bv5.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+
+                </div>
+                
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <img src="{{ asset('images/b6.jpg')}}" alt="New Image 1" 
+                        class="w-full h-full object-cover"
+                        loading="lazy">
+
+                </div>
+            </div>
+            
+            <!-- Fourth 2-column row -->
+            <div class="mobile-grid">
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <img src="{{ asset('images/b7.jpg')}}" alt="New Image 2" 
+                        class="w-full h-full object-cover"
+                        loading="lazy">
+
+                </div>
+                
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <img src="{{ asset('images/b8.jpg')}}" alt="New Image 3" 
+                        class="w-full h-full object-cover"
+                        loading="lazy">
+
+                </div>
+            </div>
+            
+            <!-- Another full width item -->
+            <div class="grid-animate relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-md">
+                <video autoplay muted loop playsinline 
+                    class="w-full h-full object-cover">
+                    <source src="{{ asset('videos/bv6.mp4') }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+            </div>
+            
+            <!-- Final 2-column row -->
+            <div class="mobile-grid">
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <img src="{{ asset('images/b9.jpg')}}" alt="New Image 4" 
+                        class="w-full h-full object-cover"
+                        loading="lazy">
+
+                </div>
+                
+                <div class="grid-animate mobile-col-1 relative overflow-hidden cursor-pointer rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 mobile-height-sm">
+                    <img src="{{ asset('images/b10.jpg')}}" alt="New Image 5" 
+                        class="w-full h-full object-cover"
+                        loading="lazy">
+
+                </div>
+            </div>
+        </div>
+    </main>
         </div>
     </main>
 

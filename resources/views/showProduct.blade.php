@@ -177,14 +177,17 @@
      
       
      
-      <div class="form space-x-4" style="z-index: 0; display: flex; align-items: center;">  
-          <i class="bx bx-heart transition-all duration-300 hover:text-red-500 hover:scale-110 transform cursor-pointer heartbeat"   
-             onclick="addToWishlist({{ $product->id }})"></i>    
-             <a href="{{ route('checkout', $product->id) }}" 
-              class="px-8 py-4 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-full font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-               Commander →
-           </a>
-      </div>  
+      <div class="form space-x-4" style="z-index: 0; display: flex; align-items: center;">
+        <i class="bx bx-heart transition-all duration-300 hover:text-red-500 hover:scale-110 transform cursor-pointer heartbeat"   
+           onclick="addToWishlist({{ $product->id }})"></i>
+        <button 
+          type="button"
+          onclick="addToCart({{ $product->id }})"
+          class="px-8 py-4 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-full font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+          Ajouter au panier →
+        </button>
+      </div>
+      
       <!-- Champ de personnalisation -->
       <span class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s]" style="display: inline;">
         <span class="relative group">
@@ -311,6 +314,72 @@
   </script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const sizeSelect = document.getElementById('size-select');
+        const customTextInput = document.getElementById('custom-text');
+        const selectedSize = document.getElementById('selected-size');
+        const selectedCustomText = document.getElementById('selected-custom-text');
+    
+        sizeSelect.addEventListener('change', function() {
+            selectedSize.value = this.value;
+        });
+    
+        customTextInput.addEventListener('input', function() {
+            selectedCustomText.value = this.value.substring(0, 5);
+        });
+    });
+    </script>
+    <script>
+      function addToCart(productId) {
+        // grab the current size & custom text
+        const size  = document.getElementById('size-select').value;
+        const text  = document.getElementById('custom-text').value.substring(0, 5);
+    
+        fetch('{{ route("cart.add") }}', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+          },
+          body: JSON.stringify({
+            product_id:  productId,
+            size:        size,
+            custom_text: text
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Produit ajouté !',
+              text: data.message,
+              showConfirmButton: false,
+              timer: 1500
+            }).then(() => {
+              // reload to trigger your view‐composer and update cart badge
+              location.reload();
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Erreur',
+              text: data.message || 'Impossible d’ajouter au panier.'
+            });
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: 'Une erreur est survenue.'
+          });
+        });
+      }
+    </script>
+    
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
   const sizeSelect = document.getElementById('size-select');
   const customTextInput = document.getElementById('custom-text');
   const checkoutButton = document.querySelector('a[href*="checkout"]');
@@ -322,22 +391,17 @@
     // Create URL object to properly handle parameters
     const url = new URL(baseUrl, window.location.origin);
     
-    // Set query parameters
     url.searchParams.set('size', sizeSelect.value);
     url.searchParams.set('custom_text', customTextInput.value);
-    
-    // Update the href attribute
+
     checkoutButton.href = url.toString();
-    
-    // For debugging - check the console
+
     console.log("Updated URL:", url.toString());
   }
 
-  // Update on ANY input change
   sizeSelect.addEventListener('change', updateCheckoutUrl);
   customTextInput.addEventListener('input', updateCheckoutUrl);
-  
-  // Initial update
+
   updateCheckoutUrl();
 });
     </script>

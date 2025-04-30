@@ -49,6 +49,11 @@
           <span class="d-flex absolute -top-1 -right-2 bg-[#C9B194] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center transition-all group-hover:scale-125 group-hover:bg-[#B89E80]">{{ $wishlistCount }}</span>
         </a>
 
+        <a href="{{ route('panier') }}" class="icon transition-all duration-300 hover:scale-110">
+          <i class="bx bx-cart"></i>
+          <span class="d-flex absolute -top-1 -right-2 bg-[#C9B194] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center transition-all group-hover:scale-125 group-hover:bg-[#B89E80]">{{ $cartCount }}</span>
+        </a>
+
       </li>
       </ul>
 
@@ -69,7 +74,11 @@
           <i class="bx bx-heart"></i>
           <span class="d-flex absolute -top-1 -right-2 bg-[#C9B194] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center transition-all group-hover:scale-125 group-hover:bg-[#B89E80]" id="wishlist-count">{{ $wishlistCount }}</span>
         </a>
-
+        <a href="{{ route('panier') }}" class="icon transition-all duration-300 hover:scale-110">
+          <i class="bx bx-cart"></i>
+          <span class="d-flex absolute -top-1 -right-2 bg-[#C9B194] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center transition-all group-hover:scale-125 group-hover:bg-[#B89E80]" id="cart-count">{{ $cartCount }}</span>
+        </a>
+      
       </div>
 
       <div class="hamburger">

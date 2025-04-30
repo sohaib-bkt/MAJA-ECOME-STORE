@@ -5,15 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
     public function __construct()
     {
-        view()->composer('*', function ($view) {
-            $wishlist = session()->get('wishlist', []);
-            $view->with('wishlistCount', count($wishlist));
+        View::composer('*', function ($view) {
+            $wishlist = session('wishlist', []);
+            $cart     = session('cart', []);
+            $view->with([
+                'wishlistCount' => count($wishlist),
+                'cartCount'     => count($cart),
+            ]);
         });
     }
 }

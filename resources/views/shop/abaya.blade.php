@@ -25,6 +25,11 @@
 </head>
 <body>
     <x-nav></x-nav>
+    @if(session('error'))  
+    <div class="alert alert-danger">  
+        {{ session('error') }}  
+    </div>  
+@endif  
     <section class="section all-products" id="products">
       <!-- Filter Controls -->
       <div class="container mb-8">
