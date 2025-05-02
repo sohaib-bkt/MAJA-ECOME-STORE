@@ -9,7 +9,7 @@
     <style>
       @media screen and (min-width: 600px) {
         #home-image {
-          background-position-y: 20%;
+          background-position-y: 32%;
         }
       }
 
@@ -71,7 +71,7 @@
       <div
         id="home-image"
         class="bg-cover bg-center h-screen relative"
-        style="background-image: url('/images/home1.jpeg')"
+        style="background-image: url('/images/home2.jpg')"
       >
         <x-nav></x-nav>
 
