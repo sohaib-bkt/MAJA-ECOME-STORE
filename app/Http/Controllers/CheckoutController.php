@@ -10,7 +10,6 @@ use App\Mail\OrderConfirmation;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderBusinessNotification;
 
-
 class CheckoutController extends Controller
 {
     public function index(Request $request)
@@ -29,7 +28,7 @@ class CheckoutController extends Controller
                     'custom_text' => $item['custom_text'] ?? '',
                 ];
                 $item['quantity'] = $item['quantity'] ?? 1;
-                $subtotal += $product->price * $item['quantity']; ;
+                $subtotal += $product->price * $item['quantity'];
             }
         }
 
@@ -65,14 +64,34 @@ class CheckoutController extends Controller
         $lineItems = [];
         $orders = [];
         $productData = $request->only(['product_ids', 'quantities', 'sizes', 'custom_texts']);
+        $subtotal = 0;
 
+        // Calculate subtotal and validate prices
+        foreach ($productData['product_ids'] as $index => $productId) {
+            $product = Product::findOrFail($productId);
+            $quantity = $productData['quantities'][$index];
+            $subtotal += $product->price * $quantity;
+        }
+
+        // Calculate and validate total price
+        $shippingCost = $this->getShippingCost($request->shipping_method);
+        $calculatedTotal = $subtotal + $shippingCost;
+
+        // Store shipping cost in session for later use
+        session(['shipping_cost' => $shippingCost]);
+
+        // Use a more tolerant comparison for floating point numbers
+        if (abs($calculatedTotal - $request->total_price) > 0.01) {
+            return redirect()->back()->withErrors(['total_price' => 'Invalid total price calculation']);
+        }
+
+        // Create Stripe line items and orders
         foreach ($productData['product_ids'] as $index => $productId) {
             $product = Product::findOrFail($productId);
             $quantity = $productData['quantities'][$index];
             $size = $productData['sizes'][$index] ?? 'S/M';
             $customText = $productData['custom_texts'][$index] ?? '';
 
-            // Création des line items Stripe - uniquement en euros
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'eur',
@@ -85,7 +104,6 @@ class CheckoutController extends Controller
                 'quantity' => $quantity,
             ];
 
-            // Création des commandes
             $orders[] = Order::create([
                 'product_id' => $product->id,
                 'email' => $request->email,
@@ -103,11 +121,11 @@ class CheckoutController extends Controller
                 'size' => $size,
                 'paid' => false,
                 'shipping_method' => $request->shipping_method,
+                'shipping_cost' => $shippingCost, 
             ]);
         }
 
-        // Ajout des frais de livraison - uniquement en euros
-        $shippingCost = $this->getShippingCost($request->shipping_method);
+        // Add shipping as separate line item
         $lineItems[] = [
             'price_data' => [
                 'currency' => 'eur',
@@ -117,7 +135,6 @@ class CheckoutController extends Controller
             'quantity' => 1,
         ];
 
-        // Création de la session Stripe
         $session = Session::create([
             'payment_method_types' => [$request->payment_method],
             'line_items' => $lineItems,
@@ -125,11 +142,10 @@ class CheckoutController extends Controller
             'success_url' => route('checkout.success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout'),
             'customer_email' => $request->email,
-            'currency' => 'eur', 
+            'currency' => 'eur',
             'locale' => 'fr',
         ]);
 
-        // Mise à jour des commandes avec l'ID de session
         foreach ($orders as $order) {
             $order->update(['stripe_session_id' => $session->id]);
         }
@@ -150,25 +166,29 @@ class CheckoutController extends Controller
     {
         try {
             $sessionId = $request->get('session_id');
+            
+            // Récupérer les commandes avant toute opération
             $orders = Order::with('product')->where('stripe_session_id', $sessionId)->get();
-    
+            
             if ($orders->isEmpty()) {
                 throw new \Exception('Aucune commande trouvée pour cette session');
             }
     
-            // Mettre à jour toutes les commandes
+            $firstOrder = $orders->first();
+            $shippingCost = $firstOrder->shipping_cost ?? $this->getShippingCost($firstOrder->shipping_method);
+    
+            // Mettre à jour le statut de paiement
             $orders->each->update(['paid' => true]);
     
-            $firstOrder = $orders->first();
-            $totalAmount = $orders->sum('total_amount');
+            $productsTotal = $orders->sum('total_amount');
+            $totalAmount = $productsTotal + $shippingCost;
     
-            // Envoyer l'email avec toutes les commandes
-            Mail::to($firstOrder->email)->send(new OrderConfirmation($orders));
-    
-            // Envoyer la notification business
-            Mail::to('majaacouture7@gmail.com')->send(new OrderBusinessNotification($orders));
+            // Envoyer les emails avec le total complet
+            Mail::to($firstOrder->email)->send(new OrderConfirmation($orders, $totalAmount));
+            Mail::to('majaacouture7@gmail.com')->send(new OrderBusinessNotification($orders, $totalAmount));
     
             session()->forget('cart');
+            session()->forget('shipping_cost');
     
             $flashData = [
                 'order_ids' => $orders->pluck('id'),

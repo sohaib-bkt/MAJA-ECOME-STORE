@@ -76,7 +76,7 @@
                 <div style="text-align: right; padding-top: 20px; border-top: 2px solid rgba(201,177,148,0.1);">
                     <span style="color: #C9B194; font-weight: 600; margin-right: 16px;">Total Général:</span>
                     <span style="font-size: 1.4em; font-weight: 700; color: #2A2A2A;">
-                        {{ number_format($orders->sum('total_amount'), 2) }}€
+                        {{ $totalAmount }}€
                     </span>
                 </div>
             </div>
