@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 
 class DashboardController extends Controller
@@ -29,12 +28,10 @@ class DashboardController extends Controller
 
         $image = $request->file('image');
         $imagePath = $image->store('products', 'public');
-        ImageOptimizer::optimize(storage_path('app/public/' . $imagePath));
 
         $images = [];
         foreach ($request->file('images') as $img) {
             $path = $img->store('products', 'public');
-            ImageOptimizer::optimize(storage_path('app/public/' . $path));
             $images[] = $path;
         }
 
