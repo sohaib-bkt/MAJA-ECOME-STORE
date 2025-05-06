@@ -36,6 +36,7 @@ Route::get('/wishlist' , [HomeController::class, 'wishlist'])->name('wishlist');
 Route::post('/wishlist/add', [HomeController::class, 'addWishlist'])->name('wishlist.add');
 Route::delete('/wishlist/remove/{productId}', [HomeController::class, 'removeWishlist'])->name('wishlist.remove');
 Route::get('/shop/{id}', [HomeController::class, 'showProduct'])->name('product.show');
+Route::post('/prevenir', [HomeController::class, 'prevent'])->name('prevent');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');

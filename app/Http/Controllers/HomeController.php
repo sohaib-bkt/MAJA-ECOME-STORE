@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\ProductNotification;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -147,6 +148,22 @@ class HomeController extends Controller
     public function backstage()
     {
         return view('backstage');
+    }
+    public function prevent(Request $request)
+    {
+        // Validation des données
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'email' => 'required|email|max:255'
+        ]);
+
+        // Création de la notification
+        ProductNotification::firstOrCreate([
+            'product_id' => $validated['product_id'],
+            'email' => $validated['email']
+        ]);
+
+        return back()->with('success', 'Vous serez notifié lorsque ce produit sera disponible !');
     }
     
 }

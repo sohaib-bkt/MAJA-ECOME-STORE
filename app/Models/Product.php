@@ -18,6 +18,8 @@ class Product extends Model
         'description',
         'price',
         'price_before_discount',
+        'is_active',
+        'stock',
         'slug',
         'color',
     ];

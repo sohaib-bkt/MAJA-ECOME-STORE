@@ -134,6 +134,8 @@
       <div class="right pt-[375px] md:pt-[50px]">
         <span class="inline-block opacity-0 animate-slide-in [animation-delay:0.2s]">Shop/{{ $product->category }}</span>
         <h1 class="opacity-0 animate-slide-in [animation-delay:0.3s]">{{ $product->name }}</h1>
+        @if($product->stock)
+
         <span class="block opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: block">
           <label for="size-select" class="block mb-2   cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]" >
             Choisir la taille :
@@ -211,6 +213,43 @@
                 <div id="custom-text-error" class="text-red-400 text-sm hidden">Maximum 5 caractères</div>
             </div>
           </span>
+        @else
+       
+        <div class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s] w-full" style="display: flex !important;z-index: 16 !important;">
+            <div class="relative group" style="display: flex !important;z-index: 16 !important;">
+              <form action="{{ route('prevent') }}" style="z-index: 16 !important;" method="POST">
+                @csrf
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                <div class="flex gap-2" style="display: flex !important;z-index: 16 !important;">
+                  <input 
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Votre email"
+                  class="w-full px-4 py-3 text-xl rounded-lg border border-[#C9B194]/30 focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194]/20 placeholder-[#C9B194]/60 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+              >
+                    <button 
+                        type="submit"
+                        class="px-6 py-3 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-sm hover:shadow-md whitespace-nowrap">
+                        Prévenir
+                    </button>
+                </div>
+
+                <!-- Success Message -->
+                @if(session('success'))
+                  <div class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg" style="display: block !important;z-index: 16 !important;">
+                      {{ session('success') }}
+                      
+                  </div>
+              @endif
+
+              </form>
+          </div>
+        </div>
+
+        @endif
+        
+        
       </span>
         <h3 class="subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">Description</h3>
         <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">{{ $product->description }}</p>
