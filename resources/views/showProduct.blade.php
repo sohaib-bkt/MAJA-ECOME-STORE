@@ -231,7 +231,7 @@
                     <button 
                         type="submit"
                         class="px-6 py-3 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-sm hover:shadow-md whitespace-nowrap">
-                        Prévenir
+                        Précommander
                     </button>
                 </div>
 
@@ -256,6 +256,21 @@
         <h3 class="subtitle font-bold mt-6">Composition</h3>
         <div class="composition-grid grid grid-cols-1 gap-4 mt-4">
           <!-- Item 1 -->
+          @if ($product->category == 'KIMONO')
+          <div class="composition-item group hover:bg-gray-50 p-4 rounded-lg transition-all duration-300">
+            <div class="flex items-center gap-3 mb-2">
+              <i class='bx bx-basket text-2xl text-[#ad8d55]'></i>
+              <div>
+                <span class="font-medium text-gray-700">Lin</span>
+                <span class="text-sm ml-2 text-gray-500">100%</span>
+              </div>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+              <div class="bg-[#ad8d55] h-2.5 rounded-full transition-all duration-500" 
+                   style="width: 100%"></div>
+            </div>
+          </div>
+          @else
           <div class="composition-item group hover:bg-gray-50 p-4 rounded-lg transition-all duration-300">
             <div class="flex items-center gap-3 mb-2">
               <i class='bx bx-basket text-2xl text-[#ad8d55]'></i>
@@ -283,7 +298,9 @@
               <div class="bg-[#ad8d55] h-2.5 rounded-full transition-all duration-500" 
                    style="width: 13%"></div>
             </div>
-          </div>
+          </div>  
+          @endif
+          
         </div>
   
         <!-- Caractéristiques -->
