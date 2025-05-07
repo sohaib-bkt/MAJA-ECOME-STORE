@@ -252,7 +252,9 @@
         
       </span>
         <h3 class="subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">Description</h3>
-        <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">{{ $product->description }}</p>
+        <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">
+          {!! nl2br(e($product->description)) !!}
+      </p>
         <h3 class="subtitle font-bold mt-6">Composition</h3>
         <div class="composition-grid grid grid-cols-1 gap-4 mt-4">
           <!-- Item 1 -->
