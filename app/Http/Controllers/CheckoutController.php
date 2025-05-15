@@ -48,7 +48,7 @@ class CheckoutController extends Controller
             'postal_code' => 'required',
             'city' => 'required',
             'phone' => 'required',
-            'payment_method' => 'required|in:card,paypal,apple_pay',
+            'payment_method' => 'required|in:card,paypal,revolut',
             'shipping_method' => 'required|string',
             'total_price' => 'required|numeric',
             'product_ids' => 'required|array',
@@ -135,8 +135,11 @@ class CheckoutController extends Controller
             'quantity' => 1,
         ];
 
-        $session = Session::create([
-            'payment_method_types' => [$request->payment_method],
+        // Définir les méthodes de paiement en fonction du choix de l'utilisateur
+        $paymentMethodTypes = $this->getPaymentMethodTypes($request->payment_method);
+
+        $sessionParams = [
+            'payment_method_types' => $paymentMethodTypes,
             'line_items' => $lineItems,
             'mode' => 'payment',
             'success_url' => route('checkout.success').'?session_id={CHECKOUT_SESSION_ID}',
@@ -144,13 +147,26 @@ class CheckoutController extends Controller
             'customer_email' => $request->email,
             'currency' => 'eur',
             'locale' => 'fr',
-        ]);
+        ];
+
+        $session = Session::create($sessionParams);
 
         foreach ($orders as $order) {
             $order->update(['stripe_session_id' => $session->id]);
         }
 
         return redirect()->away($session->url);
+    }
+
+
+    private function getPaymentMethodTypes($selectedMethod)
+    {
+        return match($selectedMethod) {
+            'card' => ['card'],
+            'paypal' => ['paypal'],
+            'revolut' => ['revolut_pay'],
+            default => ['card'], 
+        };
     }
 
     private function getShippingCost($method)

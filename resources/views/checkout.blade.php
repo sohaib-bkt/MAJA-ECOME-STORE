@@ -284,6 +284,18 @@
                                         <i class="bx bx-check check-icon text-2xl text-green-500"></i>
                                     </div>
                                 </div>
+                                <!-- Revolut -->
+                                <div class="payment-method rounded-lg p-4 cursor-pointer"
+                                    data-method="revolut">
+                                    <div class="flex items-center gap-4">
+                                        <i class="bx bx-credit-card-alt text-3xl"></i>
+                                        <div class="flex-1">
+                                            <span class="text-xl">Revolut Pay</span>
+                                            <p class="text-gray-500 text-lg">Paiement facile avec votre compte Revolut</p>
+                                        </div>
+                                        <i class="bx bx-check check-icon text-2xl text-green-500"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -322,7 +334,7 @@
                     });
                 });
             }
-        
+              
             // Initialisation des méthodes d'expédition
             function initShippingMethods() {
                 shippingMethods.forEach(method => {
@@ -331,7 +343,7 @@
                             m.classList.remove('border-[#C9B194]', 'bg-[#F7F1E9]');
                             m.querySelector('.inner-circle').classList.add('scale-0');
                         });
-
+        
                         this.classList.add('border-[#C9B194]', 'bg-[#F7F1E9]');
                         this.querySelector('.inner-circle').classList.remove('scale-0');
                         
@@ -341,17 +353,17 @@
                         updateTotal();
                     });
                 });
-
+        
                 // Sélection initiale
                 shippingMethods[0].click();
             }
-
+        
             // Calcul du total
             function updateTotal() {
                 let subtotal = {{ $subtotal }};
                 let shipping = selectedShippingPrice;
                 let total = subtotal + shipping;
-
+        
                 document.getElementById('shipping-price').textContent = shipping.toFixed(2) + ' €';
                 document.getElementById('total-price').textContent = total.toFixed(2) + ' €';
                 document.getElementById('total_price_value').value = total.toFixed(2);
@@ -370,7 +382,7 @@
             initShippingMethods();
             updateTotal(); // Calcul initial
         });
-    </script>
+        </script>
     <script src="{{ asset('js/index.js') }}"></script>
 </body>
 </html>
