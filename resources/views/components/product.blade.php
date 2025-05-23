@@ -49,18 +49,22 @@
 #simple-modal {
     backdrop-filter: blur(3px);
 }
+
+
 </style>
 
 <div class="product-item">
-  <div class="overlay">
-      <a class="product-thumb">
+  <a class="product-thumb" href="{{ route('product.show', $product->id) }}">
+    <div class="overlay">
+        
           <img src="{{ asset('storage/'.$product->image) }}" alt="" />
-      </a>
-  </div>
+        
+    </div>
+  </a>
 
   <div class="product-info">
       <span>{{ $product->category }}</span>
-      <a href="">{{ $product->name }}</a>
+      <a href="{{ route('product.show', $product->id) }}">{{ $product->name }}</a>
       <div class="">
           @if($product->price_before_discount)
               <span class="text-xl font-bold text-red-500">{{ number_format($product->price, 2) }}€</span>
@@ -70,15 +74,6 @@
           @endif
       </div>
   </div>
-
-  <ul class="icons">
-      <li><i class="bx bx-heart" onclick="addToWishlist({{ $product->id }})"></i></li>
-      <li>
-          <i class="bx bx-search" 
-             onclick="window.location.href='{{ route('product.show', $product->id) }}';"
-             style="cursor: pointer;"></i>
-      </li>
-  </ul>
 </div>
 
 <!-- La modale DOIT être placée EN DEHORS de la boucle de produits -->
