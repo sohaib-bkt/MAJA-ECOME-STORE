@@ -169,7 +169,12 @@
                                         <span class="text-xl">{{ number_format($item['product']->price * $item['quantity'], 2) }} €</span>
                                     </div>
                                     <p class="text-lg text-gray-500">
-                                        {{ $item['product']->category }} / {{ $item['size'] }}
+                                        {{ $item['product']->category }} /
+                                        @if($item['product']->category === 'KIMONO')
+                                            Unique
+                                        @else
+                                            {{ $item['size'] }}
+                                        @endif
                                         @if($item['custom_text'])
                                             <br>Personnalisation : {{ $item['custom_text'] }}
                                         @endif

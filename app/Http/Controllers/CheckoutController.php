@@ -89,7 +89,12 @@ class CheckoutController extends Controller
         foreach ($productData['product_ids'] as $index => $productId) {
             $product = Product::findOrFail($productId);
             $quantity = $productData['quantities'][$index];
-            $size = $productData['sizes'][$index] ?? 'S/M';
+            // Si la catégorie est KIMONO, la taille est Unique
+            if ($product->category === 'KIMONO') {
+                $size = 'Unique';
+            } else {
+                $size = $productData['sizes'][$index] ?? 'S/M';
+            }
             $customText = $productData['custom_texts'][$index] ?? '';
 
             $lineItems[] = [

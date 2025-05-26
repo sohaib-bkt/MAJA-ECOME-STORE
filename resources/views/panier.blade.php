@@ -47,7 +47,14 @@
                                 
                                 <div class="mt-6 space-y-4">
                                     <div class="flex items-center gap-3 text-2xl">
-                                        <span class="text-gray-700">Taille : {{ $item['size'] }}</span>
+                                        <span class="text-gray-700">
+                                            Taille :
+                                            @if(isset($item['category']) && $item['category'] == 'KIMONO')
+                                                Unique
+                                            @else
+                                                {{ $item['size'] }}
+                                            @endif
+                                        </span>
                                         <span class="text-gray-400">•</span>
                                         <span id="quantity-{{ $index }}" class="text-gray-700">Quantité : {{ $item['quantity'] ?? 1 }}</span>
                                     </div>

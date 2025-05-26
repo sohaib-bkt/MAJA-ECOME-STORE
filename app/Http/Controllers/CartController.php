@@ -28,7 +28,8 @@ class CartController extends Controller
             'price' => $product->price,
             'size' => $request->size,
             'custom_text' => $request->custom_text,
-            'image' => $product->image
+            'image' => $product->image,
+            'category' => $product->category,
         ];
 
         $cart = session()->get('cart', []);

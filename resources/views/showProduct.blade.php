@@ -137,18 +137,25 @@
         @if($product->stock)
 
         <span class="block opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: block">
-          <label for="size-select" class="block mb-2   cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]" >
-            Choisir la taille :
-        </label>
-        <select 
-        style="font-size: 13px;"
-            id="size-select" 
-            name="size" 
-            class="w-full px-4 py-10 text-gray-700 bg-white border-2 border-gray-200 rounded-lg shadow-sm appearance-none cursor-pointer focus:outline-none focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194] focus:ring-opacity-50 transition-all duration-200 hover:border-gray-400 h-[42px]"
-        >
-            <option value="S/M" class="hover:bg-[#F5EEE6]">S/M</option>
-            <option value="M/L" class="hover:bg-[#F5EEE6]">M/L</option>
-        </select>
+          @if($product->category == 'KIMONO')
+            <label class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">
+                Taille unique
+            </label>
+            <input type="hidden" id="size-select" name="size" value="S/M">
+          @else
+            <label for="size-select" class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]" >
+                Choisir la taille :
+            </label>
+            <select 
+                style="font-size: 13px;"
+                id="size-select" 
+                name="size" 
+                class="w-full px-4 py-10 text-gray-700 bg-white border-2 border-gray-200 rounded-lg shadow-sm appearance-none cursor-pointer focus:outline-none focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194] focus:ring-opacity-50 transition-all duration-200 hover:border-gray-400 h-[42px]"
+            >
+                <option value="S/M" class="hover:bg-[#F5EEE6]" selected>S/M</option>
+                <option value="M/L" class="hover:bg-[#F5EEE6]">M/L</option>
+            </select>
+          @endif
         </span>
       
 
