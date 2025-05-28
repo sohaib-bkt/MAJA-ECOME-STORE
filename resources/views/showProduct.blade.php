@@ -80,6 +80,26 @@
 .animate-pop-in {
     animation: pop-in 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
+
+/* Out of stock styles */
+.out-of-stock-badge {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
       
   </style>
 </head>
@@ -134,30 +154,42 @@
       <div class="right pt-[375px] md:pt-[50px]">
         <span class="inline-block opacity-0 animate-slide-in [animation-delay:0.2s]">Shop/{{ $product->category }}</span>
         <h1 class="opacity-0 animate-slide-in [animation-delay:0.3s]">{{ $product->name }}</h1>
-        @if($product->stock)
-
-        <span class="block opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: block">
-          @if($product->category == 'KIMONO')
-            <label class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">
-                Taille unique
-            </label>
-            <input type="hidden" id="size-select" name="size" value="S/M">
-          @else
-            <label for="size-select" class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]" >
-                Choisir la taille :
-            </label>
-            <select 
-                style="font-size: 13px;"
-                id="size-select" 
-                name="size" 
-                class="w-full px-4 py-10 text-gray-700 bg-white border-2 border-gray-200 rounded-lg shadow-sm appearance-none cursor-pointer focus:outline-none focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194] focus:ring-opacity-50 transition-all duration-200 hover:border-gray-400 h-[42px]"
-            >
-                <option value="S/M" class="hover:bg-[#F5EEE6]" selected>S/M</option>
-                <option value="M/L" class="hover:bg-[#F5EEE6]">M/L</option>
-            </select>
-          @endif
-        </span>
-      
+        
+        <!-- Check if product is active (in stock) -->
+        @if($product->is_active == 0)
+            <!-- Out of stock badge -->
+            <div class="mt-4 mb-6 opacity-0 animate-slide-in [animation-delay:0.4s]">
+                <span class="out-of-stock-badge">
+                    <i class='bx bx-x-circle'></i>
+                    Rupture de stock
+                </span>
+            </div>
+        @else
+            <!-- Size selection (only show if in stock) -->
+            @if($product->stock)
+            <span class="block opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: block">
+              @if($product->category == 'KIMONO')
+                <label class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">
+                    Taille unique
+                </label>
+                <input type="hidden" id="size-select" name="size" value="S/M">
+              @else
+                <label for="size-select" class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]" >
+                    Choisir la taille :
+                </label>
+                <select 
+                    style="font-size: 13px;"
+                    id="size-select" 
+                    name="size" 
+                    class="w-full px-4 py-10 text-gray-700 bg-white border-2 border-gray-200 rounded-lg shadow-sm appearance-none cursor-pointer focus:outline-none focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194] focus:ring-opacity-50 transition-all duration-200 hover:border-gray-400 h-[42px]"
+                >
+                    <option value="S/M" class="hover:bg-[#F5EEE6]" selected>S/M</option>
+                    <option value="M/L" class="hover:bg-[#F5EEE6]">M/L</option>
+                </select>
+              @endif
+            </span>
+            @endif
+        @endif
 
         <div class="price-container opacity-0 animate-slide-in [animation-delay:0.5s]">
           @if($product->price_before_discount)
@@ -181,87 +213,84 @@
                   <span class="absolute bottom-0 left-0 h-1.5 bg-[#C9B194]/20 w-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
               </div>
           @endif
-      </div>
-      
-     
-      
-     
-      <div class="form space-x-4" style="z-index: 0; display: flex; align-items: center;">
-        <i class="bx bx-heart transition-all duration-300 hover:text-red-500 hover:scale-110 transform cursor-pointer heartbeat"   
-           onclick="addToWishlist({{ $product->id }})"></i>
-        <button 
-          type="button"
-          onclick="addToCart({{ $product->id }})"
-          class="px-8 py-4 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-full font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-          Ajouter au panier →
-        </button>
-      </div>
-      
-      <!-- Champ de personnalisation -->
-      <span class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s]" style="display: inline;">
-        <span class="relative group">
-            <input 
-                type="text" 
-                name="custom_text" 
-                id="custom-text" 
-                maxlength="5"
-                placeholder=" "
-                class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl peer focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194]/30 transition-all duration-300 placeholder-transparent"
-                oninput="updateCharCounter(this)">
-            
-            <label 
-                for="custom-text" 
-                class="absolute left-4 -top-2.5 bg-white px-2 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-[#C9B194]">
-                Texte personnalisé (5 caractères max)
-            </label>
-            
-            <div class="flex justify-between items-center mt-2">
-                <div id="char-counter" class="text-sm text-gray-400 ml-2">0/5</div>
-                <div id="custom-text-error" class="text-red-400 text-sm hidden">Maximum 5 caractères</div>
-            </div>
-          </span>
-        @else
-       
-        <div class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s] w-full" style="display: flex !important;z-index: 16 !important;">
-            <div class="relative group" style="display: flex !important;z-index: 16 !important;">
-              <form action="{{ route('prevent') }}" style="z-index: 16 !important;" method="POST">
-                @csrf
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <div class="flex gap-2" style="display: flex !important;z-index: 16 !important;">
-                  <input 
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="Votre email"
-                  class="w-full px-4 py-3 text-xl rounded-lg border border-[#C9B194]/30 focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194]/20 placeholder-[#C9B194]/60 transition-all duration-300 bg-white/80 backdrop-blur-sm"
-              >
+        </div>
+        
+        <!-- Only show add to cart and wishlist if product is active -->
+        @if($product->is_active == 1)
+            @if($product->stock)
+                <div class="form space-x-4" style="z-index: 0; display: flex; align-items: center;">
+                    <i class="bx bx-heart transition-all duration-300 hover:text-red-500 hover:scale-110 transform cursor-pointer heartbeat"   
+                       onclick="addToWishlist({{ $product->id }})"></i>
                     <button 
-                        type="submit"
-                        class="px-6 py-3 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-sm hover:shadow-md whitespace-nowrap">
-                        Précommander
+                      type="button"
+                      onclick="addToCart({{ $product->id }})"
+                      class="px-8 py-4 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-full font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                      Ajouter au panier →
                     </button>
                 </div>
+                
+                <!-- Champ de personnalisation (only show if in stock) -->
+                <span class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s]" style="display: inline;">
+                    <span class="relative group">
+                        <input 
+                            type="text" 
+                            name="custom_text" 
+                            id="custom-text" 
+                            maxlength="5"
+                            placeholder=" "
+                            class="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl peer focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194]/30 transition-all duration-300 placeholder-transparent"
+                            oninput="updateCharCounter(this)">
+                        
+                        <label 
+                            for="custom-text" 
+                            class="absolute left-4 -top-2.5 bg-white px-2 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-[#C9B194]">
+                            Texte personnalisé (5 caractères max)
+                        </label>
+                        
+                        <div class="flex justify-between items-center mt-2">
+                            <div id="char-counter" class="text-sm text-gray-400 ml-2">0/5</div>
+                            <div id="custom-text-error" class="text-red-400 text-sm hidden">Maximum 5 caractères</div>
+                        </div>
+                    </span>
+                </span>
+            @else
+                <!-- Preorder form (only if product is active but out of stock) -->
+                <div class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s] w-full" style="display: flex !important;z-index: 16 !important;">
+                    <div class="relative group" style="display: flex !important;z-index: 16 !important;">
+                      <form action="{{ route('prevent') }}" style="z-index: 16 !important;" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <div class="flex gap-2" style="display: flex !important;z-index: 16 !important;">
+                          <input 
+                          type="email"
+                          name="email"
+                          required
+                          placeholder="Votre email"
+                          class="w-full px-4 py-3 text-xl rounded-lg border border-[#C9B194]/30 focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194]/20 placeholder-[#C9B194]/60 transition-all duration-300 bg-white/80 backdrop-blur-sm"
+                      >
+                            <button 
+                                type="submit"
+                                class="px-6 py-3 bg-gradient-to-r from-[#C9B194] to-[#D4C0A1] hover:from-[#B89E80] hover:to-[#C9B194] text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-95 shadow-sm hover:shadow-md whitespace-nowrap">
+                                Précommander
+                            </button>
+                        </div>
 
-                <!-- Success Message -->
-                @if(session('success'))
-                  <div class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg" style="display: block !important;z-index: 16 !important;">
-                      {{ session('success') }}
-                      
-                  </div>
-              @endif
-
-              </form>
-          </div>
-        </div>
-
+                        <!-- Success Message -->
+                        @if(session('success'))
+                          <div class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg" style="display: block !important;z-index: 16 !important;">
+                              {{ session('success') }}
+                          </div>
+                        @endif
+                      </form>
+                    </div>
+                </div>
+            @endif
         @endif
         
-        
-      </span>
         <h3 class="subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">Description</h3>
         <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">
           {!! nl2br(e($product->description)) !!}
-      </p>
+        </p>
         <h3 class="subtitle font-bold mt-6">Composition</h3>
         <div class="composition-grid grid grid-cols-1 gap-4 mt-4">
           <!-- Item 1 -->
@@ -313,7 +342,6 @@
         </div>
   
         <!-- Caractéristiques -->
-      
         <h3 class="text-2xl font-bold text-gray-900">Caractéristiques</h3>
         <div class="flex flex-wrap gap-2">
           <span class="px-4 py-2 bg-[#C9B194]/10 text-[#C9B194] rounded-full text-sm font-medium">Moderne</span>
@@ -384,91 +412,109 @@
         const selectedSize = document.getElementById('selected-size');
         const selectedCustomText = document.getElementById('selected-custom-text');
     
-        sizeSelect.addEventListener('change', function() {
-            selectedSize.value = this.value;
-        });
+        if (sizeSelect && selectedSize) {
+            sizeSelect.addEventListener('change', function() {
+                selectedSize.value = this.value;
+            });
+        }
     
-        customTextInput.addEventListener('input', function() {
-            selectedCustomText.value = this.value.substring(0, 5);
-        });
+        if (customTextInput && selectedCustomText) {
+            customTextInput.addEventListener('input', function() {
+                selectedCustomText.value = this.value.substring(0, 5);
+            });
+        }
     });
     </script>
     <script>
       function addToCart(productId) {
-        // grab the current size & custom text
-        const size  = document.getElementById('size-select').value;
-        const text  = document.getElementById('custom-text').value.substring(0, 5);
-    
+        // Grab the current size & custom text
+        const sizeElement = document.getElementById('size-select');
+        const textElement = document.getElementById('custom-text');
+
+        const size = sizeElement ? sizeElement.value : 'S/M';
+        const text = textElement ? textElement.value.substring(0, 5) : '';
+
         fetch('{{ route("cart.add") }}', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-          },
-          body: JSON.stringify({
-            product_id:  productId,
-            size:        size,
-            custom_text: text
-          })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                size: size,
+                custom_text: text
+            })
         })
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return res.json();
+        })
         .then(data => {
-          if (data.success) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Produit ajouté !',
-              text: data.message,
-              showConfirmButton: false,
-              timer: 1500
-            }).then(() => {
-              // reload to trigger your view‐composer and update cart badge
-              location.reload();
-            });
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Erreur',
-              text: data.message || 'Impossible d’ajouter au panier.'
-            });
-          }
+            if (data.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Produit ajouté !',
+                    text: data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Reload to trigger your view-composer and update cart badge
+                    location.reload();
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: data.message || 'Impossible d\'ajouter au panier.'
+                });
+            }
         })
         .catch(err => {
-          console.error(err);
-          Swal.fire({
-            icon: 'error',
-            title: 'Erreur',
-            text: 'Une erreur est survenue.'
-          });
+            console.error('Fetch error:', err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: 'Une erreur est survenue.'
+            });
         });
       }
     </script>
     
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-  const sizeSelect = document.getElementById('size-select');
-  const customTextInput = document.getElementById('custom-text');
-  const checkoutButton = document.querySelector('a[href*="checkout"]');
-  
-  // Get the original base URL
-  const baseUrl = checkoutButton.getAttribute('href');
+        const sizeSelect = document.getElementById('size-select');
+        const customTextInput = document.getElementById('custom-text');
+        const checkoutButton = document.querySelector('a[href*="checkout"]');
 
-  function updateCheckoutUrl() {
-    // Create URL object to properly handle parameters
-    const url = new URL(baseUrl, window.location.origin);
-    
-    url.searchParams.set('size', sizeSelect.value);
-    url.searchParams.set('custom_text', customTextInput.value);
+        if (checkoutButton && sizeSelect) {
+            // Get the original base URL
+            const baseUrl = checkoutButton.getAttribute('href');
 
-    checkoutButton.href = url.toString();
+            function updateCheckoutUrl() {
+                // Create URL object to properly handle parameters
+                const url = new URL(baseUrl, window.location.origin);
 
-    console.log("Updated URL:", url.toString());
-  }
+                url.searchParams.set('size', sizeSelect.value);
+                if (customTextInput) {
+                    url.searchParams.set('custom_text', customTextInput.value);
+                }
 
-  sizeSelect.addEventListener('change', updateCheckoutUrl);
-  customTextInput.addEventListener('input', updateCheckoutUrl);
+                checkoutButton.href = url.toString();
 
-  updateCheckoutUrl();
-});
+                console.log('Updated URL:', url.toString());
+            }
+
+            sizeSelect.addEventListener('change', updateCheckoutUrl);
+            if (customTextInput) {
+                customTextInput.addEventListener('input', updateCheckoutUrl);
+            }
+
+            updateCheckoutUrl();
+        }
+    });
     </script>
 <script>
     function addToWishlist(productId) {
@@ -480,7 +526,12 @@
             },
             body: JSON.stringify({ product_id: productId })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.status === 'success') {
                 Swal.fire({
