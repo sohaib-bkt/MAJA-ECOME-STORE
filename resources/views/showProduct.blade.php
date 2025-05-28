@@ -209,7 +209,7 @@
               </div>
           @else
               <div class="text-4xl font-bold text-gray-900 relative group">
-                  <span class="relative z-10">€{{ $product->price_before_discount }}</span>
+                  <span class="relative z-10">€{{  $product->price }}</span>
                   <span class="absolute bottom-0 left-0 h-1.5 bg-[#C9B194]/20 w-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
               </div>
           @endif
