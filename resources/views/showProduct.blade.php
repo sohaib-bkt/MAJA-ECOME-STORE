@@ -166,28 +166,30 @@
             </div>
         @else
             <!-- Size selection (only show if in stock) -->
-            @if($product->stock)
-            <span class="block opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: block">
-              @if($product->category == 'KIMONO')
-                <label class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">
-                    Taille unique
-                </label>
-                <input type="hidden" id="size-select" name="size" value="S/M">
-              @else
-                <label for="size-select" class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]" >
-                    Choisir la taille :
-                </label>
-                <select 
-                    style="font-size: 13px;"
-                    id="size-select" 
-                    name="size" 
-                    class="w-full px-4 py-10 text-gray-700 bg-white border-2 border-gray-200 rounded-lg shadow-sm appearance-none cursor-pointer focus:outline-none focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194] focus:ring-opacity-50 transition-all duration-200 hover:border-gray-400 h-[42px]"
-                >
-                    <option value="S/M" class="hover:bg-[#F5EEE6]" selected>S/M</option>
-                    <option value="M/L" class="hover:bg-[#F5EEE6]">M/L</option>
-                </select>
-              @endif
-            </span>
+            @if($product->category != 'ACCESSORY')
+                @if($product->stock)
+                <span class="block opacity-0 animate-slide-in [animation-delay:0.4s]" style="display: block">
+                  @if($product->category == 'KIMONO')
+                    <label class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]">
+                        Taille unique
+                    </label>
+                    <input type="hidden" id="size-select" name="size" value="S/M">
+                  @else
+                    <label for="size-select" class="block mb-2 cursor-pointer subtitle font-bold opacity-0 animate-slide-in [animation-delay:0.5s]" >
+                        Choisir la taille :
+                    </label>
+                    <select 
+                        style="font-size: 13px;"
+                        id="size-select" 
+                        name="size" 
+                        class="w-full px-4 py-10 text-gray-700 bg-white border-2 border-gray-200 rounded-lg shadow-sm appearance-none cursor-pointer focus:outline-none focus:border-[#C9B194] focus:ring-2 focus:ring-[#C9B194] focus:ring-opacity-50 transition-all duration-200 hover:border-gray-400 h-[42px]"
+                    >
+                        <option value="S/M" class="hover:bg-[#F5EEE6]" selected>S/M</option>
+                        <option value="M/L" class="hover:bg-[#F5EEE6]">M/L</option>
+                    </select>
+                  @endif
+                </span>
+                @endif
             @endif
         @endif
 
@@ -230,6 +232,7 @@
                 </div>
                 
                 <!-- Champ de personnalisation (only show if in stock) -->
+                @if($product->category !== 'ACCESSORY')
                 <span class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s]" style="display: inline;">
                     <span class="relative group">
                         <input 
@@ -253,6 +256,7 @@
                         </div>
                     </span>
                 </span>
+                @endif
             @else
                 <!-- Preorder form (only if product is active but out of stock) -->
                 <div class="mt-6 opacity-0 animate-slide-in [animation-delay:0.6s] w-full" style="display: flex !important;z-index: 16 !important;">
@@ -291,6 +295,7 @@
         <p class="text-gray-500 opacity-0 animate-slide-in [animation-delay:0.6s]">
           {!! nl2br(e($product->description)) !!}
         </p>
+        @if($product->category !== 'ACCESSORY')
         <h3 class="subtitle font-bold mt-6">Composition</h3>
         <div class="composition-grid grid grid-cols-1 gap-4 mt-4">
           <!-- Item 1 -->
@@ -338,8 +343,8 @@
             </div>
           </div>  
           @endif
-          
         </div>
+        @endif
   
         <!-- Caractéristiques -->
         <h3 class="text-2xl font-bold text-gray-900">Caractéristiques</h3>

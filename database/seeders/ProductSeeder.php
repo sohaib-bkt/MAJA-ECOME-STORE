@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
     {
         Product::create([
             'name' => 'ABAYA MINIMAL BEIGE',
-            'category' => 'ABAYA',
+            'category' => 'ACCESSORY',
             'image' => 'biege1.jpg',
             'images' => ['biege2.jpg', 'biege3.jpg'],
             'description' => "Découvrez notre abaya beige en nylon et jersey, une pièce qui marie élégance moderne et confort absolu. Confectionnée dans un tissu de qualité supérieure, elle offre légèreté et durabilité tout en assurant un confort optimal. Sa coupe minimaliste s'adapte avec raffinement aussi bien aux looks habillés qu'aux styles décontractés, pour une élégance discrète en toutes occasions. De plus, sa manche personnalisable brodée apporte une touche unique, vous permettant d’exprimer votre style avec originalité."  ,
